@@ -117,6 +117,14 @@ public class HelloController implements Initializable {
         ResetPass.setVisible(false);
         Verification.setVisible(false);
 
+        su_username.setText("");
+        su_password.setText("");
+        su_email.setText("");
+        su_password_confirm.setText("");
+        su_answer.setText("");
+        Lbl_error_SU.setText("");
+
+
 
 
     }
@@ -128,6 +136,14 @@ public class HelloController implements Initializable {
         SQs.setVisible(false);
         ResetPass.setVisible(false);
         Verification.setVisible(false);
+
+        su_username.setText("");
+        su_password.setText("");
+        su_email.setText("");
+        su_password_confirm.setText("");
+        su_answer.setText("");
+        Lbl_error_SU.setText("");
+
     }
 
     //@FXML
@@ -146,6 +162,14 @@ public class HelloController implements Initializable {
         SQs.setVisible(false);
         ResetPass.setVisible(false);
         Verification.setVisible(false);
+
+        su_username.setText("");
+        su_password.setText("");
+        su_email.setText("");
+        su_password_confirm.setText("");
+        su_answer.setText("");
+        Lbl_error_SU.setText("");
+
     }
 
     @FXML
@@ -156,6 +180,14 @@ public class HelloController implements Initializable {
         SQs.setVisible(false);
         ResetPass.setVisible(true);
         Verification.setVisible(false);
+
+        su_username.setText("");
+        su_password.setText("");
+        su_email.setText("");
+        su_password_confirm.setText("");
+        su_answer.setText("");
+        Lbl_error_SU.setText("");
+
     }
 
     @FXML
@@ -166,6 +198,14 @@ public class HelloController implements Initializable {
         SQs.setVisible(false);
         ResetPass.setVisible(false);
         Verification.setVisible(true);
+
+        su_username.setText("");
+        su_password.setText("");
+        su_email.setText("");
+        su_password_confirm.setText("");
+        su_answer.setText("");
+        Lbl_error_SU.setText("");
+
     }
 
 
@@ -185,6 +225,13 @@ public class HelloController implements Initializable {
         }
 
         JDBCConnection.close();
+
+        su_username.setText("");
+        su_password.setText("");
+        su_email.setText("");
+        su_password_confirm.setText("");
+        su_answer.setText("");
+        Lbl_error_SU.setText("");
 
 
         Login.setVisible(true);
@@ -208,21 +255,44 @@ public class HelloController implements Initializable {
         signup_array[2] = entered_email;
 
 
+        JDBCConnection.getConnection();
+
+        try {
+            ResultSet resultSet = JDBCConnection.ExecuteQuery("Select * from User where Username = \"" + sue_username +"\";");
+            if(sue_username.isEmpty() || entered_password.isEmpty() || entered_email.isEmpty() || entered_password_confirm.isEmpty()){
+                Lbl_error_SU.setText("A field is empty , please fill all the fields");
+            }
+            else if(resultSet.next()){
+                Lbl_error_SU.setText("Username already in use");
+                System.out.println("ERRORRRRR");
+            }
+            else if (!entered_password.equals(entered_password_confirm)) {
+                Lbl_error_SU.setText("Passwords do not match,Try Again");
+                System.out.println("ERRORRRRR");
+
+            }
+
+            else {
+                Login.setVisible(false);
+                SignUp.setVisible(false);
+                SQs.setVisible(true);
+                ResetPass.setVisible(false);
+                Verification.setVisible(false);
+
+            }
 
 
-
-
-        if(entered_password.equals(entered_password_confirm)){
-            Login.setVisible(false);
-            SignUp.setVisible(false);
-            SQs.setVisible(true);
-            ResetPass.setVisible(false);
-            Verification.setVisible(false);
         }
-        else {
-            Lbl_error_SU.setText("Passwords do not match,Try Again");
-            System.out.println("ERRORRRRR");
+        catch (SQLException e) {
+            System.out.println(e);
         }
+
+        //if(resultSet.next()) {
+
+       // }
+
+
+
 
 
 
