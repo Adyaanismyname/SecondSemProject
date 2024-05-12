@@ -1,0 +1,3 @@
+create table test1 (id int ,name varchar(20));
+inset into test1 values (1,"ali");
+select * from test1;

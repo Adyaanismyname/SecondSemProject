@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="startup_root" prefHeight="768.0" prefWidth="1366.0" styleClass="anchor-pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.secondsemproject.HelloController">
+    <children>
+        <Button layoutX="1311.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#minimize" prefHeight="23.0" prefWidth="27.0" styleClass="btn-minimize">
+            <graphic>
+                <FontAwesomeIconView fill="WHITE" glyphName="WINDOW_MINIMIZE" size="15" styleClass="btn-minimize" text="" />
+            </graphic>
+        </Button>
+        <Button layoutX="1338.0" mnemonicParsing="false" onAction="#exit" prefHeight="23.0" prefWidth="27.0" styleClass="btn-exit">
+            <font>
+                <Font size="1.0" />
+            </font>
+            <graphic>
+                <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" size="20" styleClass="btn-exit" text="" textAlignment="CENTER" wrappingWidth="15.714285850524902" />
+            </graphic>
+        </Button>
+        <StackPane layoutX="632.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="591.0" prefWidth="552.0">
+            <children>
+                <AnchorPane fx:id="SignUp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="596.0" prefWidth="552.0" style="-fx-background-color: rgba(255, 255, 255, 0.05); -fx-background-radius: 27; -fx-border-width: 0.5; -fx-border-color: #0a0625; -fx-border-radius: 27;">
+                    <children>
+                        <VBox layoutX="72.0" layoutY="149.0" prefHeight="343.0" prefWidth="414.0" spacing="10.0">
+                            <children>
+                                <TextField fx:id="su_email" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="58.0" prefWidth="413.0" promptText="Email address" style="-fx-background-radius: 20; -fx-background-color: transparent; -fx-border-radius: 30; -fx-border-color: #0a0625; -fx-border-width: 1;" styleClass="text-field">
+                                    <font>
+                                        <Font size="28.0" />
+                                    </font>
+                                </TextField>
+                                <TextField fx:id="su_username" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="58.0" prefWidth="413.0" promptText="Username" style="-fx-background-radius: 20; -fx-background-color: transparent; -fx-border-radius: 30; -fx-border-color: #0a0625; -fx-border-width: 1;" styleClass="text-field">
+                                    <font>
+                                        <Font size="28.0" />
+                                    </font>
+                                </TextField>
+                                <PasswordField fx:id="su_password" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="58.0" prefWidth="413.0" promptText="Password" style="-fx-background-radius: 20; -fx-background-color: transparent; -fx-border-color: #0a0625; -fx-border-width: 1; -fx-border-radius: 30;">
+                                    <font>
+                                        <Font size="27.0" />
+                                    </font>
+                                </PasswordField>
+                                <PasswordField fx:id="su_password_confirm" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="58.0" prefWidth="413.0" promptText="Confirm" style="-fx-background-radius: 20; -fx-background-color: transparent; -fx-border-color: #0a0625; -fx-border-width: 1; -fx-border-radius: 30;">
+                                    <font>
+                                        <Font size="27.0" />
+                                    </font>
+                                </PasswordField>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
+                                <AnchorPane layoutX="10.0" layoutY="402.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="413.0">
+                                    <children>
+                                        <Label fx:id="Lbl_error_SU" alignment="CENTER" layoutY="-1.0" prefHeight="30.0" prefWidth="413.0" styleClass="error-label" textAlignment="CENTER" textFill="#ff0505b5" wrapText="true">
+                                            <font>
+                                                <Font size="23.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </AnchorPane>
+                                <Button fx:id="SignupButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#signup"  prefHeight="58.0" prefWidth="413.0" style="-fx-background-radius: 20;" styleClass="btn-startPage" text="Next" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                    <font>
+                                        <Font size="27.0" />
+                                    </font>
+                                </Button>
+                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                    <children>
+                                        <Label fx:id="have_account" accessibleRole="BUTTON" alignment="CENTER" layoutX="46.0" layoutY="-2.0" onMouseClicked="#getLogIn" styleClass="switchLabel" text="Already have an account? Login" textAlignment="CENTER" textFill="#0a0625b5">
+                                            <font>
+                                                <Font size="23.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </VBox>
+                        <Text boundsType="VISUAL" fill="#0a0625" layoutX="118.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign up">
+                            <font>
+                                <Font name="System Bold" size="87.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="ResetPass" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="552.0" style="-fx-background-color: rgba(255, 255, 255, 0.05); -fx-background-radius: 27; -fx-border-width: 0.5; -fx-border-color: #0a0625; -fx-border-radius: 27;" visible="false">
+                    <children>
+                        <VBox layoutX="74.0" layoutY="108.0" prefHeight="343.0" prefWidth="414.0" spacing="10.0">
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
+                                <PasswordField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="58.0" prefWidth="413.0" promptText="Password" style="-fx-background-radius: 20; -fx-background-color: transparent; -fx-border-color: #0a0625; -fx-border-width: 1; -fx-border-radius: 30;">
+                                    <font>
+                                        <Font size="27.0" />
+                                    </font>
+                                </PasswordField>
+                                <PasswordField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="58.0" prefWidth="413.0" promptText="Confirm" style="-fx-background-radius: 20; -fx-background-color: transparent; -fx-border-color: #0a0625; -fx-border-width: 1; -fx-border-radius: 30;">
+                                    <font>
+                                        <Font size="27.0" />
+                                    </font>
+                                </PasswordField>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
+                                <Button fx:id="finish11" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#getLogIn" prefHeight="58.0" prefWidth="413.0" style="-fx-background-radius: 20;" styleClass="btn-startPage" text="Reset Password" textAlignment="CENTER" textFill="WHITE">
+                                    <font>
+                                        <Font size="27.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                        </VBox>
+                        <Text boundsType="VISUAL" fill="#0a0625" fontSmoothingType="LCD" layoutX="18.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reset Password" textAlignment="CENTER" wrappingWidth="525.251953125">
+                            <font>
+                                <Font name="System Bold" size="58.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="Verification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="552.0" style="-fx-background-color: rgba(255, 255, 255, 0.05); -fx-background-radius: 27; -fx-border-width: 0.5; -fx-border-color: #0a0625; -fx-border-radius: 27;" visible="false">
+                    <children>
+                        <VBox layoutX="74.0" layoutY="103.0" prefHeight="343.0" prefWidth="414.0" spacing="10.0">
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
+                                <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="58.0" prefWidth="413.0" promptText="Enter your email" style="-fx-background-radius: 20; -fx-background-color: transparent; -fx-border-radius: 30; -fx-border-color: #0a0625; -fx-border-width: 1;" styleClass="text-field">
+                                    <font>
+                                        <Font size="28.0" />
+                                    </font>
+                                </TextField>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
+                                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="414.0">
+                                    <children>
+                                        <Label layoutX="2.0" layoutY="4.0" prefHeight="68.0" prefWidth="397.0" text="What is your favorite vacation destination?" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                            <font>
+                                                <Font name="System Bold" size="23.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </AnchorPane>
+                                <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="58.0" prefWidth="413.0" promptText="Answer" style="-fx-background-radius: 20; -fx-background-color: transparent; -fx-border-radius: 30; -fx-border-color: #0a0625; -fx-border-width: 1;" styleClass="text-field">
+                                    <font>
+                                        <Font size="28.0" />
+                                    </font>
+                                </TextField>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
+                                <Button fx:id="finish1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#getResetPassword" prefHeight="58.0" prefWidth="413.0" style="-fx-background-radius: 20;" styleClass="btn-startPage" text="Next" textAlignment="CENTER" textFill="WHITE">
+                                    <font>
+                                        <Font size="27.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                        </VBox>
+                        <Text boundsType="VISUAL" fill="#0a0625" fontSmoothingType="LCD" layoutX="18.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Verification" textAlignment="CENTER" wrappingWidth="525.251953125">
+                            <font>
+                                <Font name="System Bold" size="58.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="SQs" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="552.0" style="-fx-background-color: rgba(255, 255, 255, 0.05); -fx-background-radius: 27; -fx-border-width: 0.5; -fx-border-color: #0a0625; -fx-border-radius: 27;" visible="false">
+                    <children>
+                        <VBox layoutX="74.0" layoutY="108.0" prefHeight="343.0" prefWidth="414.0" spacing="10.0">
+                            <children>
+                                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="68.0" prefWidth="414.0">
+                                    <children>
+                                        <Label layoutX="9.0" layoutY="4.0" prefHeight="56.0" prefWidth="397.0" text="Just incase you forget your password, answer this question and make sure the answer is unforgettable" textAlignment="CENTER" textFill="#0a0625" wrapText="true">
+                                            <font>
+                                                <Font name="System Bold" size="15.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </AnchorPane>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
+                                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="414.0">
+                                    <children>
+                                        <Label layoutX="3.0" layoutY="4.0" prefHeight="68.0" prefWidth="397.0" text="What is your favorite vacation destination?" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                            <font>
+                                                <Font name="System Bold" size="23.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </AnchorPane>
+                                <TextField fx:id="su_answer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="58.0" prefWidth="413.0" promptText="Answer" style="-fx-background-radius: 20; -fx-background-color: transparent; -fx-border-radius: 30; -fx-border-color: #0a0625; -fx-border-width: 1;" styleClass="text-field">
+                                    <font>
+                                        <Font size="28.0" />
+                                    </font>
+                                </TextField>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
+                                <Button fx:id="finish" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#SQFinish" onMouseClicked="#getLogIn" prefHeight="58.0" prefWidth="413.0" style="-fx-background-radius: 20;" styleClass="btn-startPage" text="Finish" textAlignment="CENTER" textFill="WHITE">
+                                    <font>
+                                        <Font size="27.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                        </VBox>
+                        <Text boundsType="VISUAL" fill="#0a0625" fontSmoothingType="LCD" layoutX="18.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Security Question" textAlignment="CENTER" wrappingWidth="525.251953125">
+                            <font>
+                                <Font name="System Bold" size="58.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="Login" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="552.0" style="-fx-background-color: rgba(255, 255, 255, 0.05); -fx-background-radius: 27; -fx-border-width: 0.5; -fx-border-color: #0a0625; -fx-border-radius: 27;" visible="false">
+                    <children>
+                        <Text boundsType="VISUAL" fill="#0a0625" layoutX="128.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Login">
+                            <font>
+                                <Font name="System Bold" size="87.0" />
+                            </font>
+                        </Text>
+                        <VBox layoutX="72.0" layoutY="162.0" prefHeight="343.0" prefWidth="414.0" spacing="10.0">
+                            <children>
+                                <TextField fx:id="Username" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="58.0" prefWidth="413.0" promptText="Username" style="-fx-background-radius: 20; -fx-background-color: transparent; -fx-border-radius: 30; -fx-border-color: #0a0625; -fx-border-width: 1;" styleClass="text-field">
+                                    <font>
+                                        <Font size="28.0" />
+                                    </font>
+                                </TextField>
+                                <PasswordField fx:id="Password" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="58.0" prefWidth="413.0" promptText="Password" style="-fx-background-radius: 20; -fx-background-color: transparent; -fx-border-color: #0a0625; -fx-border-width: 1; -fx-border-radius: 30;">
+                                    <font>
+                                        <Font size="27.0" />
+                                    </font>
+                                </PasswordField>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
+                                <Label fx:id="forgot" accessibleRole="BUTTON" onMouseClicked="#getVerification" styleClass="switchLabel" text="Forgot password?" textFill="#ff0000b5">
+                                    <font>
+                                        <Font size="23.0" />
+                                    </font>
+                                </Label>
+                                <Button fx:id="login_button" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="58.0" prefWidth="413.0" style="-fx-background-radius: 20;" styleClass="btn-startPage" text="Login" textAlignment="CENTER" textFill="WHITE">
+                                    <font>
+                                        <Font size="27.0" />
+                                    </font>
+                                </Button>
+                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                    <children>
+                                        <Label fx:id="new_user" accessibleRole="BUTTON" alignment="CENTER" layoutX="46.0" layoutY="-2.0" onMouseClicked="#getSingUp" styleClass="switchLabel" text="Are you new? Create an Account" textAlignment="CENTER" textFill="#0a0625b5">
+                                            <font>
+                                                <Font size="23.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+            </children>
+        </StackPane>
+        <Button fx:id="nonfocusButton" layoutX="498.0" layoutY="112.0" mnemonicParsing="false" styleClass="invisible-button" />
+    </children>
+</AnchorPane>

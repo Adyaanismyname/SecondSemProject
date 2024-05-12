@@ -1,0 +1,49 @@
+
+.anchor-pane {
+    /* Set the background image using the URL */
+    -fx-background-image: url("CrustyFinances.png");
+}
+.btn-minimize {
+    -fx-background-color: transparent;
+}
+
+.btn-minimize:hover {
+    -fx-background-color: #0a0a4b;
+    -fx-cursor: hand;
+}
+
+.btn-exit {
+    -fx-background-color: transparent;
+}
+
+.btn-exit:hover {
+    -fx-background-color: red;
+    -fx-cursor: hand;
+}
+
+.invisible-button {
+    -fx-opacity: 0; /* Make the button invisible */
+    -fx-pref-width: 0; /* Set the width to 0 */
+    -fx-pref-height: 0; /* Set the height to 0 */
+}
+
+.btn-startPage {
+    -fx-background-color: #0a0625
+}
+.btn-startPage:hover {
+    -fx-cursor: hand;
+    -fx-background-color: #0017af;
+}
+
+/* Styling for the switchLabel */
+.switchLabel {
+
+    -fx-underline: true; /* Underline the text */
+    -fx-cursor: hand; /* Set cursor to hand when hovered */
+}
+
+.error-label {
+    -fx-text-fill: red; /* Font color */
+    -fx-alignment: center; /* Text alignment */
+}
+
