@@ -28,7 +28,7 @@
         </Button>
         <StackPane layoutX="632.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="591.0" prefWidth="552.0">
             <children>
-                <AnchorPane fx:id="SignUp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="596.0" prefWidth="552.0" style="-fx-background-color: rgba(255, 255, 255, 0.05); -fx-background-radius: 27; -fx-border-width: 0.5; -fx-border-color: #0a0625; -fx-border-radius: 27;">
+                <AnchorPane fx:id="SignUp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="596.0" prefWidth="552.0" style="-fx-background-color: rgba(255, 255, 255, 0.05); -fx-background-radius: 27; -fx-border-width: 0.5; -fx-border-color: #0a0625; -fx-border-radius: 27;" visible="false">
                     <children>
                         <VBox layoutX="72.0" layoutY="149.0" prefHeight="343.0" prefWidth="414.0" spacing="10.0">
                             <children>
@@ -62,7 +62,7 @@
                                         </Label>
                                     </children>
                                 </AnchorPane>
-                                <Button fx:id="SignupButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#signup"  prefHeight="58.0" prefWidth="413.0" style="-fx-background-radius: 20;" styleClass="btn-startPage" text="Next" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                <Button fx:id="SignupButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#signup" prefHeight="58.0" prefWidth="413.0" style="-fx-background-radius: 20;" styleClass="btn-startPage" text="Next" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                     <font>
                                         <Font size="27.0" />
                                     </font>
@@ -157,7 +157,7 @@
                         </Text>
                     </children>
                 </AnchorPane>
-                <AnchorPane fx:id="SQs" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="552.0" style="-fx-background-color: rgba(255, 255, 255, 0.05); -fx-background-radius: 27; -fx-border-width: 0.5; -fx-border-color: #0a0625; -fx-border-radius: 27;" visible="false">
+                <AnchorPane fx:id="SQs" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="552.0" style="-fx-background-color: rgba(255, 255, 255, 0.05); -fx-background-radius: 27; -fx-border-width: 0.5; -fx-border-color: #0a0625; -fx-border-radius: 27;">
                     <children>
                         <VBox layoutX="74.0" layoutY="108.0" prefHeight="343.0" prefWidth="414.0" spacing="10.0">
                             <children>
@@ -207,7 +207,7 @@
                                 <Font name="System Bold" size="87.0" />
                             </font>
                         </Text>
-                        <VBox layoutX="72.0" layoutY="162.0" prefHeight="343.0" prefWidth="414.0" spacing="10.0">
+                        <VBox layoutX="72.0" layoutY="162.0" prefHeight="219.0" prefWidth="414.0" spacing="10.0">
                             <children>
                                 <TextField fx:id="Username" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="58.0" prefWidth="413.0" promptText="Username" style="-fx-background-radius: 20; -fx-background-color: transparent; -fx-border-radius: 30; -fx-border-color: #0a0625; -fx-border-width: 1;" styleClass="text-field">
                                     <font>
@@ -219,20 +219,25 @@
                                         <Font size="27.0" />
                                     </font>
                                 </PasswordField>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
-                                <Label fx:id="forgot" accessibleRole="BUTTON" onMouseClicked="#getVerification" styleClass="switchLabel" text="Forgot password?" textFill="#ff0000b5">
+                        <Label fx:id="login_error_label" prefHeight="55.0" prefWidth="429.0" textFill="RED">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Label>
+                                <Label fx:id="forgot" accessibleRole="BUTTON" onMouseClicked="#getVerification" styleClass="switchLabel" text="Forgot password?" textFill="#f53333b5">
                                     <font>
                                         <Font size="23.0" />
                                     </font>
                                 </Label>
-                                <Button fx:id="login_button" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="58.0" prefWidth="413.0" style="-fx-background-radius: 20;" styleClass="btn-startPage" text="Login" textAlignment="CENTER" textFill="WHITE">
+                                <Button fx:id="login_button" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#LoginButton" prefHeight="58.0" prefWidth="413.0" style="-fx-background-radius: 20;" styleClass="btn-startPage" text="Login" textAlignment="CENTER" textFill="WHITE">
                                     <font>
                                         <Font size="27.0" />
                                     </font>
                                 </Button>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                     <children>
-                                        <Label fx:id="new_user" accessibleRole="BUTTON" alignment="CENTER" layoutX="46.0" layoutY="-2.0" onMouseClicked="#getSingUp" styleClass="switchLabel" text="Are you new? Create an Account" textAlignment="CENTER" textFill="#0a0625b5">
+                                        <Label fx:id="new_user" accessibleRole="BUTTON" alignment="CENTER" layoutX="46.0" layoutY="-15.0" onMouseClicked="#getSingUp" styleClass="switchLabel" text="Are you new? Create an Account" textAlignment="CENTER" textFill="#0a0625b5">
                                             <font>
                                                 <Font size="23.0" />
                                             </font>

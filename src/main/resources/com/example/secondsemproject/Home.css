@@ -1,0 +1,4 @@
+.anchor-pane {
+    /* Set the background image using the URL */
+    -fx-background-image: url("Homepage.png");
+}

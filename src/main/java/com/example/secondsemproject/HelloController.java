@@ -20,6 +20,8 @@ import java.util.ResourceBundle;
 public class HelloController implements Initializable {
     String[] signup_array = new String[3];
 
+    private HelloApplication helloApplication;
+
     @FXML
     private AnchorPane Login;
     @FXML
@@ -51,6 +53,8 @@ public class HelloController implements Initializable {
     @FXML
     private TextField su_answer;
 
+    @FXML
+    private Label login_error_label;
 
 
 
@@ -83,24 +87,49 @@ public class HelloController implements Initializable {
         String entered_username = Username.getText();
         String entered_password = Password.getText();
 
-        JDBCConnection.getConnection();
-        try {
-            ResultSet User_password =  JDBCConnection.ExecuteQuery("Select Password from User where Username = \"" + entered_username + "\"");
+        if (entered_username.isEmpty() || entered_password.isEmpty()){
+            login_error_label.setText("Username and Password are Required");
+            System.out.println("ERRORRRRRRR");
+        }
+        else {
+            JDBCConnection.getConnection();
+            try {
+                ResultSet User_password =  JDBCConnection.ExecuteQuery("Select Password from User where Username = \"" + entered_username + "\"");
 
-            while(User_password.next()){
-                if(User_password.getString("Password").equals(entered_password)){
-                    Username.setText(entered_username + "hahahahah working mf ");
+                if (!User_password.next()){
+                    System.out.println("username doesn't exist");
+                    login_error_label.setText("Username doesn't exist");
+                } else {
+                    if(User_password.getString("Password").equals(entered_password)){
+                        login_error_label.setText("");
+                        Username.setText(entered_username + "hahahahah working mf ");
+                        System.out.println("logged in mf ");// add other functionality
+
+
+                        helloApplication.showHomePage();
+                    } else {
+                        login_error_label.setText("Incorrect Password,Try again");
+                        Password.setText("");
+                        System.out.println("Incorrect Password,Try again");
+                    }
                 }
-                else {
-                    System.out.println("INcorrect password mf try again idiot baka yaro");
-                }
+
+
+
+                JDBCConnection.close();
+            }
+            catch(SQLException e) {
+                System.out.println("username doesn't exist");
+
+                login_error_label.setText("Username doesn't exist");
+
             }
 
-            JDBCConnection.close();
         }
-        catch(SQLException e) {
-            System.out.println(e);
-        }
+
+
+
+
 
 
 
@@ -169,6 +198,8 @@ public class HelloController implements Initializable {
         su_password_confirm.setText("");
         su_answer.setText("");
         Lbl_error_SU.setText("");
+        Username.setText("");
+        Password.setText("");
 
     }
 
@@ -187,6 +218,8 @@ public class HelloController implements Initializable {
         su_password_confirm.setText("");
         su_answer.setText("");
         Lbl_error_SU.setText("");
+        Username.setText("");
+        Password.setText("");
 
     }
 
@@ -205,6 +238,8 @@ public class HelloController implements Initializable {
         su_password_confirm.setText("");
         su_answer.setText("");
         Lbl_error_SU.setText("");
+        Username.setText("");
+        Password.setText("");
 
     }
 
@@ -304,6 +339,10 @@ public class HelloController implements Initializable {
 
 
 
+    }
+
+    public void setHelloApplication(HelloApplication helloApplication) {
+        this.helloApplication = helloApplication;
     }
 
 
