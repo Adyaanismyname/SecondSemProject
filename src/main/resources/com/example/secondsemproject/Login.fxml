@@ -13,6 +13,7 @@
 
 <AnchorPane fx:id="startup_root" prefHeight="768.0" prefWidth="1366.0" styleClass="anchor-pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.secondsemproject.HelloController">
     <children>
+      <Button layoutX="480.0" layoutY="194.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="768.0" prefWidth="1366.0" style="-fx-border-color: #000000; -fx-border-width: 1; -fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
         <Button layoutX="1311.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#minimize" prefHeight="23.0" prefWidth="27.0" styleClass="btn-minimize">
             <graphic>
                 <FontAwesomeIconView fill="WHITE" glyphName="WINDOW_MINIMIZE" size="15" styleClass="btn-minimize" text="" />

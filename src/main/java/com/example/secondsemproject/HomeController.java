@@ -17,7 +17,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class HomeController {
+public class HomeController implements Initializable {
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
+    @FXML
+    public void exit(Event event){
+        System.exit(0);
+    }
+
+    @FXML
+    public void minimize(Event event){
+        // Get the stage from the event source
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+
+        // Minimize the window
+        stage.setIconified(true);
+    }
 }

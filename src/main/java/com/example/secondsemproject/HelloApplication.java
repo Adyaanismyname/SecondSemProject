@@ -1,9 +1,11 @@
 package com.example.secondsemproject;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -12,10 +14,15 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     private Stage primaryStage;
 
+    private double offsetX = 0;
+    private double offsetY = 0;
+
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         primaryStage.initStyle(StageStyle.DECORATED.UNDECORATED);
+
+
 
         showLoginPage();
     }
@@ -36,6 +43,23 @@ public class HelloApplication extends Application {
             primaryStage.setResizable(false);
 
 
+            root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event){
+                    offsetX = event.getSceneX();
+                    offsetY = event.getSceneY(); // Using getSceneY() to get the y-coordinate relative to the scene
+                }
+            });
+
+            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event){
+                    primaryStage.setX(event.getScreenX() - offsetX);
+                    primaryStage.setY(event.getScreenY() - offsetY); // Corrected to set Y coordinate
+                }
+            });
+
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -49,6 +73,9 @@ public class HelloApplication extends Application {
 
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
+
 
             primaryStage.setScene(scene);
             primaryStage.setTitle("Home Page");
