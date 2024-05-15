@@ -42,6 +42,9 @@ public class HelloController implements Initializable {
 
 
 
+
+
+
     @FXML
     private TextField su_username;
     @FXML
@@ -67,10 +70,18 @@ public class HelloController implements Initializable {
     private PasswordField Password;
 
 
+    private String username_to_pass;
+
+
+    public String getUsername_to_pass() {
+        return this.username_to_pass;
+    }
+
     @FXML
     public void exit(Event event){
         System.exit(0);
     }
+
 
     @FXML
     public void minimize(Event event){
@@ -102,10 +113,11 @@ public class HelloController implements Initializable {
                 } else {
                     if(User_password.getString("Password").equals(entered_password)){
                         login_error_label.setText("");
-                        Username.setText(entered_username + "hahahahah working mf ");
+
                         System.out.println("logged in mf ");// add other functionality
-
-
+                        Username.setText("");
+                        Password.setText("");
+                        username_to_pass = entered_username;
                         helloApplication.showHomePage();
                     } else {
                         login_error_label.setText("Incorrect Password,Try again");
@@ -322,28 +334,15 @@ public class HelloController implements Initializable {
             System.out.println(e);
         }
 
-        //if(resultSet.next()) {
-
-       // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     public void setHelloApplication(HelloApplication helloApplication) {
         this.helloApplication = helloApplication;
     }
+
+
+
+
 
 
 

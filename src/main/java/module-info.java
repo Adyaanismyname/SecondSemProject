@@ -11,6 +11,7 @@ module com.example.secondsemproject {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.sql;
+    requires ch.qos.logback.core;
 
     opens com.example.secondsemproject to javafx.fxml;
     exports com.example.secondsemproject;

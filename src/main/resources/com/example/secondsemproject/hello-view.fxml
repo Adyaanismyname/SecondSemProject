@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1366.0" styleClass="anchor-pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.secondsemproject.HelloController">
+<AnchorPane prefHeight="768.0" prefWidth="1366.0" styleClass="anchor-pane" stylesheets="@login.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.secondsemproject.HelloController">
     <children>
         <Button layoutX="1311.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#minimize" prefHeight="23.0" prefWidth="27.0" styleClass="btn">
             <graphic>
@@ -27,7 +27,7 @@
         </Button>
         <AnchorPane layoutX="633.0" layoutY="125.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="552.0" style="-fx-background-color: rgba(255, 255, 255, 0.05); -fx-background-radius: 27; -fx-border-width: 0.5; -fx-border-color: #0a0625; -fx-border-radius: 27;" styleClass="blurred-background">
             <children>
-                <VBox layoutX="72.0" layoutY="162.0" prefHeight="343.0" prefWidth="414.0" spacing="10.0" stylesheets="@style.css">
+                <VBox layoutX="72.0" layoutY="162.0" prefHeight="343.0" prefWidth="414.0" spacing="10.0" stylesheets="@login.css">
                     <children>
                         <TextField fx:id="Username" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="58.0" prefWidth="413.0" promptText="Username" style="-fx-background-radius: 20; -fx-background-color: transparent; -fx-border-radius: 30; -fx-border-color: #0a0625; -fx-border-width: 1;">
                             <font>
@@ -45,7 +45,7 @@
                         <Font size="26.0" />
                      </font>
                         </Label>
-                        <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#LoginButton" prefHeight="58.0" prefWidth="405.0" style="-fx-background-radius: 20;" styleClass="btn-login" stylesheets="@style.css" text="Login" textAlignment="CENTER" textFill="WHITE">
+                        <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#LoginButton" prefHeight="58.0" prefWidth="405.0" style="-fx-background-radius: 20;" styleClass="btn-login" stylesheets="@login.css" text="Login" textAlignment="CENTER" textFill="WHITE">
                             <font>
                                 <Font size="27.0" />
                             </font>

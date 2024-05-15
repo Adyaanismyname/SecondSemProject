@@ -2,3 +2,37 @@
     /* Set the background image using the URL */
     -fx-background-image: url("Homepage.png");
 }
+
+
+.expanded_menu {
+    -fx-background-color : #0c0829;
+}
+
+.btn-minimize {
+    -fx-background-color: transparent;
+}
+
+.btn-minimize:hover {
+    -fx-background-color: #0a0a4b;
+    -fx-cursor: hand;
+}
+
+.btn-exit {
+    -fx-background-color: transparent;
+}
+
+.btn-exit:hover {
+    -fx-background-color: red;
+    -fx-cursor: hand;
+}
+
+
+.menu_toggle:hover {
+    -fx-background-color:#0e0e94 ;
+    -fx-cursor:hand;
+
+}
+.menu_buttons:hover {
+    -fx-background-color: #0e0e94;
+    -fx-cursor: hand;
+}

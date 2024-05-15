@@ -17,10 +17,13 @@ public class HelloApplication extends Application {
     private double offsetX = 0;
     private double offsetY = 0;
 
+    HelloController helloController;
+
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         primaryStage.initStyle(StageStyle.DECORATED.UNDECORATED);
+
 
 
 
@@ -32,9 +35,11 @@ public class HelloApplication extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
             Parent root = loader.load();
             HelloController loginController = loader.getController();
+            this.helloController = loginController;
             loginController.setHelloApplication(this);
+
             Scene scene = new Scene(root);
-            scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
             primaryStage.initStyle(StageStyle.DECORATED.UNDECORATED);
 
             primaryStage.setScene(scene);
@@ -69,11 +74,22 @@ public class HelloApplication extends Application {
     public void showHomePage() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
+
+
+
             Parent root = loader.load();
+
+            HomeController homeController = loader.getController();
+            homeController.setLoginController(this.helloController);
+
+
+
+
+
 
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
-            scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
 
 
 
