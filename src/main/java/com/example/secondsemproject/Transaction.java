@@ -5,12 +5,14 @@ import java.time.LocalDate;
 public abstract class Transaction {
 
     private int ID;
+    private String Username;
     private LocalDate date;
     private double value;
 
     // Constructor
-    public Transaction(int ID, LocalDate date, double value) {
+    public Transaction(int ID, LocalDate date, double value,String Username) {
         this.ID = ID;
+        this.Username=Username;
         this.date = date;
         setValue(value);
     }

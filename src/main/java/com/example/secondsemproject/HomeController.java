@@ -2,10 +2,13 @@ package com.example.secondsemproject;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
 import javafx.animation.FadeTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -18,6 +21,7 @@ import javax.security.auth.login.LoginContext;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 
@@ -78,6 +82,20 @@ public class HomeController implements Initializable {
     @FXML
     private Label username_field;
 
+    @FXML
+    private TableView<Income> table_Income;
+
+    @FXML
+    private TableColumn<Income, LocalDate> table_IncomeDate;
+
+    @FXML
+    private TableColumn<Income,String> table_IncomeSource;
+
+    @FXML
+    private TableColumn< Income, Double> table_IncomeValue;
+
+    @FXML
+    private TableColumn<Income, Integer> table_IncomeID;
 
 
 
@@ -86,6 +104,8 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         expanded_menu_pane.setVisible(false);
+
+        setIncome_table();
 
 
 
@@ -125,6 +145,12 @@ public class HomeController implements Initializable {
         //create an income object
         Income income = new Income(income_source.getText(), income_date.getValue(),Double.parseDouble(income_value.getText()));
         income_label_1.setText("Income added!");
+        setIncome_table();
+
+        income_source.setText("");
+        income_date.setValue(null);
+        income_value.setText("");
+
     }
 
     public void removeIncome(){
@@ -139,5 +165,23 @@ public class HomeController implements Initializable {
             income_label_2.setText("No income recorded with the ID:" + ID + ".");
             income_label_2.setTextFill(Color.RED);
         }
+    }
+
+    public void setIncome_table(){
+
+        // In your initialize method or wherever you set up the TableView
+        ObservableList<Income> incomeObservableList = FXCollections.observableArrayList(Income.incomeList);
+
+
+
+
+        table_IncomeID.setCellValueFactory(new PropertyValueFactory<Income , Integer>("ID"));
+        table_IncomeDate.setCellValueFactory(new PropertyValueFactory<Income , LocalDate>("Date"));
+        table_IncomeValue.setCellValueFactory(new PropertyValueFactory<Income , Double>("Value"));
+        table_IncomeSource.setCellValueFactory(new PropertyValueFactory<Income , String>("Source"));
+
+        table_Income.setItems(incomeObservableList);
+
+
     }
 }

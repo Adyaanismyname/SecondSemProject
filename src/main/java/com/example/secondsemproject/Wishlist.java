@@ -13,6 +13,7 @@ public class Wishlist {
     private double item_price;
     private double rate;
     private double amount_saved = 0;
+    private String Username;
     private LocalDate lastCalculationDate;
 
     public static ArrayList<Wishlist> wishlists = new ArrayList<>();
@@ -26,10 +27,20 @@ public class Wishlist {
         this.item_price = item_price;
         this.rate = rate;
         this.lastCalculationDate = LocalDate.now();
+        this.Username=HelloController.getUsername_to_pass();
 
         wishlists.add(this);
 
         W_IDgenerator++;
+    }
+
+    public Wishlist(int Id,String item_name, double item_price, double rate,LocalDate date,String Username) {
+        this.ID = Id;
+        this.Username=Username;
+        this.item_name = item_name;
+        this.item_price = item_price;
+        this.rate = rate;
+        this.lastCalculationDate =date;
     }
 
     // Getters and Setters
@@ -108,7 +119,7 @@ public class Wishlist {
                 redeemable.add(this);
             }
 
-           this.lastCalculationDate = LocalDate.now();
+            this.lastCalculationDate = LocalDate.now();
         }
     }
 
@@ -139,7 +150,7 @@ public class Wishlist {
         return false;
     }
 
-   // convert the wishlist to an expenditure and delEte the wishlist
+    // convert the wishlist to an expenditure and delEte the wishlist
     public boolean isRedeemable (){
         return !(amount_saved < item_price);
     }
@@ -160,12 +171,10 @@ public class Wishlist {
 
             }
         }
-        
+
         return false;
     }
 
 
 
 }
-
-

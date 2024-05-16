@@ -48,7 +48,6 @@ public class HelloController implements Initializable {
     private Label Lbl_error_SU;
 
     @FXML
-
     private TextField reset_password;
 
     @FXML
@@ -93,11 +92,11 @@ public class HelloController implements Initializable {
     private PasswordField Password;
 
 
-    private String username_to_pass;
+    private static String username_to_pass;
 
 
-    public String getUsername_to_pass() {
-        return this.username_to_pass;
+    public static String getUsername_to_pass() {
+        return username_to_pass;
     }
 
     @FXML
@@ -441,15 +440,6 @@ public class HelloController implements Initializable {
 
 
     }
-
-
-
-
-
-
-
-
-
 
 
 

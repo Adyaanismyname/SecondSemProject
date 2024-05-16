@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Reminder extends Transaction {
     private static int R_IDgenerator = 1;
+
     private String name;
     private String category;
     private boolean yearly = false;
@@ -12,29 +13,30 @@ public class Reminder extends Transaction {
 
     public static ArrayList<Reminder>  reminderList= new ArrayList<>();
 
-
-    // Constructor
-    public Reminder(String name, String category, LocalDate date, double value, boolean monthly, boolean yearly) {
-        super(R_IDgenerator, date, value);
-
+    public Reminder(int id,String name, String category, LocalDate date, double value, boolean monthly, boolean yearly,String Username) {
+        super(id, date, value,HelloController.getUsername_to_pass());
         this.name = name;
         this.category = category;
         this.monthly = monthly;
         this.yearly = yearly;
 
+
+
+    }
+
+
+    // Constructor
+    public Reminder(String name, String category, LocalDate date, double value, boolean monthly, boolean yearly) {
+        super(R_IDgenerator, date, value,HelloController.getUsername_to_pass());
+        this.name = name;
+        this.category = category;
+        this.monthly = monthly;
+        this.yearly = yearly;
         reminderList.add(this);
 
         R_IDgenerator++;
     }
-    public Reminder(int id,String name, String category, LocalDate date, double value, boolean monthly, boolean yearly) {
-        super(id, date, value);
 
-        this.name = name;
-        this.category = category;
-        this.monthly = monthly;
-        this.yearly = yearly;
-
-    }
 
     // Getters and setters
     public String getName() {

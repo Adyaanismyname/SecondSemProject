@@ -8,16 +8,14 @@ public class Expenditure extends  Transaction{
     private String category;
     public static ArrayList<Expenditure> ExpenditureList = new ArrayList<>();
 
-    public Expenditure(int id,LocalDate date,double value,String Category){
-        super(id,date,value);
-this.category=Category;
-
-
+    public Expenditure(int id,LocalDate date,double value,String Category,String Username){
+        super(id,date,value,Username);
+        this.category=Category;
     }
 
     public Expenditure(String category, LocalDate date, double value){
 
-        super(E_IDgenerator, date, value);
+        super(E_IDgenerator, date, value,HelloController.getUsername_to_pass());
         this.category = category;
 
         E_IDgenerator++;

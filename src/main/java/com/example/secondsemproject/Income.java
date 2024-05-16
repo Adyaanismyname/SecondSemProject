@@ -3,22 +3,28 @@ package com.example.secondsemproject;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Income extends Transaction{
+public class Income extends Transaction {
     private static int I_IDgenerator;
     private String source;
+    private String Username;
     public static ArrayList<Income> incomeList = new ArrayList<>();
 
 
-    public Income(String source, LocalDate date, double value){
+    public Income(String source, LocalDate date, double value) {
 
-        super(I_IDgenerator, date, value);
+        super(I_IDgenerator, date, value, HelloController.getUsername_to_pass());
         this.source = source;
 
         I_IDgenerator++;
         incomeList.add(this);
-        int num =5;
-        I_IDgenerator = num; // why this ssssssssssss
 
+
+    }
+
+    public Income(int Id, String source, LocalDate date, double value, String Username) {
+
+        super(Id, date, value, Username);
+        this.source = source;
 
     }
 
@@ -38,22 +44,22 @@ public class Income extends Transaction{
     }
 
 
-
-    public static double getTotal(){
+    public static double getTotal() {
         double total = 0;
 
-        for(Income income  : incomeList){
-            total+= income.getValue();
+        for (Income income : incomeList) {
+            total += income.getValue();
         }
         return total;
     }
 
-    public static boolean deleteIncome (int ID){
+
+    public static boolean deleteIncome(int ID) {
 
         //for loop iterates through each income
-        for (int i = 0; i < incomeList.size(); i++){
+        for (int i = 0; i < incomeList.size(); i++) {
 
-            if (incomeList.get(i).getID() == ID){
+            if (incomeList.get(i).getID() == ID) {
 
                 incomeList.remove(i);
 
@@ -66,3 +72,4 @@ public class Income extends Transaction{
         return false;
     }
 }
+

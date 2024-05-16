@@ -97,3 +97,16 @@
     -fx-background-color: #ff5454;
     -fx-cursor: hand;
 }
+
+.button-search{
+    -fx-background-color: #2db208;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #000000;
+    -fx-border-width: 0;
+
+}
+.button-search:hover {
+    -fx-background-color: #acff7f;
+    -fx-cursor: hand;
+}
