@@ -11,9 +11,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
+import org.w3c.dom.Text;
 
 
 import javax.security.auth.login.LoginContext;
+import javax.xml.transform.Result;
 import java.awt.*;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -22,6 +24,8 @@ import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
     String[] signup_array = new String[3];
+
+    String username_for_password_reset;
 
     private HelloApplication helloApplication;
 
@@ -43,10 +47,21 @@ public class HelloController implements Initializable {
     @FXML
     private Label Lbl_error_SU;
 
+    @FXML
+
+    private TextField reset_password;
+
+    @FXML
+    private TextField reset_password_confirm;
+
+    @FXML
+    private Label reset_pass_errorlbl;
 
 
 
 
+    @FXML
+    private Label verification_error_label;
 
     @FXML
     private TextField su_username;
@@ -63,6 +78,11 @@ public class HelloController implements Initializable {
     private Label login_error_label;
 
 
+    @FXML
+    private TextField SV_email;
+
+    @FXML
+    private TextField sv_answer;
 
     @FXML
 
@@ -167,6 +187,9 @@ public class HelloController implements Initializable {
         su_password_confirm.setText("");
         su_answer.setText("");
         Lbl_error_SU.setText("");
+        reset_pass_errorlbl.setText("");
+        verification_error_label.setText("");
+
 
 
 
@@ -283,22 +306,11 @@ public class HelloController implements Initializable {
         su_answer.setText("");
         Lbl_error_SU.setText("");
 
-
-
-
         Login.setVisible(true);
         SignUp.setVisible(false);
         SQs.setVisible(false);
         ResetPass.setVisible(false);
         Verification.setVisible(false);
-
-
-
-
-
-
-
-
     }
     public void signup() {
         String sue_username = su_username.getText();
@@ -334,11 +346,6 @@ public class HelloController implements Initializable {
                 SQs.setVisible(true);
                 ResetPass.setVisible(false);
                 Verification.setVisible(false);
-
-
-
-
-
             }
 
 
@@ -351,6 +358,88 @@ public class HelloController implements Initializable {
 
     public void setHelloApplication(HelloApplication helloApplication) {
         this.helloApplication = helloApplication;
+    }
+
+
+    public void forgot_password_SV() {
+        String entered_email = SV_email.getText();
+        String entered_answer = sv_answer.getText();
+
+        JDBCConnection.getConnection();
+
+        try {
+            ResultSet SV_email_checker = JDBCConnection.ExecuteQuery("Select Answer_to_Security_Question , Username from User where Email = \"" + entered_email + "\";" );
+
+            if(!SV_email_checker.next()) {
+                verification_error_label.setText("This email does not exist");
+            }
+            else if(!SV_email_checker.getString("Answer_to_Security_Question").equals(entered_answer)) {
+                verification_error_label.setText("Wrong answer to question , Try again");
+
+
+            }
+            else {
+                username_for_password_reset = SV_email_checker.getString("Username");
+                su_username.setText("");
+                su_password.setText("");
+                su_email.setText("");
+                su_password_confirm.setText("");
+                su_answer.setText("");
+                Lbl_error_SU.setText("");
+
+                Login.setVisible(false);
+                SignUp.setVisible(false);
+                SQs.setVisible(false);
+                ResetPass.setVisible(true);
+                Verification.setVisible(false);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        JDBCConnection.close();
+
+
+
+    }
+    public void forgot_password_reset() throws SQLException {
+        String password = reset_password.getText();
+        String confirm = reset_password_confirm.getText();
+
+        JDBCConnection.getConnection();
+        if (password.isEmpty() || confirm.isEmpty()) {
+            reset_pass_errorlbl.setText("Field cannot be empty");
+
+        }
+
+        else if(!password.equals(confirm)) {
+            reset_pass_errorlbl.setText("Passwords do not match");
+
+        }
+        else {
+            JDBCConnection.ExecuteQueryWithNoResult("Update User set password = \"" +password + "\" where Username = \"" + username_for_password_reset + "\";");
+
+            Login.setVisible(true);
+            SignUp.setVisible(false);
+            SQs.setVisible(false);
+            ResetPass.setVisible(false);
+            Verification.setVisible(false);
+
+            su_username.setText("");
+            su_password.setText("");
+            su_email.setText("");
+            su_password_confirm.setText("");
+            su_answer.setText("");
+            Lbl_error_SU.setText("");
+
+
+            JDBCConnection.close();
+
+        }
+
+
+
+
+
     }
 
 
