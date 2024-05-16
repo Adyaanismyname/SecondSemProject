@@ -141,6 +141,8 @@ public class HomeController implements Initializable {
         this.helloController = helloController;
     }
 
+
+
     public void addIncome(){
         //create an income object
         Income income = new Income(income_source.getText(), income_date.getValue(),Double.parseDouble(income_value.getText()));
@@ -184,4 +186,49 @@ public class HomeController implements Initializable {
 
 
     }
+
+//
+//    public void addExpense(){
+//        //create an income object
+//        Expenditure expenditure = new Expenditure(income_source.getText(), income_date.getValue(),Double.parseDouble(income_value.getText()));
+//        income_label_1.setText("Income added!");
+//        setExpense_table();
+//
+//        income_source.setText("");
+//        income_date.setValue(null);
+//        income_value.setText("");
+//
+//    }
+//
+//    public void removeExpense(){
+//
+//        int ID = Integer.parseInt(Income_ID.getText());
+//
+//        if(Expenditure.deleteExpense(ID)){
+//            income_label_2.setText("Deleted!");
+//
+//        }
+//        else {
+//            income_label_2.setText("No expense recorded with the ID:" + ID + ".");
+//            income_label_2.setTextFill(Color.RED);
+//        }
+//    }
+//
+//    public void setExpense_table(){
+//
+//        // In your initialize method or wherever you set up the TableView
+//        ObservableList<Income> incomeObservableList = FXCollections.observableArrayList(Income.incomeList);
+//
+//
+//
+//
+//        table_IncomeID.setCellValueFactory(new PropertyValueFactory<Income , Integer>("ID"));
+//        table_IncomeDate.setCellValueFactory(new PropertyValueFactory<Income , LocalDate>("Date"));
+//        table_IncomeValue.setCellValueFactory(new PropertyValueFactory<Income , Double>("Value"));
+//        table_IncomeSource.setCellValueFactory(new PropertyValueFactory<Income , String>("Source"));
+//
+//        table_Income.setItems(incomeObservableList);
+//
+//
+//    }
 }

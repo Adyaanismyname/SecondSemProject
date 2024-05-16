@@ -172,9 +172,8 @@ public class Wishlist {
             }
         }
 
+        //the selected item cnnot be redeemed
         return false;
     }
-
-
 
 }

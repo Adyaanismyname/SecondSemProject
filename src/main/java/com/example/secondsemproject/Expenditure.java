@@ -51,5 +51,23 @@ public class Expenditure extends  Transaction{
     }
 
 
+    public static boolean deleteExpense(int ID) {
+
+        //for loop iterates through each expense
+        for (int i = 0; i < ExpenditureList.size(); i++) {
+
+            if (ExpenditureList.get(i).getID() == ID) {
+
+                ExpenditureList.remove(i);
+
+                //successfully deleted
+                return true;
+            }
+        }
+
+        //this means no such expense with the ID
+        return false;
+    }
+
 
 }

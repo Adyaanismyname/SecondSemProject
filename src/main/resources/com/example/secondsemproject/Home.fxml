@@ -29,44 +29,10 @@
             <FontAwesomeIconView fill="WHITE" glyphName="WINDOW_MINIMIZE" onMouseClicked="#minimize" size="15" styleClass="btn-minimize" text="" />
          </graphic>
       </Button>
-      <AnchorPane fx:id="expanded_menu_pane" prefHeight="766.0" prefWidth="272.0" styleClass="expanded_menu" visible="false">
-         <children>
-            <Label layoutX="1.0" layoutY="154.0" prefHeight="50.0" prefWidth="267.0" styleClass="menu_buttons" text="  Home" textFill="WHITE">
-               <font>
-                  <Font size="33.0" />
-               </font>
-            </Label>
-            <Label layoutX="1.0" layoutY="232.0" prefHeight="56.0" prefWidth="267.0" styleClass="menu_buttons" text="  Account" textFill="WHITE">
-               <font>
-                  <Font size="33.0" />
-               </font>
-            </Label>
-            <Label layoutX="-1.0" layoutY="316.0" prefHeight="50.0" prefWidth="268.0" styleClass="menu_buttons" text="  Convert Currency" textFill="WHITE">
-               <font>
-                  <Font size="33.0" />
-               </font>
-            </Label>
-            <Label layoutY="401.0" prefHeight="50.0" prefWidth="268.0" styleClass="menu_buttons" text="  Reminders" textFill="WHITE">
-               <font>
-                  <Font size="33.0" />
-               </font>
-            </Label>
-            <Label layoutY="481.0" prefHeight="50.0" prefWidth="266.0" styleClass="menu_buttons" text="  Calculate Zakaat" textFill="WHITE">
-               <font>
-                  <Font size="33.0" />
-               </font>
-            </Label>
-            <Label fx:id="username_field" layoutX="66.0" layoutY="725.0" prefHeight="26.0" prefWidth="194.0" styleClass="username-field" textFill="WHITE">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="home_pane" layoutX="299.0" layoutY="101.0" prefHeight="631.0" prefWidth="1027.0" />
+      <AnchorPane fx:id="home_pane" layoutX="83.0" layoutY="101.0" prefHeight="631.0" prefWidth="1243.0" visible="false" />
       <AnchorPane fx:id="income" layoutX="101.0" layoutY="101.0" prefHeight="631.0" prefWidth="1228.0" />
       <AnchorPane fx:id="currency_conv_pane" layoutX="102.0" layoutY="99.0" prefHeight="634.0" prefWidth="1225.0" />
-      <AnchorPane fx:id="calculator_pane" layoutX="101.0" layoutY="101.0" prefHeight="633.0" prefWidth="1225.0">
+      <AnchorPane fx:id="Income" layoutX="101.0" layoutY="101.0" prefHeight="633.0" prefWidth="1225.0" visible="false">
          <children>
             <HBox layoutX="282.0" layoutY="162.0" prefHeight="605.0" prefWidth="1228.0" style="-fx-spacing: 20;" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -176,5 +142,39 @@
             <Image url="@avatar_placeholder.png" />
          </image>
       </ImageView>
+      <AnchorPane fx:id="expanded_menu_pane" prefHeight="766.0" prefWidth="272.0" styleClass="expanded_menu" visible="false">
+         <children>
+            <Label layoutX="1.0" layoutY="154.0" prefHeight="50.0" prefWidth="267.0" styleClass="menu_buttons" text="  Home" textFill="WHITE">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Label>
+            <Label layoutX="1.0" layoutY="232.0" prefHeight="56.0" prefWidth="267.0" styleClass="menu_buttons" text="  Account" textFill="WHITE">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Label>
+            <Label layoutX="-1.0" layoutY="316.0" prefHeight="50.0" prefWidth="268.0" styleClass="menu_buttons" text="  Convert Currency" textFill="WHITE">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Label>
+            <Label layoutY="401.0" prefHeight="50.0" prefWidth="268.0" styleClass="menu_buttons" text="  Reminders" textFill="WHITE">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Label>
+            <Label layoutY="481.0" prefHeight="50.0" prefWidth="266.0" styleClass="menu_buttons" text="  Calculate Zakaat" textFill="WHITE">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Label>
+            <Label fx:id="username_field" layoutX="66.0" layoutY="725.0" prefHeight="26.0" prefWidth="194.0" styleClass="username-field" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

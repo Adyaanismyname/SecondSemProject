@@ -12,6 +12,7 @@ public class Reminder extends Transaction {
     private boolean monthly = false;
 
     public static ArrayList<Reminder>  reminderList= new ArrayList<>();
+    public static ArrayList<Reminder> upcomingReminders = new ArrayList<>();
 
     public Reminder(int id,String name, String category, LocalDate date, double value, boolean monthly, boolean yearly,String Username) {
         super(id, date, value,HelloController.getUsername_to_pass());
@@ -89,8 +90,18 @@ public class Reminder extends Transaction {
                 "\nRepetition: " + repetition;
     }
 
+
     //REMOVE REMINDER
-    public boolean deleteReminder (int ID){
+    public static boolean deleteReminder (int ID){
+
+        //for loop iterates through each reminder in the upcoming section
+        for (int i = 0; i < upcomingReminders.size(); i++){
+
+            if (upcomingReminders.get(i).getID() == ID){
+
+                upcomingReminders.remove(i);
+            }
+        }
 
         //for loop iterates through each reminder
         for (int i = 0; i < reminderList.size(); i++){
@@ -104,16 +115,26 @@ public class Reminder extends Transaction {
             }
         }
 
+
         //this means no such reminder with the ID
         return false;
     }
 
-    public void payReminder(){
+    public static void payReminder(int ID){
 
-        Expenditure expense = new Expenditure(this.category, LocalDate.now(), getValue());
+        //for loop iterates through each reminder
+        for (int i = 0; i < reminderList.size(); i++){
 
-        if (!(this.yearly || this.monthly)){
-            deleteReminder(getID());
+            Reminder reminder = reminderList.get(i);
+
+            if (reminder.getID() == ID){
+
+                Expenditure expense = new Expenditure(reminder.category, LocalDate.now(), reminder.getValue());
+
+                if (!(reminder.yearly || reminder.monthly)) {
+                    deleteReminder(ID);
+                }
+            }
         }
     }
 
@@ -123,6 +144,23 @@ public class Reminder extends Transaction {
         LocalDate currentDate = LocalDate.now();
 
         return !(getDate().isBefore(currentDate) || getDate().isEqual(currentDate));
+    }
+
+    public static void getUpcomingReminders(){
+
+        LocalDate five_days_later = LocalDate.now().plusDays(5);
+
+        //for loop iterates through each reminder
+        for (int i = 0; i < reminderList.size(); i++){
+
+            boolean upcoming = reminderList.get(i).getDate().isBefore(five_days_later);
+
+            if (upcoming){
+
+                upcomingReminders.add(reminderList.get(i));
+
+            }
+        }
     }
 
 
