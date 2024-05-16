@@ -48,4 +48,21 @@ public class Income extends Transaction{
         return total;
     }
 
+    public static boolean deleteIncome (int ID){
+
+        //for loop iterates through each income
+        for (int i = 0; i < incomeList.size(); i++){
+
+            if (incomeList.get(i).getID() == ID){
+
+                incomeList.remove(i);
+
+                //successfully deleted
+                return true;
+            }
+        }
+
+        //this means no such income with the ID
+        return false;
+    }
 }
