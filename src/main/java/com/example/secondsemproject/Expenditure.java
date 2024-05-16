@@ -4,9 +4,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Expenditure extends  Transaction{
-    private static int E_IDgenerator = 1;
+    private static int E_IDgenerator ;
     private String category;
     public static ArrayList<Expenditure> ExpenditureList = new ArrayList<>();
+
+    public Expenditure(int id,LocalDate date,double value,String Category){
+        super(id,date,value);
+this.category=Category;
+
+
+    }
 
     public Expenditure(String category, LocalDate date, double value){
 

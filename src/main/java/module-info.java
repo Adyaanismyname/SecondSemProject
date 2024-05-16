@@ -12,6 +12,7 @@ module com.example.secondsemproject {
     requires com.almasb.fxgl.all;
     requires java.sql;
     requires ch.qos.logback.core;
+    requires java.desktop;
 
     opens com.example.secondsemproject to javafx.fxml;
     exports com.example.secondsemproject;

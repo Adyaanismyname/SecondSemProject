@@ -26,6 +26,15 @@ public class Reminder extends Transaction {
 
         R_IDgenerator++;
     }
+    public Reminder(int id,String name, String category, LocalDate date, double value, boolean monthly, boolean yearly) {
+        super(id, date, value);
+
+        this.name = name;
+        this.category = category;
+        this.monthly = monthly;
+        this.yearly = yearly;
+
+    }
 
     // Getters and setters
     public String getName() {
