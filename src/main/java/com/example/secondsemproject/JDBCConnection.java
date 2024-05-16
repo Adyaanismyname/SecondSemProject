@@ -1,6 +1,7 @@
 package com.example.secondsemproject ;
 
 import javax.xml.transform.Result;
+import java.io.File;
 import java.sql.*;
 
 public class JDBCConnection {
@@ -12,7 +13,8 @@ public class JDBCConnection {
 
     public static void getConnection() {
         try {
-            String url = "jdbc:sqlite:D:\\D\\F\\Program Files\\GIThub\\SecondSemProject\\src\\main\\java\\com\\example\\secondsemproject\\database3.db";
+
+            String url = "jdbc:sqlite:src/main/java/com/example/secondsemproject/database3.db";
             connection = DriverManager.getConnection(url);
             statement = connection.createStatement();
             System.out.println("the connection was successful");

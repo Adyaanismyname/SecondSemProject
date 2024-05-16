@@ -38,6 +38,9 @@ public class HomeController implements Initializable {
     @FXML
     HelloController helloController;
 
+    @FXML
+    private Label username_field;
+
 
 
 
@@ -78,7 +81,7 @@ public class HomeController implements Initializable {
         fadeTransition.setFromValue(0.0);
         fadeTransition.setToValue(1.0);
         fadeTransition.play();
-        System.out.println(helloController.getUsername_to_pass());
+        username_field.setText(helloController.getUsername_to_pass());
 
         expanded_menu_pane.setVisible(!expanded_menu_pane.isVisible());
 

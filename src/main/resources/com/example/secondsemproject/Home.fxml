@@ -23,7 +23,7 @@
             <FontAwesomeIconView fill="WHITE" glyphName="WINDOW_MINIMIZE" onMouseClicked="#minimize" size="15" styleClass="btn-minimize" text="" />
          </graphic>
       </Button>
-      <AnchorPane fx:id="expanded_menu_pane" prefHeight="766.0" prefWidth="272.0" styleClass="expanded_menu" visible="false">
+      <AnchorPane fx:id="expanded_menu_pane" prefHeight="766.0" prefWidth="272.0" styleClass="expanded_menu">
          <children>
             <Label layoutX="1.0" layoutY="154.0" prefHeight="50.0" prefWidth="267.0" styleClass="menu_buttons" text="  Home" textFill="WHITE">
                <font>
@@ -50,6 +50,11 @@
                   <Font size="33.0" />
                </font>
             </Label>
+            <Label fx:id="username_field" layoutX="66.0" layoutY="725.0" prefHeight="26.0" prefWidth="194.0" styleClass="username-field" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="home_pane" layoutX="102.0" layoutY="101.0" prefHeight="631.0" prefWidth="1224.0" />
@@ -59,6 +64,11 @@
       <ImageView fx:id="menu_toggle_button" fitHeight="78.0" fitWidth="53.0" layoutX="2.0" layoutY="13.0" onMouseClicked="#show_menu" pickOnBounds="true" preserveRatio="true" styleClass="menu_toggle">
          <image>
             <Image url="@menu_icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="48.0" fitWidth="50.0" layoutX="4.0" layoutY="716.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@avatar_placeholder.png" />
          </image>
       </ImageView>
    </children>

@@ -36,3 +36,10 @@
     -fx-background-color: #0e0e94;
     -fx-cursor: hand;
 }
+
+.username-field {
+    -fx-font-weight: bold;
+}
+.username-field:hover {
+    -fx-background-color : #0e0e94;
+}

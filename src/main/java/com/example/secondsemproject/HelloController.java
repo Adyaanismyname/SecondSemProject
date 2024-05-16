@@ -10,8 +10,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.scene.paint.Color;
+
 
 import javax.security.auth.login.LoginContext;
+import java.awt.*;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -258,7 +261,7 @@ public class HelloController implements Initializable {
 
 
     @FXML
-    public void SQFinish() {
+    public void SQFinish() throws InterruptedException {
 
         String sue_answer = su_answer.getText();
 
@@ -281,11 +284,17 @@ public class HelloController implements Initializable {
         Lbl_error_SU.setText("");
 
 
+
+
         Login.setVisible(true);
         SignUp.setVisible(false);
         SQs.setVisible(false);
         ResetPass.setVisible(false);
         Verification.setVisible(false);
+
+
+
+
 
 
 
@@ -325,6 +334,10 @@ public class HelloController implements Initializable {
                 SQs.setVisible(true);
                 ResetPass.setVisible(false);
                 Verification.setVisible(false);
+
+
+
+
 
             }
 
