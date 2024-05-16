@@ -5,14 +5,12 @@ import javafx.animation.FadeTransition;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -25,30 +23,62 @@ import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
 
-    @FXML
-    private AnchorPane calculator_pane;
-    @FXML
-    private AnchorPane home_pane;
-    @FXML
-    private AnchorPane account_pane;
-    @FXML
-    private AnchorPane currency_conv_pane;
-
 
     @FXML
     HelloController helloController;
 
     @FXML
-    private Label username_field;
+    private AnchorPane calculator_pane;
 
-
-
+    @FXML
+    private AnchorPane currency_conv_pane;
 
     @FXML
     private AnchorPane expanded_menu_pane;
 
     @FXML
+    private AnchorPane home_pane;
+
+    @FXML
+    private AnchorPane income;
+
+    @FXML
+    private TextField Income_ID;
+
+    @FXML
+    private Button income_all;
+
+    @FXML
+    private DatePicker income_date;
+
+    @FXML
+    private DatePicker income_date_end;
+
+    @FXML
+    private DatePicker income_date_start;
+
+    @FXML
+    private Label income_label_1;
+
+    @FXML
+    private Label income_label_2;
+
+    @FXML
+    private Button income_search;
+
+    @FXML
+    private TextField income_source;
+
+    @FXML
+    private TextField income_value;
+
+    @FXML
     private ImageView menu_toggle_button;
+
+    @FXML
+    private Label username_field;
+
+
 
 
 
@@ -89,5 +119,25 @@ public class HomeController implements Initializable {
 
     public void setLoginController(HelloController helloController) {
         this.helloController = helloController;
+    }
+
+    public void addIncome(){
+        //create an income object
+        Income income = new Income(income_source.getText(), income_date.getValue(),Double.parseDouble(income_value.getText()));
+        income_label_1.setText("Income added!");
+    }
+
+    public void removeIncome(){
+
+        int ID = Integer.parseInt(Income_ID.getText());
+
+        if(Income.deleteIncome(ID)){
+            income_label_2.setText("Deleted!");
+
+        }
+        else {
+            income_label_2.setText("No income recorded with the ID:" + ID + ".");
+            income_label_2.setTextFill(Color.RED);
+        }
     }
 }
