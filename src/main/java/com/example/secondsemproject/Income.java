@@ -17,7 +17,7 @@ public class Income extends Transaction{
         I_IDgenerator++;
         incomeList.add(this);
         int num =5;
-        I_IDgenerator = num;
+        I_IDgenerator = num; // why this ssssssssssss
 
 
     }
