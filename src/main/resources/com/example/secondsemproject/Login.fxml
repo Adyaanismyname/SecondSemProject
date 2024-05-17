@@ -85,12 +85,12 @@
                         </Text>
                     </children>
                 </AnchorPane>
-                <AnchorPane fx:id="ResetPass" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="552.0" style="-fx-background-color: rgba(255, 255, 255, 0.05); -fx-background-radius: 27; -fx-border-width: 0.5; -fx-border-color: #0a0625; -fx-border-radius: 27;">
+                <AnchorPane fx:id="ResetPass" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="552.0" style="-fx-background-color: rgba(255, 255, 255, 0.05); -fx-background-radius: 27; -fx-border-width: 0.5; -fx-border-color: #0a0625; -fx-border-radius: 27;" visible="false">
                     <children>
                         <VBox layoutX="74.0" layoutY="108.0" prefHeight="343.0" prefWidth="414.0" spacing="10.0">
                             <children>
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
-                        <Label fx:id="reset_pass_errorlbl" prefHeight="15.0" prefWidth="215.0">
+                        <Label fx:id="reset_pass_errorlbl" alignment="CENTER" prefHeight="27.0" prefWidth="415.0" textFill="RED">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -120,12 +120,12 @@
                         </Text>
                     </children>
                 </AnchorPane>
-                <AnchorPane fx:id="Verification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="552.0" style="-fx-background-color: rgba(255, 255, 255, 0.05); -fx-background-radius: 27; -fx-border-width: 0.5; -fx-border-color: #0a0625; -fx-border-radius: 27;" visible="false">
+                <AnchorPane fx:id="Verification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="552.0" style="-fx-background-color: rgba(255, 255, 255, 0.05); -fx-background-radius: 27; -fx-border-width: 0.5; -fx-border-color: #0a0625; -fx-border-radius: 27;">
                     <children>
                         <VBox layoutX="74.0" layoutY="103.0" prefHeight="343.0" prefWidth="414.0" spacing="10.0">
                             <children>
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
-                        <Label fx:id="verification_error_label" prefHeight="23.0" prefWidth="404.0">
+                        <Label fx:id="verification_error_label" alignment="CENTER" prefHeight="23.0" prefWidth="404.0" textFill="RED">
                            <font>
                               <Font size="18.0" />
                            </font>

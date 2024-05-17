@@ -111,6 +111,8 @@ public class HomeController implements Initializable {
         expanded_menu_pane.setVisible(false);
 
         setAllIncomes_table();
+
+
         BarGraphs.displayBarChart(HomeBarChart);
 
 
@@ -191,12 +193,14 @@ public class HomeController implements Initializable {
             income_source.setStyle("-fx-text-fill: green;");
 
             income_label_2.setText("Deleted!");
+            setAllIncomes_table();
 
         }
         else {
             income_label_2.setText("No income recorded with the ID:" + ID + ".");
             income_label_2.setTextFill(Color.GREEN);
         }
+        Income_ID.setText("");
     }
 
     public void setAllIncomes_table(){
@@ -211,10 +215,6 @@ public class HomeController implements Initializable {
         table_IncomeSource.setCellValueFactory(new PropertyValueFactory<Income , String>("Source"));
 
         table_Income.setItems(incomeObservableList);
-
-        System.out.println(income_date.getValue());
-        System.out.println(LocalDate.now());
-
     }
 
     //VALIDATION THAT START DATE IS ALWAYS SMALLER THEN END DATE !!!!
@@ -248,8 +248,6 @@ public class HomeController implements Initializable {
 
         table_Income.setItems(incomeObservableList);
 
-      income.setVisible(false);
-      home_pane.setVisible(true);
     }
 
 
