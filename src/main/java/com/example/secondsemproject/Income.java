@@ -11,12 +11,15 @@ public class Income extends Transaction {
 
 
     public Income(String source, LocalDate date, double value) {
+        main.setIdForTable("Income");
 
         super(I_IDgenerator, date, value, HelloController.getUsername_to_pass());
         this.source = source;
+        main.UpdateLatestIdForClass("L_Income_id",I_IDgenerator+1,I_IDgenerator);
 
         I_IDgenerator++;
         incomeList.add(this);
+
 
 
     }
@@ -26,6 +29,9 @@ public class Income extends Transaction {
         super(Id, date, value, Username);
         this.source = source;
 
+    }
+    public static void setId(int id){
+        I_IDgenerator=id;
     }
 
     // Getters and setters for source
@@ -93,5 +99,7 @@ public class Income extends Transaction {
         return monthlyIncome;
 
     }
+
+
 }
 

@@ -28,14 +28,20 @@ public class Reminder extends Transaction {
 
     // Constructor
     public Reminder(String name, String category, LocalDate date, double value, boolean monthly, boolean yearly) {
+        main.setIdForTable("Reminder");
         super(R_IDgenerator, date, value,HelloController.getUsername_to_pass());
         this.name = name;
         this.category = category;
         this.monthly = monthly;
         this.yearly = yearly;
         reminderList.add(this);
+        main.UpdateLatestIdForClass("L_Reminder_id",R_IDgenerator+1,R_IDgenerator);
+
 
         R_IDgenerator++;
+    }
+    public static void setId(int id){
+        R_IDgenerator=id;
     }
 
 

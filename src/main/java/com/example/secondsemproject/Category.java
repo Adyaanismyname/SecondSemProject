@@ -31,10 +31,15 @@ public class Category {
         this.Username=Username;
     }
     Category(String name){
+        main.setIdForTable("Category");
         this.ID=C_IDgenerator;
         this.name=name;
         this.Username=HelloController.getUsername_to_pass();
         categories.add(this);
+        main.UpdateLatestIdForClass("L_Category_id",C_IDgenerator+1,C_IDgenerator);
         C_IDgenerator++;
+    }
+    public static void setId(int id){
+        C_IDgenerator=id;
     }
 }

@@ -14,9 +14,12 @@ public class Expenditure extends  Transaction{
     }
 
     public Expenditure(String category, LocalDate date, double value){
+        main.setIdForTable("Expenditure");
 
         super(E_IDgenerator, date, value,HelloController.getUsername_to_pass());
         this.category = category;
+        main.UpdateLatestIdForClass("L_Expenditure_id",E_IDgenerator+1,E_IDgenerator);
+
 
         E_IDgenerator++;
         ExpenditureList.add(this);
@@ -48,6 +51,9 @@ public class Expenditure extends  Transaction{
             total+= spent.getValue();
         }
         return total;
+    }
+    public static void setId(int id){
+        E_IDgenerator=id;
     }
 
 
