@@ -32,7 +32,7 @@
       <AnchorPane fx:id="home_pane" layoutX="83.0" layoutY="101.0" prefHeight="631.0" prefWidth="1243.0" visible="false" />
       <AnchorPane fx:id="income" layoutX="101.0" layoutY="101.0" prefHeight="631.0" prefWidth="1228.0" />
       <AnchorPane fx:id="currency_conv_pane" layoutX="102.0" layoutY="99.0" prefHeight="634.0" prefWidth="1225.0" />
-      <AnchorPane fx:id="Income" layoutX="101.0" layoutY="101.0" prefHeight="633.0" prefWidth="1225.0" visible="false">
+      <AnchorPane fx:id="Income" layoutX="101.0" layoutY="101.0" prefHeight="633.0" prefWidth="1225.0">
          <children>
             <HBox layoutX="282.0" layoutY="162.0" prefHeight="605.0" prefWidth="1228.0" style="-fx-spacing: 20;" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -101,12 +101,12 @@
                                  <children>
                                     <DatePicker fx:id="income_date_start" layoutX="10.0" layoutY="11.0" prefHeight="37.0" prefWidth="122.0" promptText="Start Date" styleClass="text-field" />
                                     <DatePicker fx:id="income_date_end" layoutX="10.0" layoutY="66.0" prefHeight="37.0" prefWidth="122.0" promptText="End Date" styleClass="text-field" />
-                                    <Button fx:id="income_search" alignment="CENTER" layoutX="147.0" layoutY="10.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="101.0" styleClass="button-all" text="Search" textAlignment="CENTER">
+                                    <Button fx:id="income_search" alignment="CENTER" layoutX="147.0" layoutY="10.0" mnemonicParsing="false" onAction="#setSearchIncomes_table" prefHeight="90.0" prefWidth="101.0" styleClass="button-all" text="Search" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="22.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="income_all" alignment="CENTER" layoutX="258.0" layoutY="10.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="115.0" styleClass="button-all" text="All" textAlignment="CENTER">
+                                    <Button fx:id="income_all" alignment="CENTER" layoutX="258.0" layoutY="10.0" mnemonicParsing="false" onAction="#setAllIncomes_table" prefHeight="90.0" prefWidth="115.0" styleClass="button-all" text="All" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="25.0" />
                                        </font>

@@ -22,6 +22,7 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -105,7 +106,7 @@ public class HomeController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         expanded_menu_pane.setVisible(false);
 
-        setIncome_table();
+        setAllIncomes_table();
 
 
 
@@ -147,7 +148,7 @@ public class HomeController implements Initializable {
         //create an income object
         Income income = new Income(income_source.getText(), income_date.getValue(),Double.parseDouble(income_value.getText()));
         income_label_1.setText("Income added!");
-        setIncome_table();
+        setAllIncomes_table();
 
         income_source.setText("");
         income_date.setValue(null);
@@ -169,12 +170,47 @@ public class HomeController implements Initializable {
         }
     }
 
-    public void setIncome_table(){
+    public void setAllIncomes_table(){
 
         // In your initialize method or wherever you set up the TableView
         ObservableList<Income> incomeObservableList = FXCollections.observableArrayList(Income.incomeList);
 
 
+        table_IncomeID.setCellValueFactory(new PropertyValueFactory<Income , Integer>("ID"));
+        table_IncomeDate.setCellValueFactory(new PropertyValueFactory<Income , LocalDate>("Date"));
+        table_IncomeValue.setCellValueFactory(new PropertyValueFactory<Income , Double>("Value"));
+        table_IncomeSource.setCellValueFactory(new PropertyValueFactory<Income , String>("Source"));
+
+        table_Income.setItems(incomeObservableList);
+
+        System.out.println(income_date.getValue());
+        System.out.println(LocalDate.now());
+
+    }
+
+    //VALIDATION THAT START DATE IS ALWAYS SMALLER THEN END DATE !!!!
+    public void setSearchIncomes_table(){
+
+        ArrayList <Income> searchResult = new ArrayList<>();
+
+        for (int i = 0; i < Income.incomeList.size(); i++){
+
+            LocalDate start = income_date_start.getValue();
+            LocalDate end = income_date_end.getValue();
+
+            LocalDate income_date = Income.incomeList.get(i).getDate();
+
+            boolean isBetween = (income_date.isAfter(start) && income_date.isBefore(end)) || income_date.equals(start) || income_date.equals(end);
+
+            if (isBetween){
+                searchResult.add(Income.incomeList.get(i));
+
+            }
+
+        }
+
+        // In your initialize method or wherever you set up the TableView
+        ObservableList<Income> incomeObservableList = FXCollections.observableArrayList(searchResult);
 
 
         table_IncomeID.setCellValueFactory(new PropertyValueFactory<Income , Integer>("ID"));
@@ -186,6 +222,7 @@ public class HomeController implements Initializable {
 
 
     }
+
 
 //
 //    public void addExpense(){
