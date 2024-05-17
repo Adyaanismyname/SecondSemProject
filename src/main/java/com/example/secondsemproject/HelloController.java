@@ -326,6 +326,7 @@ public class HelloController implements Initializable {
 
         try {
             ResultSet resultSet = JDBCConnection.ExecuteQuery("Select * from User where Username = \"" + sue_username +"\";");
+
             if(sue_username.isEmpty() || entered_password.isEmpty() || entered_email.isEmpty() || entered_password_confirm.isEmpty()){
                 Lbl_error_SU.setText("A field is empty , please fill all the fields");
             }
@@ -338,13 +339,19 @@ public class HelloController implements Initializable {
                 System.out.println("ERRORRRRR");
 
             }
-
             else {
-                Login.setVisible(false);
-                SignUp.setVisible(false);
-                SQs.setVisible(true);
-                ResetPass.setVisible(false);
-                Verification.setVisible(false);
+                ResultSet resultSet_for_email = JDBCConnection.ExecuteQuery("Select * from User where email = \"" + entered_email + "\";");
+                if(resultSet_for_email.next()){
+                    Lbl_error_SU.setText("Email already in use");
+                }
+                else {
+                    Login.setVisible(false);
+                    SignUp.setVisible(false);
+                    SQs.setVisible(true);
+                    ResetPass.setVisible(false);
+                    Verification.setVisible(false);
+                }
+
             }
 
 

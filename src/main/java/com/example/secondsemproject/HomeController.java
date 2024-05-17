@@ -24,6 +24,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 
@@ -149,13 +150,36 @@ public class HomeController implements Initializable {
 
     public void addIncome(){
         //create an income object
-        Income income = new Income(income_source.getText(), income_date.getValue(),Double.parseDouble(income_value.getText()));
-        income_label_1.setText("Income added!");
-        setAllIncomes_table();
+        try {
+            LocalDate date = income_date.getValue();
+            if (income_value.getText().isEmpty() || income_source.getText().isEmpty() || date == null) {
+                income_label_1.setStyle("-fx-text-fill: red;");
+                income_label_1.setText("Field cannot be empty");
 
-        income_source.setText("");
-        income_date.setValue(null);
-        income_value.setText("");
+
+            }
+            if(Double.parseDouble(income_value.getText()) < 0) {
+                income_label_1.setStyle("-fx-text-fill: red;");
+                income_label_1.setText("Value cannot be negative");
+            }
+
+            else {
+                Income income = new Income(income_source.getText(), income_date.getValue(),Double.parseDouble(income_value.getText()));
+                income_label_1.setStyle("-fx-text-fill: green;");
+                income_label_1.setText("Income added!");
+                setAllIncomes_table();
+                income_source.setText("");
+                income_date.setValue(null);
+                income_value.setText("");
+            }
+        }
+        catch(NumberFormatException e) {
+            income_label_1.setStyle("-fx-text-fill: red;");
+            income_label_1.setText("Need a number in the Value field");
+
+        }
+
+
 
     }
 
@@ -164,12 +188,14 @@ public class HomeController implements Initializable {
         int ID = Integer.parseInt(Income_ID.getText());
 
         if(Income.deleteIncome(ID)){
+            income_source.setStyle("-fx-text-fill: green;");
+
             income_label_2.setText("Deleted!");
 
         }
         else {
             income_label_2.setText("No income recorded with the ID:" + ID + ".");
-            income_label_2.setTextFill(Color.RED);
+            income_label_2.setTextFill(Color.GREEN);
         }
     }
 
@@ -196,11 +222,10 @@ public class HomeController implements Initializable {
 
         ArrayList <Income> searchResult = new ArrayList<>();
 
+        LocalDate start = income_date_start.getValue();
+        LocalDate end = income_date_end.getValue();
+
         for (int i = 0; i < Income.incomeList.size(); i++){
-
-            LocalDate start = income_date_start.getValue();
-            LocalDate end = income_date_end.getValue();
-
             LocalDate income_date = Income.incomeList.get(i).getDate();
 
             boolean isBetween = (income_date.isAfter(start) && income_date.isBefore(end)) || income_date.equals(start) || income_date.equals(end);

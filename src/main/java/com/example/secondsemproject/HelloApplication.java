@@ -88,24 +88,14 @@ public class HelloApplication extends Application {
             HomeController homeController = loader.getController();
             homeController.setLoginController(this.helloController);
 
-
-
-
-
-
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
             scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
-
-
 
             primaryStage.setScene(scene);
             primaryStage.setTitle("Home Page");
             primaryStage.show();
             primaryStage.setResizable(false);
-
-
-
 
         } catch (IOException e) {
             e.printStackTrace();

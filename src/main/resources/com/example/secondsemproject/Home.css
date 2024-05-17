@@ -49,6 +49,7 @@
     -fx-border-radius: 15;
     -fx-background-color: #0a0625;
 
+
     -fx-background-radius: 15;
 }
 
@@ -67,26 +68,29 @@
     -fx-border-radius: 5;
 }
 .text{
-    -fx-text-fill: linear-gradient(from 100.0% 0.0% to 100.0% 100.0%, #00bbff 0.0%, #ffffff 100.0%);
+    -fx-text-fill: white;
 
 }
 
-.anchor-transparent{
-    -fx-border-color: rgba(255, 255, 255, 0.52);
-    -fx-border-width: 3;
-    -fx-border-radius: 15;
-    -fx-background-radius: 15;
-}
+
 
 .table-background {
     -fx-background-color: #0a0625;
     -fx-table-cell-border-color: derive(-fx-base, 20%);
     -fx-table-header-border-color: derive(-fx-base, 20%);
-    -fx-border-width: 1px;
+
+    -fx-border-width: 0px;
+
+    -fx-border-radius: 15; /* Rounded corners for the table border */
+    -fx-background-radius: 20; /* Rounded corners for the background */
+    -fx-padding: 10; /* Optional: padding around the table */
+    -fx-border-color: #ddd; /* Optional: border color */
+    /* Optional: border width */
+
 }
 
 .button-all{
-    -fx-background-color: #ff0000;
+    -fx-background-color: #d02424;
     -fx-background-radius: 10;
     -fx-border-radius: 10;
     -fx-border-color: #000000;
