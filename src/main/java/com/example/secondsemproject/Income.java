@@ -71,5 +71,27 @@ public class Income extends Transaction {
         //this means no such income with the ID
         return false;
     }
+
+    public static double getMonthIncome(int number){
+
+        double monthlyIncome = 0;
+        int currentYear = LocalDate.now().getYear();
+
+
+        for(Income income : Income.incomeList){
+
+            int month = income.getDate().getMonthValue();
+            int year = income.getDate().getYear();
+
+            boolean isCurrent = (number == month) && (currentYear == year);
+
+            if (isCurrent){
+                monthlyIncome += income.getValue();
+            }
+        }
+
+        return monthlyIncome;
+
+    }
 }
 

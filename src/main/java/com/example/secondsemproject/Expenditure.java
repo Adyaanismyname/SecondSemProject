@@ -69,5 +69,26 @@ public class Expenditure extends  Transaction{
         return false;
     }
 
+    public static double getMonthExpense(int number){
+
+        double monthlyExpense = 0;
+        int currentYear = LocalDate.now().getYear();
+
+
+        for(Expenditure expenditure : ExpenditureList){
+
+            int month = expenditure.getDate().getMonthValue();
+            int year = expenditure.getDate().getYear();
+
+            boolean isCurrent = (number == month) && (currentYear == year);
+
+            if (isCurrent){
+                monthlyExpense += expenditure.getValue();
+            }
+        }
+
+        return monthlyExpense;
+
+    }
 
 }

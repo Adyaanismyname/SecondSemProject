@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -97,7 +98,8 @@ public class HomeController implements Initializable {
 
     @FXML
     private TableColumn<Income, Integer> table_IncomeID;
-
+    @FXML
+   private BarChart<String, Number> HomeBarChart;
 
 
 
@@ -107,7 +109,7 @@ public class HomeController implements Initializable {
         expanded_menu_pane.setVisible(false);
 
         setAllIncomes_table();
-
+        BarGraphs.displayBarChart(HomeBarChart);
 
 
     }
@@ -220,7 +222,8 @@ public class HomeController implements Initializable {
 
         table_Income.setItems(incomeObservableList);
 
-
+      income.setVisible(false);
+      home_pane.setVisible(true);
     }
 
 
