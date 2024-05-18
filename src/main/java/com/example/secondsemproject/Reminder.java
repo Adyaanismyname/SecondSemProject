@@ -20,6 +20,7 @@ public class Reminder extends Transaction {
         this.category = category;
         this.monthly = monthly;
         this.yearly = yearly;
+        main.setIdForTable("Reminder");
 
 
 
@@ -28,7 +29,7 @@ public class Reminder extends Transaction {
 
     // Constructor
     public Reminder(String name, String category, LocalDate date, double value, boolean monthly, boolean yearly) {
-        main.setIdForTable("Reminder");
+
         super(R_IDgenerator, date, value,HelloController.getUsername_to_pass());
         this.name = name;
         this.category = category;

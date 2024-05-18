@@ -29,9 +29,9 @@ public class Category {
         this.ID=Id;
         this.name=name;
         this.Username=Username;
+        main.setIdForTable("Category");
     }
     Category(String name){
-        main.setIdForTable("Category");
         this.ID=C_IDgenerator;
         this.name=name;
         this.Username=HelloController.getUsername_to_pass();

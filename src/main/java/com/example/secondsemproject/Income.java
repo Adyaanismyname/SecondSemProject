@@ -11,7 +11,7 @@ public class Income extends Transaction {
 
 
     public Income(String source, LocalDate date, double value) {
-        main.setIdForTable("Income");
+
 
         super(I_IDgenerator, date, value, HelloController.getUsername_to_pass());
         this.source = source;
@@ -28,6 +28,7 @@ public class Income extends Transaction {
 
         super(Id, date, value, Username);
         this.source = source;
+        main.setIdForTable("Income");
 
     }
     public static void setId(int id){

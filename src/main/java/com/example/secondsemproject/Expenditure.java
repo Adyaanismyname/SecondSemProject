@@ -11,10 +11,11 @@ public class Expenditure extends  Transaction{
     public Expenditure(int id,LocalDate date,double value,String Category,String Username){
         super(id,date,value,Username);
         this.category=Category;
+        main.setIdForTable("Expenditure");
     }
 
     public Expenditure(String category, LocalDate date, double value){
-        main.setIdForTable("Expenditure");
+
 
         super(E_IDgenerator, date, value,HelloController.getUsername_to_pass());
         this.category = category;
