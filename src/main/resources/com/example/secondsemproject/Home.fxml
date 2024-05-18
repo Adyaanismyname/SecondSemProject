@@ -247,7 +247,7 @@
          </font>
       </Button>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-      <AnchorPane fx:id="expense" layoutX="101.0" layoutY="109.0" prefHeight="633.0" prefWidth="1225.0" visible="false">
+      <AnchorPane fx:id="expense" layoutX="101.0" layoutY="109.0" prefHeight="633.0" prefWidth="1225.0">
          <children>
             <HBox layoutY="7.0" prefHeight="605.0" prefWidth="1228.0" style="-fx-spacing: 20;" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0">
                <children>
@@ -321,12 +321,12 @@
                                  <children>
                                     <DatePicker fx:id="expense_date_start" layoutX="10.0" layoutY="12.0" prefHeight="37.0" prefWidth="122.0" promptText="Start Date" styleClass="text-field" />
                                     <DatePicker fx:id="expense_date_end" layoutX="10.0" layoutY="62.0" prefHeight="37.0" prefWidth="122.0" promptText="End Date" styleClass="text-field" />
-                                    <Button fx:id="income_search1" alignment="CENTER" layoutX="147.0" layoutY="11.0" mnemonicParsing="false" onAction="#setSearchExpense_table" prefHeight="67.0" prefWidth="101.0" styleClass="button-search" text="Search" textAlignment="CENTER">
+                                    <Button alignment="CENTER" layoutX="147.0" layoutY="11.0" mnemonicParsing="false" onAction="#setSearchExpense_table" prefHeight="67.0" prefWidth="101.0" styleClass="button-search" text="Search" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="22.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="income_all1" alignment="CENTER" layoutX="257.0" layoutY="11.0" mnemonicParsing="false" onAction="#setAllExpenses_table" prefHeight="67.0" prefWidth="110.0" styleClass="button-all" text="All" textAlignment="CENTER">
+                                    <Button alignment="CENTER" layoutX="257.0" layoutY="11.0" mnemonicParsing="false" onAction="#setAllExpenses_table" prefHeight="67.0" prefWidth="110.0" styleClass="button-all" text="All" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="22.0" />
                                        </font>
@@ -354,7 +354,7 @@
             </HBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="reminder" layoutX="98.0" layoutY="108.0" prefHeight="633.0" prefWidth="1225.0">
+      <AnchorPane fx:id="reminder" layoutX="98.0" layoutY="108.0" prefHeight="633.0" prefWidth="1225.0" visible="false">
          <children>
             <HBox layoutY="7.0" prefHeight="605.0" prefWidth="1228.0" style="-fx-spacing: 20;" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0">
                <children>
