@@ -23,6 +23,7 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -58,7 +59,7 @@ public class HomeController implements Initializable {
     private AnchorPane income;
 
     @FXML
-    private TextField Income_ID;
+    private TextField income_ID;
 
     @FXML
     private Button income_all;
@@ -80,7 +81,8 @@ public class HomeController implements Initializable {
 
     @FXML
     private Label income_label_2;
-
+    @FXML
+    private Label income_label_3;
     @FXML
     private Button income_search;
 
@@ -180,54 +182,91 @@ public class HomeController implements Initializable {
         //create an income object
         try {
             LocalDate date = income_date.getValue();
-            if (income_value.getText().isEmpty() || income_source.getText().isEmpty() || date == null) {
+            if ((income_value.getText().isEmpty()) ||( income_source.getText().isEmpty()) || (income_date.getValue() == null)) {
+
                 income_label_1.setStyle("-fx-text-fill: red;");
-                income_label_1.setText("Field cannot be empty");
 
+                if (income_date.getValue() == null && !((income_value.getText().isEmpty()) ||( income_source.getText().isEmpty()))){
+                    income_label_1.setText("Enter a valid date");
+                }
+                else{
+                    income_label_1.setText("Field cannot be empty");
+                }
 
             }
-            if(Double.parseDouble(income_value.getText()) < 0) {
-                income_label_1.setStyle("-fx-text-fill: red;");
-                income_label_1.setText("Value cannot be negative");
+            else{
+                if(Double.parseDouble(income_value.getText()) < 0) {
+                    income_label_1.setStyle("-fx-text-fill: red;");
+                    income_label_1.setText("Value cannot be negative");
+                }
+
+                else {
+                    Income income = new Income(income_source.getText(), income_date.getValue(),Double.parseDouble(income_value.getText()));
+                    income_label_1.setStyle("-fx-text-fill: green;");
+                    income_label_1.setText("Income added!");
+                    setAllIncomes_table();
+                    income_source.setText("");
+                    income_date.setValue(null);
+                    income_value.setText("");
+                }
+
             }
 
-            else {
-                Income income = new Income(income_source.getText(), income_date.getValue(),Double.parseDouble(income_value.getText()));
-                income_label_1.setStyle("-fx-text-fill: green;");
-                income_label_1.setText("Income added!");
-                setAllIncomes_table();
-                income_source.setText("");
-                income_date.setValue(null);
-                income_value.setText("");
-            }
         }
         catch(NumberFormatException e) {
             income_label_1.setStyle("-fx-text-fill: red;");
             income_label_1.setText("Need a number in the Value field");
-
         }
-
-
+        catch (DateTimeParseException e) {
+            income_label_3.setText("Enter valid dates");
+            income_label_3.setStyle("-fx-text-fill: red;");
+        }
 
     }
 
+
     public void removeIncome(){
 
-        int ID = Integer.parseInt(Income_ID.getText());
+        try {
 
 
-        if(Income.deleteIncome(ID)){
-            income_label_2.setStyle("-fx-text-fill: green;");
+            if (income_ID.getText().isEmpty()){
+                income_label_2.setStyle("-fx-text-fill: red;");
+                income_label_2.setText("Please enter an ID");
+            }
+            else {
+                int ID = Integer.parseInt(income_ID.getText());
 
-            income_label_2.setText("Deleted!");
-            setAllIncomes_table();
+                if (ID > 0){
+                    if(Income.deleteIncome(ID)){
+                        income_label_2.setStyle("-fx-text-fill: green;");
+
+                        income_label_2.setText("Deleted!");
+                        setAllIncomes_table();
+
+                    }
+                    else {
+                        income_label_2.setText("No income recorded with the ID:" + ID);
+                        income_label_2.setTextFill(Color.RED);
+                    }
+                    income_ID.setText("");
+                }
+                else {
+                    income_label_2.setStyle("-fx-text-fill: red;");
+                    income_label_2.setText("Please enter a valid ID");
+
+                }
+
+
+
+            }
+        }
+        catch(NumberFormatException e) {
+            income_label_2.setStyle("-fx-text-fill: red;");
+            income_label_2.setText("ID is a positive number");
 
         }
-        else {
-            income_label_2.setText("No income recorded with the ID:" + ID + ".");
-            income_label_2.setTextFill(Color.GREEN);
-        }
-        Income_ID.setText("");
+
     }
 
     public void setAllIncomes_table(){
@@ -244,40 +283,58 @@ public class HomeController implements Initializable {
         table_Income.setItems(incomeObservableList);
     }
 
+
+
     //VALIDATION THAT START DATE IS ALWAYS SMALLER THEN END DATE !!!!
     public void setSearchIncomes_table(){
 
         ArrayList <Income> searchResult = new ArrayList<>();
-
-        LocalDate start = income_date_start.getValue();
-        LocalDate end = income_date_end.getValue();
-
-        for (int i = 0; i < Income.incomeList.size(); i++){
-            LocalDate income_date = Income.incomeList.get(i).getDate();
-
-            boolean isBetween = (income_date.isAfter(start) && income_date.isBefore(end)) || income_date.equals(start) || income_date.equals(end);
-
-            if (isBetween){
-                searchResult.add(Income.incomeList.get(i));
+        try {
+            if (income_date_start.getValue() == null || income_date_end.getValue() == null){
+                income_label_3.setText("Enter valid dates");
+                income_label_3.setStyle("-fx-text-fill: red;");
 
             }
+            else{
+                LocalDate start = income_date_start.getValue();
+                LocalDate end = income_date_end.getValue();
+
+                if(start.isAfter(end)){
+                    income_label_3.setText("Start date should be smaller than the End date");
+                    income_label_3.setStyle("-fx-text-fill: red;");
+                }
+                else {
+
+                    for (int i = 0; i < Income.incomeList.size(); i++) {
+                        LocalDate income_date = Income.incomeList.get(i).getDate();
+
+                        boolean isBetween = (income_date.isAfter(start) && income_date.isBefore(end)) || income_date.equals(start) || income_date.equals(end);
+
+                        if (isBetween) {
+                            searchResult.add(Income.incomeList.get(i));
+
+                        }
+                    }
+
+                    // In your initialize method or wherever you set up the TableView
+                    ObservableList<Income> incomeObservableList = FXCollections.observableArrayList(searchResult);
+
+
+                    table_IncomeID.setCellValueFactory(new PropertyValueFactory<Income , Integer>("ID"));
+                    table_IncomeDate.setCellValueFactory(new PropertyValueFactory<Income , LocalDate>("Date"));
+                    table_IncomeValue.setCellValueFactory(new PropertyValueFactory<Income , Double>("Value"));
+                    table_IncomeSource.setCellValueFactory(new PropertyValueFactory<Income , String>("Source"));
+
+                    table_Income.setItems(incomeObservableList);
+
+
+                }
+            }
+        }catch (DateTimeParseException e){
+            income_label_3.setText("Enter valid dates");
+            income_label_3.setStyle("-fx-text-fill: red;");
 
         }
-
-        // In your initialize method or wherever you set up the TableView
-        ObservableList<Income> incomeObservableList = FXCollections.observableArrayList(searchResult);
-
-
-        table_IncomeID.setCellValueFactory(new PropertyValueFactory<Income , Integer>("ID"));
-        table_IncomeDate.setCellValueFactory(new PropertyValueFactory<Income , LocalDate>("Date"));
-        table_IncomeValue.setCellValueFactory(new PropertyValueFactory<Income , Double>("Value"));
-        table_IncomeSource.setCellValueFactory(new PropertyValueFactory<Income , String>("Source"));
-
-        table_Income.setItems(incomeObservableList);
-
-
-
-
 
     }
 

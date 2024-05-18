@@ -139,6 +139,15 @@ public class Reminder extends Transaction {
                 if (!(reminder.yearly || reminder.monthly)) {
                     deleteReminder(ID);
                 }
+                else if (reminder.isMonthly()){
+                    LocalDate current = reminder.getDate();
+                    reminder.setDate(current.plusMonths(1));
+                }
+                else{
+                    LocalDate current = reminder.getDate();
+                    reminder.setDate(current.plusYears(1));
+
+                }
             }
         }
     }
@@ -156,13 +165,13 @@ public class Reminder extends Transaction {
         LocalDate five_days_later = LocalDate.now().plusDays(5);
 
         //for loop iterates through each reminder
-        for (Reminder reminder : reminderList) {
+        for (int i = 0; i < reminderList.size(); i++){
 
-            boolean upcoming = reminder.getDate().isBefore(five_days_later);
+            boolean upcoming = reminderList.get(i).getDate().isBefore(five_days_later) && reminderList.get(i).getDate().isAfter(LocalDate.now());
 
-            if (upcoming) {
+            if (upcoming){
 
-                upcomingReminders.add(reminder);
+                upcomingReminders.add(reminderList.get(i));
 
             }
         }
