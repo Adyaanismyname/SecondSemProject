@@ -36,8 +36,6 @@ public class Reminder extends Transaction {
         this.yearly = yearly;
         reminderList.add(this);
         main.UpdateLatestIdForClass("L_Reminder_id",R_IDgenerator+1,R_IDgenerator);
-
-
         R_IDgenerator++;
     }
     public static void setId(int id){
@@ -157,13 +155,13 @@ public class Reminder extends Transaction {
         LocalDate five_days_later = LocalDate.now().plusDays(5);
 
         //for loop iterates through each reminder
-        for (int i = 0; i < reminderList.size(); i++){
+        for (Reminder reminder : reminderList) {
 
-            boolean upcoming = reminderList.get(i).getDate().isBefore(five_days_later);
+            boolean upcoming = reminder.getDate().isBefore(five_days_later);
 
-            if (upcoming){
+            if (upcoming) {
 
-                upcomingReminders.add(reminderList.get(i));
+                upcomingReminders.add(reminder);
 
             }
         }

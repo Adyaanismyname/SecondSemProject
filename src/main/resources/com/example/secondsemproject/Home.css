@@ -126,3 +126,11 @@
 .chart-bar .series2.default-color2.chart-bar {
     -fx-bar-fill: green; /* Default color for the Balance series (positive balance) */
 }
+
+.reminder-label {
+    -fx-background-color:#0a0625 ;
+    -fx-background-radius:10;
+
+    -fx-padding: 11px;
+    -fx-font-weight : bold;
+}

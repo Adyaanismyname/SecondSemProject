@@ -27,15 +27,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+import static com.example.secondsemproject.Reminder.*;
+
 
 public class HomeController implements Initializable {
 
 
+    Reminder currently_showing_reminder;
 
     @FXML
     HelloController helloController;
 
-
+    @FXML
+    private Label reminder_label;
 
 
     @FXML
@@ -58,6 +62,9 @@ public class HomeController implements Initializable {
 
     @FXML
     private Button income_all;
+
+    @FXML
+    private Button complete_reminder_button;
 
     @FXML
     private DatePicker income_date;
@@ -114,8 +121,24 @@ public class HomeController implements Initializable {
         expanded_menu_pane.setVisible(false);
         income.setVisible(true);
         home_pane.setVisible(false);
+        reminder_label.setVisible(false);
+        reminder_label.setText("");
+        complete_reminder_button.setVisible(false);
+
+
+        // for testing purposes
+        Reminder reminder1 = new Reminder("pay gas bill" , "bills" , LocalDate.now() , 1000 , false , false);
+        Reminder reminder2 = new Reminder("pay electricity bill" , "bills" , LocalDate.now() , 10000 , false , false);
+
+        reminder2.setID(2);
+
+        getUpcomingReminders();
+
+        reminders();
 
         setAllIncomes_table();
+
+
 
 
         BarGraphs.displayBarChart(HomeBarChart);
@@ -256,6 +279,59 @@ public class HomeController implements Initializable {
         table_Income.setItems(incomeObservableList);
 
     }
+
+
+
+    public void complete_reminder() {
+        System.out.println("button clicked");
+        int id = currently_showing_reminder.getID();
+
+        deleteReminder(id);
+
+
+
+        reminders();
+    }
+
+    public void reminders() {
+
+
+        if(upcomingReminders.isEmpty()) {
+            reminder_label.setVisible(false);
+            complete_reminder_button.setVisible(false);
+            reminder_label.setText("");
+        }
+
+
+        for(Reminder reminder : upcomingReminders) {
+            if(reminder.datePassed()) {
+                reminder_label.setStyle("-fx-text-fill: red;");
+                complete_reminder_button.setVisible(true);
+                reminder_label.setVisible(true);
+                reminder_label.setText(reminder.getName());
+                currently_showing_reminder = reminder;
+
+                //System.out.println("Reminder found " + reminder.getID());
+                break;
+            }
+        }
+
+
+        for(Reminder reminder : upcomingReminders){
+            if (reminder.getDate().isEqual(LocalDate.now())) {
+                reminder_label.setStyle("-fx-text-fill: white;");
+                complete_reminder_button.setVisible(true);
+                reminder_label.setVisible(true);
+                reminder_label.setText(reminder.getName());
+                currently_showing_reminder = reminder;
+                //System.out.println("Reminder found " + reminder.getID());
+                break;
+            }
+        }
+
+
+    }
+
 
 
 //
