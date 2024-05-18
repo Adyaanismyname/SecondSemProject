@@ -2,6 +2,7 @@ package com.example.secondsemproject;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
 import javafx.animation.FadeTransition;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -42,13 +43,6 @@ public class HomeController implements Initializable {
     @FXML
     private Label reminder_label;
 
-
-    @FXML
-    private AnchorPane calculator_pane;
-
-    @FXML
-    private AnchorPane currency_conv_pane;
-
     @FXML
     private AnchorPane expanded_menu_pane;
 
@@ -61,8 +55,6 @@ public class HomeController implements Initializable {
     @FXML
     private TextField income_ID;
 
-    @FXML
-    private Button income_all;
 
     @FXML
     private Button complete_reminder_button;
@@ -81,10 +73,9 @@ public class HomeController implements Initializable {
 
     @FXML
     private Label income_label_2;
+
     @FXML
     private Label income_label_3;
-    @FXML
-    private Button income_search;
 
     @FXML
     private TextField income_source;
@@ -113,7 +104,98 @@ public class HomeController implements Initializable {
     @FXML
     private TableColumn<Income, Integer> table_IncomeID;
     @FXML
-   private BarChart<String, Number> HomeBarChart;
+    private BarChart<String, Number> HomeBarChart;
+
+    @FXML
+    private AnchorPane expense;
+    @FXML
+    private TextField expense_ID;
+    @FXML
+    private DatePicker expense_date;
+
+    @FXML
+    private DatePicker expense_date_end;
+
+    @FXML
+    private DatePicker expense_date_start;
+
+    @FXML
+    private Label expense_label_1;
+
+    @FXML
+    private Label expense_label_2;
+
+    @FXML
+    private Label expense_label_3;
+
+    @FXML
+    private TextField expense_category;
+
+    @FXML
+    private TextField expense_value;
+    @FXML
+    private TableView<Expenditure> table_expense;
+
+    @FXML
+    private TableColumn<Expenditure, LocalDate> table_expenseDate;
+
+    @FXML
+    private TableColumn<Expenditure,String> table_expenseCategory;
+
+    @FXML
+    private TableColumn< Expenditure, Double> table_expenseValue;
+
+    @FXML
+    private TableColumn<Expenditure, Integer> table_expenseID;
+
+
+    @FXML
+    private AnchorPane reminder;
+    @FXML
+    private TextField reminder_ID;
+    @FXML
+    private DatePicker reminder_date;
+
+    @FXML
+    private Label reminder_label_1;
+
+    @FXML
+    private Label reminder_label_2;
+
+    @FXML
+    private TextField reminder_category;
+    @FXML
+    private TextField reminder_name;
+
+    @FXML
+    private TextField reminder_value;
+    @FXML
+    private TableView <Reminder> table_reminder;
+
+    @FXML
+    private TableColumn <Reminder, LocalDate> table_reminderDate;
+
+    @FXML
+    private TableColumn<Reminder,String> table_reminderCategory;
+
+    @FXML
+    private TableColumn< Reminder, Double> table_reminderValue;
+
+    @FXML
+    private TableColumn<Reminder, Integer> table_reminderID;
+    @FXML
+    private TableColumn<Reminder, String> table_reminderName;
+    @FXML
+    private TableColumn<Reminder, String> table_reminderRepeat;
+    @FXML
+    private RadioButton monthly;
+
+    @FXML
+    private RadioButton once;
+    @FXML
+    private RadioButton yearly;
+    @FXML
+    private ToggleGroup reminder_status;
 
 
 
@@ -121,16 +203,18 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         expanded_menu_pane.setVisible(false);
-        income.setVisible(true);
+        income.setVisible(false);
+        expense.setVisible(false);
         home_pane.setVisible(false);
+        reminder.setVisible(true);
         reminder_label.setVisible(false);
         reminder_label.setText("");
         complete_reminder_button.setVisible(false);
 
 
         // for testing purposes
-        Reminder reminder1 = new Reminder("pay gas bill" , "bills" , LocalDate.now() , 1000 , false , false);
-        Reminder reminder2 = new Reminder("pay electricity bill" , "bills" , LocalDate.now() , 10000 , false , false);
+        Reminder reminder1 = new Reminder("pay gas bill" , "bills" , LocalDate.now() , 1000 , false , true);
+        Reminder reminder2 = new Reminder("pay electricity bill" , "bills" , LocalDate.now() , 10000 , true , false);
 
         reminder2.setID(2);
 
@@ -218,8 +302,8 @@ public class HomeController implements Initializable {
             income_label_1.setText("Need a number in the Value field");
         }
         catch (DateTimeParseException e) {
-            income_label_3.setText("Enter valid dates");
-            income_label_3.setStyle("-fx-text-fill: red;");
+            income_label_1.setText("Enter valid dates");
+            income_label_1.setStyle("-fx-text-fill: red;");
         }
 
     }
@@ -271,6 +355,8 @@ public class HomeController implements Initializable {
 
     public void setAllIncomes_table(){
 
+        table_Income.getItems().clear();
+
         // In your initialize method or wherever you set up the TableView
         ObservableList<Income> incomeObservableList = FXCollections.observableArrayList(Income.incomeList);
 
@@ -287,6 +373,9 @@ public class HomeController implements Initializable {
 
     //VALIDATION THAT START DATE IS ALWAYS SMALLER THEN END DATE !!!!
     public void setSearchIncomes_table(){
+
+        table_Income.getItems().clear();
+
 
         ArrayList <Income> searchResult = new ArrayList<>();
         try {
@@ -335,10 +424,377 @@ public class HomeController implements Initializable {
             income_label_3.setStyle("-fx-text-fill: red;");
 
         }
+    }
+
+
+    public void addExpense(){
+        //create an expense object
+        try {
+            LocalDate date = expense_date.getValue();
+            if ((expense_value.getText().isEmpty()) ||( expense_category.getText().isEmpty()) || (expense_date.getValue() == null)) {
+
+                expense_label_1.setStyle("-fx-text-fill: red;");
+
+                if (expense_date.getValue() == null && !((expense_value.getText().isEmpty()) ||( expense_category.getText().isEmpty()))){
+                    expense_label_1.setText("Enter a valid date");
+                }
+                else{
+                    expense_label_1.setText("Field cannot be empty");
+                }
+
+            }
+            else{
+                if(Double.parseDouble(expense_value.getText()) < 0) {
+                    expense_label_1.setStyle("-fx-text-fill: red;");
+                    expense_label_1.setText("Value cannot be negative");
+                }
+
+                else {
+                    Expenditure expense1 = new Expenditure(expense_category.getText(), expense_date.getValue(),Double.parseDouble(expense_value.getText()));
+                    expense_label_1.setStyle("-fx-text-fill: green;");
+                    expense_label_1.setText("Expense added!");
+                    setAllExpenses_table();
+                    expense_category.setText("");
+                    expense_date.setValue(null);
+                    expense_value.setText("");
+                }
+
+            }
+
+        }
+        catch(NumberFormatException e) {
+            expense_label_1.setStyle("-fx-text-fill: red;");
+            expense_label_1.setText("Need a number in the Value field");
+        }
+        catch (DateTimeParseException e) {
+            expense_label_1.setText("Enter valid dates");
+            expense_label_1.setStyle("-fx-text-fill: red;");
+        }
 
     }
 
 
+    public void removeExpense(){
+
+        try {
+
+
+            if (expense_ID.getText().isEmpty()){
+                expense_label_2.setStyle("-fx-text-fill: red;");
+                expense_label_2.setText("Please enter an ID");
+            }
+            else {
+                int ID = Integer.parseInt(expense_ID.getText());
+
+                if (ID > 0){
+                    if(Expenditure.deleteExpense(ID)){
+                        expense_label_2.setStyle("-fx-text-fill: green;");
+
+                        expense_label_2.setText("Deleted!");
+                        setAllExpenses_table();
+
+                    }
+                    else {
+                        expense_label_2.setText("No expense recorded with the ID:" + ID);
+                        expense_label_2.setTextFill(Color.RED);
+                    }
+                    expense_ID.setText("");
+                }
+                else {
+                    expense_label_2.setStyle("-fx-text-fill: red;");
+                    expense_label_2.setText("Please enter a valid ID");
+
+                }
+
+
+
+            }
+        }
+        catch(NumberFormatException e) {
+            expense_label_2.setStyle("-fx-text-fill: red;");
+            expense_label_2.setText("ID is a positive number");
+
+        }
+
+    }
+
+    public void setAllExpenses_table(){
+
+        table_expense.getItems().clear();
+
+        ObservableList<Expenditure> expenseObservableList = FXCollections.observableArrayList(Expenditure.ExpenditureList);
+
+
+        table_expenseID.setCellValueFactory(new PropertyValueFactory<Expenditure , Integer>("ID"));
+        table_expenseDate.setCellValueFactory(new PropertyValueFactory<Expenditure , LocalDate>("Date"));
+        table_expenseValue.setCellValueFactory(new PropertyValueFactory<Expenditure , Double>("Value"));
+        table_expenseCategory.setCellValueFactory(new PropertyValueFactory<Expenditure , String>("Category"));
+
+        table_expense.setItems(expenseObservableList);
+    }
+
+    public void setSearchExpense_table(){
+
+        table_expense.getItems().clear();
+
+        ArrayList <Expenditure> searchResult = new ArrayList<>();
+        try {
+            if (expense_date_start.getValue() == null || expense_date_end.getValue() == null){
+                expense_label_3.setText("Enter valid dates");
+                expense_label_3.setStyle("-fx-text-fill: red;");
+
+            }
+            else{
+                LocalDate start = expense_date_start.getValue();
+                LocalDate end = expense_date_end.getValue();
+
+                if(start.isAfter(end)){
+                    expense_label_3.setText("Start date should be smaller than the End date");
+                    expense_label_3.setStyle("-fx-text-fill: red;");
+                }
+                else {
+
+                    for (int i = 0; i < Expenditure.ExpenditureList.size(); i++) {
+                        LocalDate expense_date = Expenditure.ExpenditureList.get(i).getDate();
+
+                        boolean isBetween = (expense_date.isAfter(start) && expense_date.isBefore(end)) || expense_date.equals(start) || expense_date.equals(end);
+
+                        if (isBetween) {
+                            searchResult.add(Expenditure.ExpenditureList.get(i));
+                        }
+                    }
+
+                    // In your initialize method or wherever you set up the TableView
+                    ObservableList<Expenditure> expenseObservableList = FXCollections.observableArrayList(searchResult);
+
+
+                    table_expenseID.setCellValueFactory(new PropertyValueFactory<Expenditure, Integer>("ID"));
+                    table_expenseDate.setCellValueFactory(new PropertyValueFactory<Expenditure , LocalDate>("Date"));
+                    table_expenseValue.setCellValueFactory(new PropertyValueFactory<Expenditure , Double>("Value"));
+                    table_expenseCategory.setCellValueFactory(new PropertyValueFactory<Expenditure , String>("Category"));
+
+                    table_expense.setItems(expenseObservableList);
+
+
+                }
+            }
+        }catch (DateTimeParseException e){
+            expense_label_3.setText("Enter valid dates");
+            expense_label_3.setStyle("-fx-text-fill: red;");
+
+        }
+    }
+
+
+
+    public void addReminder(){
+
+        try {
+            LocalDate date = reminder_date.getValue();
+            if ((reminder_value.getText().isEmpty()) ||( reminder_category.getText().isEmpty()) || (reminder_date.getValue() == null) || reminder_name.getText().isEmpty()) {
+
+                reminder_label_1.setStyle("-fx-text-fill: red;");
+
+                if (reminder_date.getValue() == null && !((reminder_value.getText().isEmpty()) || reminder_name.getText().isEmpty() ||( reminder_category.getText().isEmpty()))){
+                    reminder_label_1.setText("Enter a valid date");
+                }
+                else{
+                    reminder_label_1.setText("Field cannot be empty");
+                }
+
+            }
+            else{
+                if(Double.parseDouble(reminder_value.getText()) < 0) {
+                    reminder_label_1.setStyle("-fx-text-fill: red;");
+                    reminder_label_1.setText("Value cannot be negative");
+                }
+
+                else {
+
+                    boolean is_yearly = false, is_monthly = false;
+                    if(reminder_status.getSelectedToggle().equals(yearly)){
+                        is_yearly = true;
+                    }
+                    else if (reminder_status.getSelectedToggle().equals(monthly)){
+                        is_monthly = true;
+                    }
+
+                    Reminder reminder1 = new Reminder(reminder_name.getText(), reminder_category.getText(), reminder_date.getValue(), Double.parseDouble(reminder_value.getText()), is_monthly, is_yearly);
+                    reminder_label_1.setStyle("-fx-text-fill: green;");
+                    reminder_label_1.setText("Expense added!");
+                    setAllReminders_table();
+                    reminder_category.setText("");
+                    reminder_date.setValue(null);
+                    reminder_value.setText("");
+                    reminder_name.setText("");
+                }
+
+            }
+
+        }
+        catch(NumberFormatException e) {
+            reminder_label_1.setStyle("-fx-text-fill: red;");
+            reminder_label_1.setText("Need a number in the Value field");
+        }
+        catch (DateTimeParseException e) {
+            reminder_label_1.setText("Enter valid dates");
+            reminder_label_1.setStyle("-fx-text-fill: red;");
+        }
+
+    }
+
+
+    public void removeReminder(){
+
+        try {
+
+            if (reminder_ID.getText().isEmpty()){
+                reminder_label_2.setStyle("-fx-text-fill: red;");
+                reminder_label_2.setText("Please enter an ID");
+            }
+            else {
+                int ID = Integer.parseInt(reminder_ID.getText());
+
+                if (ID > 0){
+                    if(Reminder.deleteReminder(ID)){
+                        reminder_label_2.setStyle("-fx-text-fill: green;");
+
+                        reminder_label_2.setText("Deleted!");
+                        setAllReminders_table();
+
+                    }
+                    else {
+                        reminder_label_2.setText("No reminder recorded with the ID:" + ID);
+                        reminder_label_2.setTextFill(Color.RED);
+                    }
+                    reminder_ID.setText("");
+                }
+                else {
+                    reminder_label_2.setStyle("-fx-text-fill: red;");
+                    reminder_label_2.setText("Please enter a valid ID");
+
+                }
+
+
+
+            }
+        }
+        catch(NumberFormatException e) {
+            reminder_label_2.setStyle("-fx-text-fill: red;");
+            reminder_label_2.setText("ID is a positive number");
+
+        }
+
+    }
+
+    public void setAllReminders_table(){
+
+        table_reminder.getItems().clear();
+
+        ObservableList<Reminder> reminderObservableList = FXCollections.observableArrayList(Reminder.reminderList);
+
+
+        table_reminderID.setCellValueFactory(new PropertyValueFactory<Reminder , Integer>("ID"));
+        table_reminderDate.setCellValueFactory(new PropertyValueFactory<Reminder , LocalDate>("Date"));
+        table_reminderName.setCellValueFactory(new PropertyValueFactory<Reminder , String>("Category"));
+        table_reminderValue.setCellValueFactory(new PropertyValueFactory<Reminder , Double>("Value"));
+        table_reminderCategory.setCellValueFactory(new PropertyValueFactory<Reminder , String>("Category"));
+
+
+        // Custom cell value factory for repeat column
+        table_reminderRepeat.setCellValueFactory(cellData -> {
+            Reminder reminder = cellData.getValue();
+            boolean yearly = reminder.isYearly();
+            boolean monthly = reminder.isMonthly();
+
+           if (yearly) {
+                return new SimpleStringProperty("Yearly");
+            } else if (monthly) {
+                return new SimpleStringProperty("Monthly");
+            } else {
+                return new SimpleStringProperty("Once");
+            }
+        });
+
+        table_reminder.setItems(reminderObservableList);
+    }
+
+    public void setUpcomingReminders_table(){
+
+        table_reminder.getItems().clear();
+
+
+        Reminder.getUpcomingReminders();
+        ObservableList<Reminder> reminderObservableList = FXCollections.observableArrayList(Reminder.upcomingReminders);
+
+
+        table_reminderID.setCellValueFactory(new PropertyValueFactory<Reminder , Integer>("ID"));
+        table_reminderDate.setCellValueFactory(new PropertyValueFactory<Reminder , LocalDate>("Date"));
+        table_reminderName.setCellValueFactory(new PropertyValueFactory<Reminder , String>("Category"));
+        table_reminderValue.setCellValueFactory(new PropertyValueFactory<Reminder , Double>("Value"));
+        table_reminderCategory.setCellValueFactory(new PropertyValueFactory<Reminder , String>("Category"));
+
+        // Custom cell value factory for repeat column
+        table_reminderRepeat.setCellValueFactory(cellData -> {
+            Reminder reminder = cellData.getValue();
+            boolean yearly = reminder.isYearly();
+            boolean monthly = reminder.isMonthly();
+
+            if (yearly) {
+                return new SimpleStringProperty("Yearly");
+            } else if (monthly) {
+                return new SimpleStringProperty("Monthly");
+            } else {
+                return new SimpleStringProperty("Once");
+            }
+        });
+
+
+        table_reminder.setItems(reminderObservableList);
+    }
+
+
+
+    public void complete_reminderByID() {
+        try {
+
+            if (reminder_ID.getText().isEmpty()){
+                reminder_label_2.setStyle("-fx-text-fill: red;");
+                reminder_label_2.setText("Please enter an ID");
+            }
+            else {
+                int ID = Integer.parseInt(reminder_ID.getText());
+
+                if (ID > 0){
+                    if(Reminder.payReminder(ID)){
+                        reminder_label_2.setStyle("-fx-text-fill: green;");
+
+                        reminder_label_2.setText("Completed!");
+                        setAllReminders_table();
+
+                    }
+                    else {
+                        reminder_label_2.setText("No reminder recorded with the ID:" + ID);
+                        reminder_label_2.setTextFill(Color.RED);
+                    }
+                    reminder_ID.setText("");
+                }
+                else {
+                    reminder_label_2.setStyle("-fx-text-fill: red;");
+                    reminder_label_2.setText("Please enter a valid ID");
+
+                }
+
+                setAllReminders_table();
+
+            }
+        }
+        catch(NumberFormatException e) {
+            reminder_label_2.setStyle("-fx-text-fill: red;");
+            reminder_label_2.setText("ID is a positive number");
+
+        }
+    }
 
     public void complete_reminder() {
         System.out.println("button clicked");
@@ -391,49 +847,4 @@ public class HomeController implements Initializable {
     }
 
 
-
-//
-//    public void addExpense(){
-//        //create an income object
-//        Expenditure expenditure = new Expenditure(income_source.getText(), income_date.getValue(),Double.parseDouble(income_value.getText()));
-//        income_label_1.setText("Income added!");
-//        setExpense_table();
-//
-//        income_source.setText("");
-//        income_date.setValue(null);
-//        income_value.setText("");
-//
-//    }
-//
-//    public void removeExpense(){
-//
-//        int ID = Integer.parseInt(Income_ID.getText());
-//
-//        if(Expenditure.deleteExpense(ID)){
-//            income_label_2.setText("Deleted!");
-//
-//        }
-//        else {
-//            income_label_2.setText("No expense recorded with the ID:" + ID + ".");
-//            income_label_2.setTextFill(Color.RED);
-//        }
-//    }
-//
-//    public void setExpense_table(){
-//
-//        // In your initialize method or wherever you set up the TableView
-//        ObservableList<Income> incomeObservableList = FXCollections.observableArrayList(Income.incomeList);
-//
-//
-//
-//
-//        table_IncomeID.setCellValueFactory(new PropertyValueFactory<Income , Integer>("ID"));
-//        table_IncomeDate.setCellValueFactory(new PropertyValueFactory<Income , LocalDate>("Date"));
-//        table_IncomeValue.setCellValueFactory(new PropertyValueFactory<Income , Double>("Value"));
-//        table_IncomeSource.setCellValueFactory(new PropertyValueFactory<Income , String>("Source"));
-//
-//        table_Income.setItems(incomeObservableList);
-//
-//
-//    }
 }

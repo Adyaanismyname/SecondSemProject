@@ -7,9 +7,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,9 +22,9 @@
 
 <AnchorPane prefHeight="768.0" prefWidth="1366.0" styleClass="anchor-pane" stylesheets="@Home.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.secondsemproject.HomeController">
    <children>
-      <AnchorPane fx:id="income" layoutX="101.0" layoutY="101.0" prefHeight="633.0" prefWidth="1225.0">
+      <AnchorPane fx:id="income" layoutX="101.0" layoutY="101.0" prefHeight="633.0" prefWidth="1225.0" visible="false">
          <children>
-            <HBox layoutX="282.0" layoutY="162.0" prefHeight="605.0" prefWidth="1228.0" style="-fx-spacing: 20;" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <HBox layoutY="7.0" prefHeight="605.0" prefWidth="1228.0" style="-fx-spacing: 20;" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0">
                <children>
                   <VBox prefHeight="595.0" prefWidth="407.0" style="-fx-spacing: 8;">
                      <children>
@@ -224,8 +226,6 @@
                </children>
             </AnchorPane>
          </children></AnchorPane>
-      <AnchorPane layoutX="101.0" layoutY="101.0" prefHeight="631.0" prefWidth="1228.0" visible="false" />
-      <AnchorPane fx:id="currency_conv_pane" layoutX="102.0" layoutY="99.0" prefHeight="634.0" prefWidth="1225.0" visible="false" />
       <ImageView fitHeight="48.0" fitWidth="50.0" layoutX="4.0" layoutY="716.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@avatar_placeholder.png" />
@@ -241,10 +241,248 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <Button fx:id="complete_reminder_button" alignment="CENTER" layoutX="1112.0" layoutY="79.0" mnemonicParsing="false" onAction="#complete_reminder" prefHeight="30.0" prefWidth="114.0" styleClass="button-search" text="Done" textAlignment="CENTER">
+      <Button fx:id="complete_reminder_button" alignment="CENTER" layoutX="1110.0" layoutY="80.0" mnemonicParsing="false" onAction="#complete_reminder" prefHeight="23.0" prefWidth="114.0" styleClass="button-search" text="Done" textAlignment="CENTER">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Button>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+      <AnchorPane fx:id="expense" layoutX="101.0" layoutY="109.0" prefHeight="633.0" prefWidth="1225.0" visible="false">
+         <children>
+            <HBox layoutY="7.0" prefHeight="605.0" prefWidth="1228.0" style="-fx-spacing: 20;" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0">
+               <children>
+                  <VBox prefHeight="595.0" prefWidth="407.0" style="-fx-spacing: 8;">
+                     <children>
+                        <AnchorPane prefHeight="350.0" prefWidth="398.0" styleClass="anchor-transparent">
+                           <children>
+                              <AnchorPane layoutX="8.0" layoutY="19.0" prefHeight="327.0" prefWidth="381.0" styleClass="anchor-panes">
+                                 <children>
+                                    <TextField fx:id="expense_category" layoutX="183.0" layoutY="207.0" prefHeight="31.0" prefWidth="181.0" styleClass="text-field" />
+                                    <TextField fx:id="expense_value" layoutX="185.0" layoutY="89.0" prefHeight="48.0" prefWidth="77.0" style="-fx-border-width: 4;" styleClass="text-field" />
+                                    <DatePicker fx:id="expense_date" layoutX="183.0" layoutY="156.0" prefHeight="37.0" prefWidth="181.0" styleClass="text-field" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="14.0" prefHeight="59.0" prefWidth="321.0" styleClass="history-labels" text="NEW EXPENSE" textAlignment="CENTER" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="32.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="36.0" layoutY="85.0" prefHeight="56.0" prefWidth="101.0" styleClass="text" text="Value:" textFill="#fffb00">
+                                       <font>
+                                          <Font name="System Bold" size="27.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="37.0" layoutY="147.0" prefHeight="56.0" prefWidth="101.0" text="Date:" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="27.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="36.0" layoutY="195.0" prefHeight="56.0" prefWidth="130.0" text="Category:" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="27.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="expense_label_1" alignment="CENTER" layoutX="30.0" layoutY="300.0" prefHeight="17.0" prefWidth="310.0" styleClass="history-labels" textFill="WHITE" />
+                                    <Button fx:id="income_search11" alignment="CENTER" layoutX="32.0" layoutY="255.0" mnemonicParsing="false" onAction="#addExpense" prefHeight="35.0" prefWidth="331.0" styleClass="button-search" text="ADD" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="153.0" prefWidth="400.0" styleClass="anchor-transparent">
+                           <children>
+                              <AnchorPane layoutX="9.0" layoutY="10.0" prefHeight="143.0" prefWidth="381.0" styleClass="anchor-panes">
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="9.0" prefHeight="59.0" prefWidth="321.0" styleClass="history-labels" text="DELETE EXPENSE" textAlignment="CENTER" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="32.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="expense_label_2" alignment="CENTER" layoutX="41.0" layoutY="123.0" prefHeight="17.0" prefWidth="310.0" styleClass="history-labels" textFill="WHITE" />
+                                    <TextField fx:id="expense_ID" layoutX="163.0" layoutY="74.0" prefHeight="45.0" prefWidth="73.0" styleClass="text-field" />
+                                    <Label layoutX="28.0" layoutY="67.0" prefHeight="56.0" prefWidth="122.0" text="Expense ID:" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="income_detete1" alignment="CENTER" layoutX="247.0" layoutY="71.0" mnemonicParsing="false" onAction="#removeExpense" prefHeight="38.0" prefWidth="110.0" styleClass="button-all" text="Delete" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="25.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="106.0" prefWidth="390.0" styleClass="anchor-transparent">
+                           <children>
+                              <AnchorPane layoutX="9.0" layoutY="18.0" prefHeight="94.0" prefWidth="381.0" styleClass="anchor-panes">
+                                 <children>
+                                    <DatePicker fx:id="expense_date_start" layoutX="10.0" layoutY="12.0" prefHeight="37.0" prefWidth="122.0" promptText="Start Date" styleClass="text-field" />
+                                    <DatePicker fx:id="expense_date_end" layoutX="10.0" layoutY="62.0" prefHeight="37.0" prefWidth="122.0" promptText="End Date" styleClass="text-field" />
+                                    <Button fx:id="income_search1" alignment="CENTER" layoutX="147.0" layoutY="11.0" mnemonicParsing="false" onAction="#setSearchExpense_table" prefHeight="67.0" prefWidth="101.0" styleClass="button-search" text="Search" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="22.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="income_all1" alignment="CENTER" layoutX="257.0" layoutY="11.0" mnemonicParsing="false" onAction="#setAllExpenses_table" prefHeight="67.0" prefWidth="110.0" styleClass="button-all" text="All" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="22.0" />
+                                       </font>
+                                    </Button>
+                                    <Label fx:id="expense_label_3" alignment="CENTER" layoutX="151.0" layoutY="80.0" prefHeight="17.0" prefWidth="194.0" styleClass="history-labels" textFill="WHITE" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+                  <AnchorPane prefHeight="639.0" prefWidth="847.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="anchor-transparent">
+                     <children>
+                        <TableView fx:id="table_expense" layoutX="-5.0" layoutY="17.0" prefHeight="625.0" prefWidth="815.0" styleClass="table-background" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="-5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="17.0">
+                           <columns>
+                              <TableColumn fx:id="table_expenseID" prefWidth="75.0" text="Expense ID" />
+                              <TableColumn fx:id="table_expenseDate" prefWidth="151.0" text="Date" />
+                              <TableColumn fx:id="table_expenseValue" prefWidth="163.0" text="Value" />
+                              <TableColumn fx:id="table_expenseCategory" prefWidth="422.0" text="Category" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="reminder" layoutX="98.0" layoutY="108.0" prefHeight="633.0" prefWidth="1225.0">
+         <children>
+            <HBox layoutY="7.0" prefHeight="605.0" prefWidth="1228.0" style="-fx-spacing: 20;" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0">
+               <children>
+                  <VBox prefHeight="595.0" prefWidth="407.0" style="-fx-spacing: 8;">
+                     <children>
+                        <AnchorPane prefHeight="368.0" prefWidth="390.0" styleClass="anchor-transparent">
+                           <children>
+                              <AnchorPane layoutX="8.0" layoutY="19.0" prefHeight="362.0" prefWidth="381.0" styleClass="anchor-panes">
+                                 <children>
+                                    <TextField fx:id="reminder_name" layoutX="183.0" layoutY="170.0" prefHeight="31.0" prefWidth="181.0" styleClass="text-field" />
+                                    <TextField fx:id="reminder_value" layoutX="185.0" layoutY="70.0" prefHeight="35.0" prefWidth="77.0" style="-fx-border-width: 4;" styleClass="text-field" />
+                                    <DatePicker fx:id="reminder_date" layoutX="183.0" layoutY="118.0" prefHeight="23.0" prefWidth="122.0" styleClass="text-field" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="1.0" prefHeight="59.0" prefWidth="321.0" styleClass="history-labels" text="NEW REMINDER" textAlignment="CENTER" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="32.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="36.0" layoutY="59.0" prefHeight="56.0" prefWidth="101.0" styleClass="text" text="Value:" textFill="#fffb00">
+                                       <font>
+                                          <Font name="System Bold" size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="37.0" layoutY="109.0" prefHeight="56.0" prefWidth="101.0" text="Date:" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="36.0" layoutY="158.0" prefHeight="56.0" prefWidth="130.0" text="Name:" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="reminder_label_1" alignment="CENTER" layoutX="36.0" layoutY="340.0" prefHeight="17.0" prefWidth="310.0" styleClass="history-labels" textFill="WHITE" />
+                                    <Button fx:id="income_search111" alignment="CENTER" layoutX="26.0" layoutY="301.0" mnemonicParsing="false" onAction="#addReminder" prefHeight="35.0" prefWidth="331.0" styleClass="button-search" text="ADD" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Button>
+                                    <RadioButton fx:id="yearly" layoutX="31.0" layoutY="264.0" mnemonicParsing="false" text="Yearly" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="reminder_status" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="monthly" layoutX="139.0" layoutY="264.0" mnemonicParsing="false" text="Monthly" textFill="WHITE" toggleGroup="$reminder_status">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </RadioButton>
+                                    <RadioButton fx:id="once" layoutX="268.0" layoutY="264.0" mnemonicParsing="false" selected="true" text="Once" textFill="WHITE" toggleGroup="$reminder_status">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </RadioButton>
+                                    <TextField fx:id="reminder_category" layoutX="184.0" layoutY="215.0" prefHeight="31.0" prefWidth="181.0" styleClass="text-field" />
+                                    <Label layoutX="37.0" layoutY="203.0" prefHeight="56.0" prefWidth="130.0" text="Category:" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="24.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="153.0" prefWidth="400.0" styleClass="anchor-transparent">
+                           <children>
+                              <AnchorPane layoutX="9.0" layoutY="10.0" prefHeight="143.0" prefWidth="381.0" styleClass="anchor-panes">
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="9.0" prefHeight="59.0" prefWidth="321.0" styleClass="history-labels" text="COMPLETE OR DELETE" textAlignment="CENTER" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="29.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="reminder_label_2" alignment="CENTER" layoutX="41.0" layoutY="124.0" prefHeight="17.0" prefWidth="310.0" styleClass="history-labels" textFill="WHITE" />
+                                    <TextField fx:id="reminder_ID" alignment="CENTER" layoutX="16.0" layoutY="75.0" prefHeight="45.0" prefWidth="91.0" promptText="Reminder ID" styleClass="text-field" />
+                                    <Button fx:id="income_detete11" alignment="CENTER" layoutX="257.0" layoutY="77.0" mnemonicParsing="false" onAction="#removeReminder" prefHeight="38.0" prefWidth="110.0" styleClass="button-all" text="Delete" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="income_detete111" alignment="CENTER" layoutX="129.0" layoutY="77.0" mnemonicParsing="false" onAction="#complete_reminderByID" prefHeight="38.0" prefWidth="110.0" styleClass="button-search" text="Complete" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="70.0" prefWidth="390.0" styleClass="anchor-transparent">
+                           <children>
+                              <AnchorPane layoutX="5.0" layoutY="14.0" prefHeight="67.0" prefWidth="381.0" styleClass="anchor-panes">
+                                 <children>
+                                    <Button alignment="CENTER" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#setUpcomingReminders_table" prefHeight="46.0" prefWidth="160.0" styleClass="button-search" text="Upcoming" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="22.0" />
+                                       </font>
+                                    </Button>
+                                    <Button alignment="CENTER" layoutX="204.0" layoutY="11.0" mnemonicParsing="false" onAction="#setAllReminders_table" prefHeight="46.0" prefWidth="160.0" styleClass="button-all" text="All" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="22.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+                  <AnchorPane prefHeight="639.0" prefWidth="847.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="anchor-transparent">
+                     <children>
+                        <TableView fx:id="table_reminder" layoutX="-5.0" layoutY="17.0" prefHeight="625.0" prefWidth="815.0" styleClass="table-background" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="-5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="17.0">
+                           <columns>
+                              <TableColumn fx:id="table_reminderID" prefWidth="98.0" text="Reminder ID" />
+                              <TableColumn fx:id="table_reminderDate" prefWidth="128.0" text="Date" />
+                              <TableColumn fx:id="table_reminderName" prefWidth="159.0" text="Name" />
+                              <TableColumn fx:id="table_reminderValue" prefWidth="94.0" text="Value" />
+                              <TableColumn fx:id="table_reminderCategory" prefWidth="209.0" text="Category" />
+                              <TableColumn fx:id="table_reminderRepeat" prefWidth="114.0" text="Repeat" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

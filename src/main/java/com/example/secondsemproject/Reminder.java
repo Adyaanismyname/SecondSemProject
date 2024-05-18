@@ -22,6 +22,8 @@ public class Reminder extends Transaction {
         this.yearly = yearly;
         main.setIdForTable("Reminder");
 
+        getUpcomingReminders();
+
 
 
     }
@@ -38,6 +40,8 @@ public class Reminder extends Transaction {
         reminderList.add(this);
         main.UpdateLatestIdForClass("L_Reminder_id",R_IDgenerator+1,R_IDgenerator);
         R_IDgenerator++;
+
+        getUpcomingReminders();
     }
     public static void setId(int id){
         R_IDgenerator=id;
@@ -115,8 +119,11 @@ public class Reminder extends Transaction {
 
                 reminderList.remove(i);
 
+                getUpcomingReminders();
+
                 //successfully deleted
                 return true;
+
             }
         }
 
@@ -125,7 +132,7 @@ public class Reminder extends Transaction {
         return false;
     }
 
-    public static void payReminder(int ID){
+    public static boolean payReminder(int ID){
 
         //for loop iterates through each reminder
         for (int i = 0; i < reminderList.size(); i++){
@@ -138,18 +145,28 @@ public class Reminder extends Transaction {
 
                 if (!(reminder.yearly || reminder.monthly)) {
                     deleteReminder(ID);
+                    getUpcomingReminders();
+
+                    return true;
                 }
                 else if (reminder.isMonthly()){
                     LocalDate current = reminder.getDate();
                     reminder.setDate(current.plusMonths(1));
+                    getUpcomingReminders();
+
+                    return true;
                 }
                 else{
                     LocalDate current = reminder.getDate();
                     reminder.setDate(current.plusYears(1));
+                    getUpcomingReminders();
+
+                    return true;
 
                 }
             }
         }
+        return false;
     }
 
 
@@ -162,16 +179,20 @@ public class Reminder extends Transaction {
 
     public static void getUpcomingReminders(){
 
+        upcomingReminders.clear();
+
         LocalDate five_days_later = LocalDate.now().plusDays(5);
 
         //for loop iterates through each reminder
-        for (int i = 0; i < reminderList.size(); i++){
+        for (Reminder reminder : reminderList) {
 
-            boolean upcoming = reminderList.get(i).getDate().isBefore(five_days_later) && reminderList.get(i).getDate().isAfter(LocalDate.now());
+            LocalDate date = reminder.getDate();
 
-            if (upcoming){
+            boolean upcoming = (date.isBefore(five_days_later));
 
-                upcomingReminders.add(reminderList.get(i));
+            if (upcoming) {
+
+                upcomingReminders.add(reminder);
 
             }
         }
