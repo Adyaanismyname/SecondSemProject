@@ -35,6 +35,9 @@ public class HomeController implements Initializable {
     @FXML
     HelloController helloController;
 
+
+
+
     @FXML
     private AnchorPane calculator_pane;
 
@@ -109,11 +112,14 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         expanded_menu_pane.setVisible(false);
+        income.setVisible(true);
+        home_pane.setVisible(false);
 
         setAllIncomes_table();
 
 
         BarGraphs.displayBarChart(HomeBarChart);
+
 
 
     }
@@ -189,8 +195,9 @@ public class HomeController implements Initializable {
 
         int ID = Integer.parseInt(Income_ID.getText());
 
+
         if(Income.deleteIncome(ID)){
-            income_source.setStyle("-fx-text-fill: green;");
+            income_label_2.setStyle("-fx-text-fill: green;");
 
             income_label_2.setText("Deleted!");
             setAllIncomes_table();
