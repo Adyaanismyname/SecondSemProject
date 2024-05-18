@@ -138,9 +138,6 @@ public class HomeController implements Initializable {
 
         setAllIncomes_table();
 
-
-
-
         BarGraphs.displayBarChart(HomeBarChart);
 
 
@@ -277,6 +274,10 @@ public class HomeController implements Initializable {
         table_IncomeSource.setCellValueFactory(new PropertyValueFactory<Income , String>("Source"));
 
         table_Income.setItems(incomeObservableList);
+
+
+
+
 
     }
 

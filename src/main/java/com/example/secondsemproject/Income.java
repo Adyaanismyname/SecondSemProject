@@ -79,10 +79,9 @@ public class Income extends Transaction {
         return false;
     }
 
-    public static double getMonthIncome(int number){
+    public static double getMonthIncome(int number, int monthYear){
 
         double monthlyIncome = 0;
-        int currentYear = LocalDate.now().getYear();
 
 
         for(Income income : Income.incomeList){
@@ -90,7 +89,7 @@ public class Income extends Transaction {
             int month = income.getDate().getMonthValue();
             int year = income.getDate().getYear();
 
-            boolean isCurrent = (number == month) && (currentYear == year);
+            boolean isCurrent = (number == month) && (monthYear == year);
 
             if (isCurrent){
                 monthlyIncome += income.getValue();
@@ -100,7 +99,6 @@ public class Income extends Transaction {
         return monthlyIncome;
 
     }
-
 
 }
 

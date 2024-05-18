@@ -11,6 +11,10 @@ public class BarGraphs {
     // method to display a bar chart
     public static void displayBarChart(BarChart<String, Number> barChart){
 
+        // Clearing any existing data from the bar chart
+        barChart.getData().clear();
+
+
         // determining the starting month for the chart
         int startingMonth = getStartingMonth();
 
@@ -20,8 +24,25 @@ public class BarGraphs {
 
         // getting monthly income and expenses for the chart
         for (int i = 0; i < 5; i++){
-            monthlyIncome[i] = Income.getMonthIncome(startingMonth + i);
-            monthlyExpense[i] = Expenditure.getMonthExpense(startingMonth + i);
+
+            int monthYear;
+            int currentYear = LocalDate.now().getYear();
+
+
+            if (startingMonth > 8) {
+                int nextMonth = (startingMonth + i) % 12;
+                nextMonth = (nextMonth == 0) ? 12 : nextMonth;
+                monthYear = (nextMonth > 8) ? currentYear - 1 : currentYear;
+            } else {
+                monthYear = currentYear;
+            }
+
+
+            int monthIndex = (startingMonth + i) % 12;
+            monthIndex = (monthIndex == 0) ? 12 : monthIndex;
+
+            monthlyIncome[i] = Income.getMonthIncome(monthIndex, monthYear);
+            monthlyExpense[i] = Expenditure.getMonthExpense(monthIndex, monthYear);
         }
 
         CategoryAxis xAxis = new CategoryAxis();
@@ -37,14 +58,17 @@ public class BarGraphs {
         yAxis.setLabel("Amount");
         yAxis.setStyle("-fx-text-fill: white;");
 
-        barChart.setCategoryGap(5);
+        barChart.setCategoryGap(20);
 
         // creating series for income
         XYChart.Series<String, Number> incomeSeries = new XYChart.Series<>();
         incomeSeries.setName("Income");
         // adding data points for income series
         for (int i = 0; i < 5; i++) {
-            incomeSeries.getData().add(new XYChart.Data<>(getMonthName(startingMonth + i), monthlyIncome[i]));
+            int monthIndex = (startingMonth + i) % 12;
+            monthIndex = (monthIndex == 0) ? 12 : monthIndex;
+
+            incomeSeries.getData().add(new XYChart.Data<>(getMonthName(monthIndex), monthlyIncome[i]));
         }
 
         // creating series for expenses
@@ -52,7 +76,10 @@ public class BarGraphs {
         expenseSeries.setName("Expense");
         // adding data points for expense series
         for (int i = 0; i < 5; i++) {
-            expenseSeries.getData().add(new XYChart.Data<>(getMonthName(startingMonth + i), monthlyExpense[i]));
+
+            int monthIndex = (startingMonth + i) % 12;
+            monthIndex = (monthIndex == 0) ? 12 : monthIndex;
+            expenseSeries.getData().add(new XYChart.Data<>(getMonthName(monthIndex), monthlyExpense[i]));
         }
 
         // defining series for balance
@@ -60,9 +87,13 @@ public class BarGraphs {
         balanceSeries.setName("Balance");
         // adding data points for balance series
         for (int i = 0; i < 5; i++) {
+
+            int monthIndex = (startingMonth + i) % 12;
+            monthIndex = (monthIndex == 0) ? 12 : monthIndex;
+
             double balance = Math.abs(monthlyIncome[i] - monthlyExpense[i]);
 
-            balanceSeries.getData().add(new XYChart.Data<>(getMonthName(startingMonth + i), balance));
+            balanceSeries.getData().add(new XYChart.Data<>(getMonthName(monthIndex), balance));
         }
 
         // adding all series to the bar chart
@@ -154,5 +185,6 @@ public class BarGraphs {
 
         return startingMonth;
     }
+
 
 }
