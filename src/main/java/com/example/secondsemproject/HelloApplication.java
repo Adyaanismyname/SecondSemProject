@@ -96,6 +96,7 @@ public class HelloApplication extends Application {
             primaryStage.setTitle("Home Page");
             primaryStage.show();
             primaryStage.setResizable(false);
+            System.out.println(HelloController.getUsername_to_pass());
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -23,11 +23,7 @@ public class Reminder extends Transaction {
         this.monthly = monthly;
         this.yearly = yearly;
         main.setIdForTable("Reminder");
-
         getUpcomingReminders();
-
-
-
     }
 
 
