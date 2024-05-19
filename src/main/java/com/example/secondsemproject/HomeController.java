@@ -252,6 +252,7 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        main.load_Data_AL();
         expanded_menu_pane.setVisible(false);
         income.setVisible(false);
         expense.setVisible(false);

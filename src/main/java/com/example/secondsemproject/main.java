@@ -1,38 +1,31 @@
 package com.example.secondsemproject;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
-import java.awt.*;
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Scanner;
 
-import static com.example.secondsemproject.Category.categories;
 import static com.example.secondsemproject.Expenditure.ExpenditureList;
 import static com.example.secondsemproject.Income.incomeList;
 import static com.example.secondsemproject.Reminder.reminderList;
 import static com.example.secondsemproject.Wishlist.wishlists;
 import static java.awt.AWTEventMulticaster.add;
-import static java.time.LocalDate.*;
 
 public class main {
-    LocalDate date;
-    int Id;
-    double value;
+    static LocalDate date;
+    static int Id;
+    static double value;
 
-    String category;
-    String username;
-    String name;
-    String source;
+    static String category;
+    static String username;
+    static String name;
+    static String source;
 
-    Boolean is_monthly;
-    Boolean is_yearly;
+    static Boolean is_monthly;
+    static Boolean is_yearly;
 
-    ResultSet result;
-    PreparedStatement preparedStatement;
+    static ResultSet result;
+    static PreparedStatement preparedStatement;
 
-    void load_Expenditure() {
+    static void load_Expenditure() {
         ExpenditureList.clear();
         try {
             String query = "SELECT * FROM Expenditure WHERE Username = "+HelloController.getUsername_to_pass();
@@ -53,7 +46,7 @@ public class main {
 
     }
 
-    void load_Reminder() {
+    static void load_Reminder() {
         reminderList.clear();
         try {
             String query = "SELECT * FROM Reminder where Username =" + HelloController.getUsername_to_pass();
@@ -77,7 +70,7 @@ public class main {
 
     }
 
-    void load_Income() {
+    static void load_Income() {
         incomeList.clear();
 
         try {
@@ -100,7 +93,7 @@ public class main {
 
     }
 
-    void load_Wishlist() {
+    static void load_Wishlist() {
         wishlists.clear();
         try {
             String query = "SELECT * FROM Wishlist WHERE Username = "+HelloController.getUsername_to_pass();
@@ -143,9 +136,6 @@ public class main {
 
             // Update the stored ID in your Java program for the specified table
             switch (tableName) {
-                case "Category":
-                    Category.setId(latestId + 1);
-                    break;
                 case "Income":
                     Income.setId(latestId + 1);
                     break;
@@ -200,7 +190,7 @@ public class main {
 
 
 
-    void insert_Expenditure(int Id, LocalDate date, double value, String Category) {
+    static void insert_Expenditure(int Id, LocalDate date, double value, String Category) {
         PreparedStatement preparedStatement = null;
         while (true) {
             try {
@@ -230,7 +220,7 @@ public class main {
         }
     }
 
-    void insert_Income(int Id,LocalDate date, double value, String source) {
+    static void insert_Income(int Id, LocalDate date, double value, String source) {
         PreparedStatement preparedStatement = null;
         while (true) {
             try {
@@ -259,7 +249,7 @@ public class main {
         }
     }
 
-    void insert_Reminder(int Id,LocalDate date, double value, String name, String Category, Boolean is_yearly, Boolean is_monthly) {
+    static void insert_Reminder(int Id, LocalDate date, double value, String name, String Category, Boolean is_yearly, Boolean is_monthly) {
         PreparedStatement preparedStatement = null;
         while (true) {
             try {
@@ -290,7 +280,7 @@ public class main {
         }
     }
 
-    void insert_Wishlist(int Id, String item_name, double item_price, double rate, double amount_saved, LocalDate last_calculated_date) {
+    static void insert_Wishlist(int Id, String item_name, double item_price, double rate, double amount_saved, LocalDate last_calculated_date) {
 
         PreparedStatement preparedStatement = null;
         while (true) {
@@ -323,7 +313,7 @@ public class main {
     }
 
 
-    void deleteWishlistfromdb() {
+    static void deleteWishlistfromdb() {
         PreparedStatement preparedStatement = null;
         while (true) {
             try {
@@ -346,7 +336,7 @@ public class main {
         }
     }
 
-    void deleteIncomefromdb() {
+    static void deleteIncomefromdb() {
         PreparedStatement preparedStatement = null;
         while (true) {
             try {
@@ -370,7 +360,7 @@ public class main {
         }
     }
 
-    void deleteExpenditurefromdb() {
+    static void deleteExpenditurefromdb() {
         PreparedStatement preparedStatement = null;
         while (true) {
             try {
@@ -394,7 +384,8 @@ public class main {
         }
     }
 
-    void deleteReminderfromdb() {
+
+    static void deleteReminderfromdb() {
         PreparedStatement preparedStatement = null;
         while (true) {
             try {
@@ -418,7 +409,7 @@ public class main {
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    void Load_into_databsae(){
+    static void Load_into_databsae(){
 
         Insert_Wishlist_db();
         Insert_Income_db();
@@ -427,7 +418,7 @@ public class main {
 
     }
 
-    void delete_Previous_Data(){
+     static void  delete_Previous_Data(){
 
         deleteExpenditurefromdb();
         deleteIncomefromdb();
@@ -436,7 +427,7 @@ public class main {
 
     }
 
-    void load_Data_AL(){
+    static void load_Data_AL(){
         load_Wishlist();
         load_Reminder();
         load_Income();
@@ -462,29 +453,32 @@ public class main {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    void Insert_Wishlist_db() {
+    static void Insert_Wishlist_db() {
         for (Wishlist wishlist : wishlists) {
             insert_Wishlist(wishlist.getID(), wishlist.getItem_name(), wishlist.getItem_price(), wishlist.getRate(), wishlist.getAmountSaved(), wishlist.getLastCalculationDate());
         }
 
     }
 
-    void Insert_Expenditure_db() {
+    static void Insert_Expenditure_db() {
         for (Expenditure E : ExpenditureList) {
             insert_Expenditure(E.getID(), E.getDate(), E.getValue(), E.getCategory());
         }
     }
 
-    void Insert_Income_db() {
+    static void Insert_Income_db() {
         for (Income I : incomeList) {
             insert_Income(I.getID(), I.getDate(), I.getValue(), I.getSource());
         }
     }
-    void Insert_Reminder_db() {
+    static void Insert_Reminder_db() {
         for (Reminder R : reminderList) {
             insert_Reminder(R.getID(),R.getDate(),R.getValue(),R.getName(),R.getCategory(),R.isYearly(),R.isMonthly());
         }
     }
+
+
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

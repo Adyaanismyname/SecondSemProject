@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Wishlist {
 
     private int ID;
-    private static int W_IDgenerator = 1;
+    private static int W_IDgenerator = 0;
     private String item_name;
     private double item_price;
     private double rate;

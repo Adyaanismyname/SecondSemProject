@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Income extends Transaction {
-    private static int I_IDgenerator;
+    private static int I_IDgenerator=0;
     private String source;
     private String Username;
     public static ArrayList<Income> incomeList = new ArrayList<>();
