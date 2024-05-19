@@ -823,7 +823,7 @@ public class HomeController implements Initializable {
 
         table_reminderID.setCellValueFactory(new PropertyValueFactory<Reminder , Integer>("ID"));
         table_reminderDate.setCellValueFactory(new PropertyValueFactory<Reminder , LocalDate>("Date"));
-        table_reminderName.setCellValueFactory(new PropertyValueFactory<Reminder , String>("Category"));
+        table_reminderName.setCellValueFactory(new PropertyValueFactory<Reminder , String>("Name"));
         table_reminderValue.setCellValueFactory(new PropertyValueFactory<Reminder , Double>("Value"));
         table_reminderCategory.setCellValueFactory(new PropertyValueFactory<Reminder , String>("Category"));
 
