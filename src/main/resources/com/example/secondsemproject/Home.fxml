@@ -199,12 +199,12 @@
             </AnchorPane>
             <AnchorPane layoutX="637.0" layoutY="95.0" prefHeight="319.0" prefWidth="594.0" styleClass="anchor-panes">
                <children>
-                  <Label layoutX="26.0" layoutY="141.0" prefHeight="29.0" prefWidth="263.0" style="-fx-font-weight: bold;" text="INCOME THIS MONTH : " textFill="WHITE">
+                  <Label layoutX="26.0" layoutY="141.0" prefHeight="35.0" prefWidth="283.0" style="-fx-font-weight: bold;" text="INCOME THIS MONTH : " textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="309.0" layoutY="134.0" prefHeight="42.0" prefWidth="106.0" style="-fx-font-weight: bold;" text="10000" textFill="#fffefe">
+                  <Label layoutX="339.0" layoutY="134.0" prefHeight="42.0" prefWidth="106.0" style="-fx-font-weight: bold;" text="10000" textFill="#fffefe">
                      <font>
                         <Font size="31.0" />
                      </font>
@@ -214,12 +214,12 @@
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <Label layoutX="25.0" layoutY="201.0" prefHeight="29.0" prefWidth="277.0" style="-fx-font-weight: bold;" text="EXPENSES THIS MONTH : " textFill="WHITE">
+                  <Label layoutX="25.0" layoutY="201.0" prefHeight="35.0" prefWidth="299.0" style="-fx-font-weight: bold;" text="EXPENSES THIS MONTH : " textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="311.0" layoutY="194.0" prefHeight="42.0" prefWidth="106.0" style="-fx-font-weight: bold;" text="100" textFill="#fffefe">
+                  <Label layoutX="341.0" layoutY="194.0" prefHeight="42.0" prefWidth="106.0" style="-fx-font-weight: bold;" text="100" textFill="#fffefe">
                      <font>
                         <Font size="31.0" />
                      </font>
@@ -229,7 +229,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="231.0" layoutY="257.0" prefHeight="42.0" prefWidth="299.0" style="-fx-font-weight: bold;" text="NOT ENOUGH MF" textFill="#fffefe">
+                  <Label layoutX="261.0" layoutY="257.0" prefHeight="42.0" prefWidth="299.0" style="-fx-font-weight: bold;" text="NOT ENOUGH MF" textFill="#fffefe">
                      <font>
                         <Font size="31.0" />
                      </font>
@@ -278,7 +278,7 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <Button fx:id="complete_reminder_button" alignment="CENTER" layoutX="1110.0" layoutY="80.0" mnemonicParsing="false" onAction="#complete_reminder" prefHeight="23.0" prefWidth="114.0" styleClass="button-search" text="Next" textAlignment="CENTER">
+      <Button fx:id="complete_reminder_button" alignment="CENTER" layoutX="1110.0" layoutY="80.0" mnemonicParsing="false" onAction="#complete_reminder" prefHeight="23.0" prefWidth="114.0" styleClass="button-search" text="Complete" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

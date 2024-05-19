@@ -260,6 +260,20 @@ public class HomeController implements Initializable {
         complete_reminder_button.setVisible(false);
         wishlist_error_lbl.setText("");
 
+
+        income_date.setEditable(false);
+        income_date_start.setEditable(false);
+        income_date_end.setEditable(false);
+
+        expense_date.setEditable(false);
+        expense_date_end.setEditable(false);
+        expense_date_start.setEditable(false);
+
+        reminder_date.setEditable(false);
+
+
+
+
         getUpcomingReminders();
         // for testing purposes
         ;
@@ -754,7 +768,7 @@ public class HomeController implements Initializable {
 
         table_reminderID.setCellValueFactory(new PropertyValueFactory<Reminder , Integer>("ID"));
         table_reminderDate.setCellValueFactory(new PropertyValueFactory<Reminder , LocalDate>("Date"));
-        table_reminderName.setCellValueFactory(new PropertyValueFactory<Reminder , String>("Category"));
+        table_reminderName.setCellValueFactory(new PropertyValueFactory<Reminder , String>("Name"));
         table_reminderValue.setCellValueFactory(new PropertyValueFactory<Reminder , Double>("Value"));
         table_reminderCategory.setCellValueFactory(new PropertyValueFactory<Reminder , String>("Category"));
 
@@ -1106,6 +1120,9 @@ public class HomeController implements Initializable {
         home_pane.setVisible(true);
         reminder.setVisible(false);
         wishlist.setVisible(false);
+
+
+        BarGraphs.displayBarChart(HomeBarChart);
 
     }
 
