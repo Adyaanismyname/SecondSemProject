@@ -212,6 +212,25 @@ public class HomeController implements Initializable {
     private TableColumn<Wishlist, Double> table_wishlistAmount;
 
 
+    @FXML
+    private Label monthly_income;
+
+    @FXML
+    private Label monthly_expenses;
+
+    @FXML
+    private Label monthly_savings;
+
+    @FXML
+    private Label zakaat;
+
+    double mon_expense = Expenditure.getMonthExpense(LocalDate.now().getMonthValue() , LocalDate.now().getYear()) ;
+
+    double mon_income = Income.getMonthIncome(LocalDate.now().getMonthValue() , LocalDate.now().getYear());
+
+    double mon_savings = mon_income - mon_expense;
+
+
 
 
     @FXML
@@ -263,6 +282,11 @@ public class HomeController implements Initializable {
         reminder_label.setText("");
         complete_reminder_button.setVisible(false);
         wishlist_error_lbl.setText("");
+
+        monthly_expenses.setText("");
+        monthly_income.setText("");
+        monthly_savings.setText("");
+        zakaat.setText("");
 
 
         income_date.setEditable(false);
@@ -376,6 +400,20 @@ public class HomeController implements Initializable {
                     Income income = new Income(income_source.getText(), income_date.getValue(),Double.parseDouble(income_value.getText()));
                     income_label_1.setStyle("-fx-text-fill: green;");
                     income_label_1.setText("Income added!");
+                    mon_income = Income.getMonthIncome(LocalDate.now().getMonthValue() , LocalDate.now().getYear());
+                    mon_savings = mon_income - mon_expense;
+                    monthly_expenses.setText(String.valueOf(mon_expense));
+                    monthly_income.setText(String.valueOf(mon_income));
+                    if(mon_savings > 0) {
+                        monthly_savings.setText(String.valueOf(mon_savings));
+
+                    }
+                    else {
+                        monthly_savings.setText("0");
+                    }
+                    zakaat.setText(String.valueOf(0.025 * (Income.getTotal() - Expenditure.getTotal())));
+
+
                     setAllIncomes_table();
                     income_source.setText("");
                     income_date.setValue(null);
@@ -414,6 +452,21 @@ public class HomeController implements Initializable {
                         income_label_2.setStyle("-fx-text-fill: green;");
 
                         income_label_2.setText("Deleted!");
+                        mon_income = Income.getMonthIncome(LocalDate.now().getMonthValue() , LocalDate.now().getYear());
+                        mon_savings = mon_income - mon_expense;
+                        monthly_expenses.setText(String.valueOf(mon_expense));
+                        monthly_income.setText(String.valueOf(mon_income));
+                        if(mon_savings > 0) {
+                            monthly_savings.setText(String.valueOf(mon_savings));
+
+                        }
+                        else {
+                            monthly_savings.setText("0");
+                        }
+                        zakaat.setText(String.valueOf(0.025 * (Income.getTotal() - Expenditure.getTotal())));
+
+
+
                         setAllIncomes_table();
 
                     }
@@ -540,6 +593,21 @@ public class HomeController implements Initializable {
                     Expenditure expense1 = new Expenditure(expense_category.getText(), expense_date.getValue(),Double.parseDouble(expense_value.getText()));
                     expense_label_1.setStyle("-fx-text-fill: green;");
                     expense_label_1.setText("Expense added!");
+                    mon_expense = Expenditure.getMonthExpense(LocalDate.now().getMonthValue() , LocalDate.now().getYear());
+                    mon_savings = mon_income - mon_expense;
+                    monthly_expenses.setText(String.valueOf(mon_expense));
+                    monthly_income.setText(String.valueOf(mon_income));
+                    if(mon_savings > 0) {
+                        monthly_savings.setText(String.valueOf(mon_savings));
+
+                    }
+                    else {
+                        monthly_savings.setText("0");
+                    }
+                    zakaat.setText(String.valueOf(0.025 * (Income.getTotal() - Expenditure.getTotal())));
+
+
+
                     setAllExpenses_table();
                     expense_category.setText("");
                     expense_date.setValue(null);
@@ -578,6 +646,20 @@ public class HomeController implements Initializable {
                         expense_label_2.setStyle("-fx-text-fill: green;");
 
                         expense_label_2.setText("Deleted!");
+                        mon_expense = Expenditure.getMonthExpense(LocalDate.now().getMonthValue() , LocalDate.now().getYear()) ;
+                        mon_savings = mon_income - mon_expense;
+
+
+                        monthly_expenses.setText(String.valueOf(mon_expense));
+                        monthly_income.setText(String.valueOf(mon_income));
+                        if(mon_savings > 0) {
+                            monthly_savings.setText(String.valueOf(mon_savings));
+
+                        }
+                        else {
+                            monthly_savings.setText("0");
+                        }
+                        zakaat.setText(String.valueOf(0.025 * (Income.getTotal() - Expenditure.getTotal())));
                         setAllExpenses_table();
 
                     }

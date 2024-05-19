@@ -204,7 +204,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="339.0" layoutY="134.0" prefHeight="42.0" prefWidth="106.0" style="-fx-font-weight: bold;" text="10000" textFill="#fffefe">
+                  <Label fx:id="monthly_income" layoutX="339.0" layoutY="134.0" prefHeight="42.0" prefWidth="174.0" style="-fx-font-weight: bold;" text="10000" textFill="#fffefe">
                      <font>
                         <Font size="31.0" />
                      </font>
@@ -219,7 +219,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="341.0" layoutY="194.0" prefHeight="42.0" prefWidth="106.0" style="-fx-font-weight: bold;" text="100" textFill="#fffefe">
+                  <Label fx:id="monthly_expenses" layoutX="341.0" layoutY="194.0" prefHeight="42.0" prefWidth="180.0" style="-fx-font-weight: bold;" text="100" textFill="#fffefe">
                      <font>
                         <Font size="31.0" />
                      </font>
@@ -229,7 +229,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="261.0" layoutY="257.0" prefHeight="42.0" prefWidth="299.0" style="-fx-font-weight: bold;" text="NOT ENOUGH MF" textFill="#fffefe">
+                  <Label fx:id="monthly_savings" layoutX="261.0" layoutY="257.0" prefHeight="42.0" prefWidth="299.0" style="-fx-font-weight: bold;" text="NOT ENOUGH MF" textFill="#fffefe">
                      <font>
                         <Font size="31.0" />
                      </font>
@@ -260,7 +260,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="199.0" layoutY="129.0" prefHeight="29.0" prefWidth="92.0" style="-fx-font-weight: bold;" text="1000" textFill="WHITE">
+                  <Label fx:id="zakaat" layoutX="199.0" layoutY="129.0" prefHeight="29.0" prefWidth="92.0" style="-fx-font-weight: bold;" text="1000" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -668,7 +668,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <ImageView fx:id="avatar_image" fitHeight="48.0" fitWidth="50.0" layoutX="4.0" layoutY="722.0" onMouseClicked="#handleImageClick" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="avatar_image" fitHeight="48.0" fitWidth="50.0" layoutX="4.0" layoutY="722.0" onMouseClicked="#handleImageClick" pickOnBounds="true" preserveRatio="true" styleClass="avatar-image">
          <image>
             <Image url="@avatar_placeholder.png" />
          </image>
