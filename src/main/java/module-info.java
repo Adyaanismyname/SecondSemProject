@@ -14,6 +14,7 @@ module com.example.secondsemproject {
     requires ch.qos.logback.core;
     requires java.desktop;
     requires org.xerial.sqlitejdbc;
+    requires com.fasterxml.jackson.annotation;
 
     opens com.example.secondsemproject to javafx.fxml;
     exports com.example.secondsemproject;
