@@ -668,7 +668,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="48.0" fitWidth="50.0" layoutX="4.0" layoutY="722.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="avatar_image" fitHeight="48.0" fitWidth="50.0" layoutX="4.0" layoutY="722.0" onMouseClicked="#handleImageClick" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@avatar_placeholder.png" />
          </image>

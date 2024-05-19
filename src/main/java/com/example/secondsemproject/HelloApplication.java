@@ -29,14 +29,10 @@ public class HelloApplication extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         primaryStage.initStyle(StageStyle.DECORATED.UNDECORATED);
-
-
-
-
         showLoginPage();
     }
 
-    private void showLoginPage() {
+    public void showLoginPage() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
             Parent root = loader.load();
@@ -46,7 +42,6 @@ public class HelloApplication extends Application {
 
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
-            primaryStage.initStyle(StageStyle.DECORATED.UNDECORATED);
 
             primaryStage.setScene(scene);
             primaryStage.setTitle("Login Page");

@@ -243,6 +243,10 @@ public class HomeController implements Initializable {
     @FXML
     private Label wishlist_label_2;
 
+    private ContextMenu contextMenu;
+
+    @FXML
+    private ImageView avatar_image;
 
 
 
@@ -270,6 +274,23 @@ public class HomeController implements Initializable {
         expense_date_start.setEditable(false);
 
         reminder_date.setEditable(false);
+
+
+        contextMenu= new ContextMenu();
+
+        // Create custom menu items
+        MenuItem menuItem1 = new MenuItem("Logout");
+
+
+        // Add action handlers to the menu items
+        menuItem1.setOnAction(event -> {
+            logout();
+        });
+
+
+
+        // Add the menu items to the context menu
+        contextMenu.getItems().addAll(menuItem1);
 
 
 
@@ -1165,6 +1186,18 @@ public class HomeController implements Initializable {
         wishlist.setVisible(true);
     }
 
+    @FXML
+    public void handleImageClick(MouseEvent event) {
+
+
+        contextMenu.show(avatar_image, event.getScreenX(), event.getScreenY());
+
+    }
+
+
+    public void logout() {
+        helloController.helloApplication.showLoginPage();
+    }
 
 
 }
