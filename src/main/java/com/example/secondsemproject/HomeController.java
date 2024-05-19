@@ -187,6 +187,38 @@ public class HomeController implements Initializable {
     private TableColumn<Reminder, String> table_reminderName;
     @FXML
     private TableColumn<Reminder, String> table_reminderRepeat;
+
+    @FXML
+    private TableView <Wishlist> table_wishlist;
+
+
+    @FXML
+    private TableColumn<Wishlist,String> table_wishlistname;
+
+    @FXML
+    private TableColumn< Wishlist, Double> table_wishlistprice;
+
+    @FXML
+    private TableColumn<Wishlist, Integer> table_wishlistID;
+    @FXML
+    private TableColumn<Wishlist, Double> table_wishlistrate;
+
+    @FXML
+    private TableColumn<Wishlist , LocalDate> table_wishlistdate;
+
+    @FXML
+    private TableColumn<Wishlist , String> table_wishlistredeemable;
+
+
+    @FXML
+    private TextField search_wishlist_name;
+
+    @FXML
+    private TextField redeem_wishlist_id;
+
+
+
+
     @FXML
     private RadioButton monthly;
 
@@ -196,6 +228,17 @@ public class HomeController implements Initializable {
     private RadioButton yearly;
     @FXML
     private ToggleGroup reminder_status;
+    @FXML
+    private AnchorPane wishlist;
+
+    @FXML
+    private TextField wishlist_name;
+    @FXML
+    private TextField wishlist_price;
+    @FXML
+    private TextField wishlist_rate;
+    @FXML
+    private Label wishlist_error_lbl;
 
 
 
@@ -210,6 +253,7 @@ public class HomeController implements Initializable {
         reminder_label.setVisible(false);
         reminder_label.setText("");
         complete_reminder_button.setVisible(false);
+        wishlist_error_lbl.setText("");
 
 
         // for testing purposes
@@ -843,6 +887,111 @@ public class HomeController implements Initializable {
             }
         }
 
+
+    }
+
+    public void add_wishlist() {
+        String name = wishlist_name.getText();
+        String price = wishlist_price.getText();
+        String rate = wishlist_rate.getText();
+
+
+        if(name.isEmpty() || price.isEmpty() || rate.isEmpty()) {
+            wishlist_error_lbl.setStyle("-fx-text-fill: red");
+            wishlist_error_lbl.setText("Field cannot be empty");
+        }
+        else if(Double.parseDouble(price) < 0 || Double.parseDouble(rate) < 0) {
+            wishlist_error_lbl.setStyle("-fx-text-fill: red");
+            wishlist_error_lbl.setText("Price or rate cannot be negative");
+        }
+        else {
+            Wishlist w1 = new Wishlist(name , Double.parseDouble(price) , Double.parseDouble(rate));
+            wishlist_error_lbl.setStyle("-fx-text-fill: green");
+            wishlist_error_lbl.setText("Item added");
+
+            setAllWishlist_table();
+
+
+        }
+
+
+    }
+
+    public void setAllWishlist_table() {
+        table_wishlist.getItems().clear();
+
+        ObservableList<Wishlist> wishlistObservableList = FXCollections.observableArrayList(Wishlist.wishlists);
+
+
+        table_wishlistID.setCellValueFactory(new PropertyValueFactory<Wishlist , Integer>("Wishlist ID"));
+        table_wishlistname.setCellValueFactory(new PropertyValueFactory<Wishlist , String>("Name"));
+        table_wishlistprice.setCellValueFactory(new PropertyValueFactory<Wishlist , Double>("Price"));
+        table_wishlistrate.setCellValueFactory(new PropertyValueFactory<Wishlist, Double>("Rate"));
+        table_wishlistdate.setCellValueFactory(new PropertyValueFactory<Wishlist , LocalDate>("Date"));
+
+        // Custom cell value factory for repeat column
+        table_wishlistredeemable.setCellValueFactory(cellData -> {
+            Wishlist wishlist = cellData.getValue();
+            Boolean is_redeemable = wishlist.isRedeemable();
+
+
+            if (is_redeemable) {
+                return new SimpleStringProperty("Yes");
+            } else {
+                return new SimpleStringProperty("No");
+            }
+        });
+
+        table_wishlist.setItems(wishlistObservableList);
+
+    }
+
+    public void setsearchwishlist_table(){
+
+        table_wishlist.getItems().clear();
+
+        ArrayList <Wishlist> searchResult = new ArrayList<>();
+
+
+        for(Wishlist w1 : Wishlist.wishlists) {
+            if(w1.getItemName().equals(search_wishlist_name.getText())) {
+                searchResult.add(w1);
+
+            }
+
+        }
+
+                    // In your initialize method or wherever you set up the TableView
+        ObservableList<Wishlist> wishlistObservableList = FXCollections.observableArrayList(searchResult);
+
+
+        table_wishlistID.setCellValueFactory(new PropertyValueFactory<Wishlist , Integer>("Wishlist ID"));
+        table_wishlistname.setCellValueFactory(new PropertyValueFactory<Wishlist , String>("Name"));
+        table_wishlistprice.setCellValueFactory(new PropertyValueFactory<Wishlist , Double>("Price"));
+        table_wishlistrate.setCellValueFactory(new PropertyValueFactory<Wishlist, Double>("Rate"));
+        table_wishlistdate.setCellValueFactory(new PropertyValueFactory<Wishlist , LocalDate>("Date"));
+
+        table_wishlist.setItems(wishlistObservableList);
+
+        table_wishlistredeemable.setCellValueFactory(cellData -> {
+            Wishlist wishlist = cellData.getValue();
+            Boolean is_redeemable = wishlist.isRedeemable();
+
+
+            if (is_redeemable) {
+                return new SimpleStringProperty("Yes");
+            } else {
+                return new SimpleStringProperty("No");
+            }
+        });
+    }
+
+    public void redeem_wishlist_item() {
+        int id = Integer.parseInt(redeem_wishlist_id.getText());
+
+        if(Wishlist.redeem(id)) {
+            setAllWishlist_table();
+        }
 
     }
 
