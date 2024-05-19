@@ -254,7 +254,7 @@ public class HomeController implements Initializable {
         home_pane.setVisible(true);
         reminder.setVisible(false);
         wishlist.setVisible(false);
-
+        getShowingReminders();
         reminder_label.setVisible(false);
         reminder_label.setText("");
         complete_reminder_button.setVisible(false);
@@ -690,7 +690,7 @@ public class HomeController implements Initializable {
                     reminder_label_1.setStyle("-fx-text-fill: green;");
                     reminder_label_1.setText("Reminder added!");
 
-                    getShowingReminders();
+
                     System.out.println(showing_reminders.size());
                     setAllReminders_table();
 

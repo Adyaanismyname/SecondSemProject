@@ -40,6 +40,7 @@ public class Reminder extends Transaction {
         this.monthly = monthly;
         this.yearly = yearly;
         reminderList.add(this);
+        showing_reminders.add(this);
         main.UpdateLatestIdForClass("L_Reminder_id",R_IDgenerator+1,R_IDgenerator);
         R_IDgenerator++;
 
@@ -225,12 +226,7 @@ public class Reminder extends Transaction {
 
             boolean upcoming = (date.isBefore(five_days_later));
 
-            if (upcoming) {
-
-                showing_reminders.add(reminder);
-
-
-            }
+            showing_reminders.add(reminder);
         }
 
     }
