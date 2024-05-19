@@ -27,7 +27,7 @@ public class HelloController implements Initializable {
 
     String username_for_password_reset;
 
-    private HelloApplication helloApplication;
+    HelloApplication helloApplication;
 
     @FXML
     private AnchorPane Login;
