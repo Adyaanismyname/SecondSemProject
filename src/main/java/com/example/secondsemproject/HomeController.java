@@ -323,7 +323,6 @@ public class HomeController implements Initializable {
         // for testing purposes
         ;
 
-        Wishlist w1 = new Wishlist("Umiar", 100,100);
 
 
 
@@ -465,8 +464,10 @@ public class HomeController implements Initializable {
                         }
                         zakaat.setText(String.valueOf(0.025 * (Income.getTotal() - Expenditure.getTotal())));
 
-
-
+                        income_date_end.setValue(null);
+                        income_date_start.setValue(null);
+                        income_date_end.setValue(null);
+                        income_date_start.setValue(null);
                         setAllIncomes_table();
 
                     }
@@ -530,7 +531,7 @@ public class HomeController implements Initializable {
 
                 if(start.isAfter(end)){
                     income_label_3.setText("Start date should be smaller than the End date");
-                    income_label_3.setStyle("-fx-text-fill: red;");
+                    income_label_3.setStyle("-fx-text-fill: red; -fx-font-size: 9;");
                 }
                 else {
 
@@ -607,7 +608,8 @@ public class HomeController implements Initializable {
                     zakaat.setText(String.valueOf(0.025 * (Income.getTotal() - Expenditure.getTotal())));
 
 
-
+                    expense_date_end.setValue(null);
+                    expense_date_start.setValue(null);
                     setAllExpenses_table();
                     expense_category.setText("");
                     expense_date.setValue(null);
@@ -659,6 +661,9 @@ public class HomeController implements Initializable {
                         else {
                             monthly_savings.setText("0");
                         }
+
+                        expense_date_end.setValue(null);
+                        expense_date_start.setValue(null);
                         zakaat.setText(String.valueOf(0.025 * (Income.getTotal() - Expenditure.getTotal())));
                         setAllExpenses_table();
 
@@ -719,7 +724,8 @@ public class HomeController implements Initializable {
 
                 if(start.isAfter(end)){
                     expense_label_3.setText("Start date should be smaller than the End date");
-                    expense_label_3.setStyle("-fx-text-fill: red;");
+                    expense_label_3.setStyle("-fx-text-fill: red; -fx-font-size: 9;");
+
                 }
                 else {
 
@@ -945,6 +951,19 @@ public class HomeController implements Initializable {
 
                         reminder_label_2.setText("Completed!");
                         setAllReminders_table();
+
+                        mon_expense = Expenditure.getMonthExpense(LocalDate.now().getMonthValue() , LocalDate.now().getYear());
+                        mon_savings = mon_income - mon_expense;
+                        monthly_expenses.setText(String.valueOf(mon_expense));
+                        monthly_income.setText(String.valueOf(mon_income));
+                        if(mon_savings > 0) {
+                            monthly_savings.setText(String.valueOf(mon_savings));
+
+                        }
+                        else {
+                            monthly_savings.setText("0");
+                        }
+                        zakaat.setText(String.valueOf(0.025 * (Income.getTotal() - Expenditure.getTotal())));
 
                     }
                     else {
@@ -1190,6 +1209,19 @@ public class HomeController implements Initializable {
                         wishlist_label_2.setText("Redeemed!");
                         setAllWishlist_table();
 
+                        mon_expense = Expenditure.getMonthExpense(LocalDate.now().getMonthValue() , LocalDate.now().getYear());
+                        mon_savings = mon_income - mon_expense;
+                        monthly_expenses.setText(String.valueOf(mon_expense));
+                        monthly_income.setText(String.valueOf(mon_income));
+                        if(mon_savings > 0) {
+                            monthly_savings.setText(String.valueOf(mon_savings));
+
+                        }
+                        else {
+                            monthly_savings.setText("0");
+                        }
+                        zakaat.setText(String.valueOf(0.025 * (Income.getTotal() - Expenditure.getTotal())));
+
                     }
                     else {
                         wishlist_label_2.setText("Not redeemable or no wishlist recorded with the ID:" + ID);
@@ -1246,6 +1278,7 @@ public class HomeController implements Initializable {
         income_date_end.setValue(null);
         income_value.setText("");
         income_source.setText("");
+        income_date_start.setValue(null);
         income_ID.setText("");
     }
 

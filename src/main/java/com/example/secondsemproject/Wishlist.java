@@ -12,7 +12,7 @@ public class Wishlist {
     private String item_name;
     private double item_price;
     private double rate;
-    private double amount_saved = 100;
+    private double amount_saved = 0;
     private String Username;
     private LocalDate lastCalculationDate;
 
@@ -167,11 +167,13 @@ public class Wishlist {
     public static boolean redeem (int ID){
 
         //for loop iterates through each wishlist
-        for (int i = 0; i < redeemable.size(); i++) {
-            if (redeemable.get(i).getID() == ID) {
+        for (Wishlist wishlist : redeemable) {
+            if (wishlist.getID() == ID) {
 
+                String categ = "wishlist: " + wishlist.item_name;
                 //add in expenditure
-                Expenditure expenditure = new Expenditure("wishlist", LocalDate.now(), redeemable.get(i).getAmountSaved());
+
+                Expenditure expenditure = new Expenditure(categ, LocalDate.now(), wishlist.getAmountSaved());
 
                 //remove the wishlist
                 deleteWishlist(ID);
