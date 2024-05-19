@@ -1,5 +1,7 @@
 package com.example.secondsemproject;
 
+import org.sqlite.JDBC;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -216,10 +218,13 @@ public class main {
             // Construct the SQL update statement for the specified class in the latest_id table
             String sql = "UPDATE latest_id SET " + targetClass + " = ? WHERE " + targetClass + " = ?";
 
+
             // Create a PreparedStatement with the SQL statement
             PreparedStatement preparedStatement = JDBCConnection.connection.prepareStatement(sql);
             preparedStatement.setInt(1, newLatestId); // Set the new latest ID
             preparedStatement.setInt(2, oldLatestId); // Set the old latest ID
+
+
 
             // Execute the update query
             int rowsAffected = preparedStatement.executeUpdate();
@@ -230,6 +235,7 @@ public class main {
             } else {
                 System.out.println("No row found for the given old latest ID or class");
             }
+
 
 
         } catch (SQLException e) {

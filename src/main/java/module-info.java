@@ -13,6 +13,7 @@ module com.example.secondsemproject {
     requires java.sql;
     requires ch.qos.logback.core;
     requires java.desktop;
+    requires org.xerial.sqlitejdbc;
 
     opens com.example.secondsemproject to javafx.fxml;
     exports com.example.secondsemproject;

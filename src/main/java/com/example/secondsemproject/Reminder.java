@@ -1,5 +1,6 @@
 package com.example.secondsemproject;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -13,6 +14,7 @@ public class Reminder extends Transaction {
 
     public static ArrayList<Reminder>  reminderList= new ArrayList<>();
     public static ArrayList<Reminder> upcomingReminders = new ArrayList<>();
+    public static ArrayList<Reminder> showing_reminders = new ArrayList<>();
 
     public Reminder(int id,String name, String category, LocalDate date, double value, boolean monthly, boolean yearly,String Username) {
         super(id, date, value,HelloController.getUsername_to_pass());
@@ -132,6 +134,19 @@ public class Reminder extends Transaction {
         return false;
     }
 
+    public static Boolean deleteShowingReminders(int ID) {
+        for(int i = 0 ; i < showing_reminders.size(); i++) {
+            if (showing_reminders.get(i).getID() == ID) {
+                showing_reminders.remove(i);
+
+                return true;
+            }
+        }
+        return false;
+
+
+    }
+
     public static boolean payReminder(int ID){
 
         //for loop iterates through each reminder
@@ -174,7 +189,7 @@ public class Reminder extends Transaction {
 
         LocalDate currentDate = LocalDate.now();
 
-        return !(getDate().isBefore(currentDate) || getDate().isEqual(currentDate));
+        return (getDate().isBefore(currentDate) || getDate().isEqual(currentDate));
     }
 
     public static void getUpcomingReminders(){
@@ -194,8 +209,30 @@ public class Reminder extends Transaction {
 
                 upcomingReminders.add(reminder);
 
+
             }
         }
+    }
+
+    public static void getShowingReminders() {
+        showing_reminders.clear();
+        LocalDate five_days_later = LocalDate.now().plusDays(5);
+
+        //for loop iterates through each reminder
+        for (Reminder reminder : reminderList) {
+
+            LocalDate date = reminder.getDate();
+
+            boolean upcoming = (date.isBefore(five_days_later));
+
+            if (upcoming) {
+
+                showing_reminders.add(reminder);
+
+
+            }
+        }
+
     }
 
 

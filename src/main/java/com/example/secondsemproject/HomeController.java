@@ -251,22 +251,22 @@ public class HomeController implements Initializable {
         expanded_menu_pane.setVisible(false);
         income.setVisible(false);
         expense.setVisible(false);
-        home_pane.setVisible(false);
+        home_pane.setVisible(true);
         reminder.setVisible(false);
-        wishlist.setVisible(true);
+        wishlist.setVisible(false);
 
         reminder_label.setVisible(false);
         reminder_label.setText("");
         complete_reminder_button.setVisible(false);
         wishlist_error_lbl.setText("");
 
-
+        getUpcomingReminders();
         // for testing purposes
-        Reminder reminder1 = new Reminder("pay gas bill" , "bills" , LocalDate.now() , 1000 , false , true);
-        Reminder reminder2 = new Reminder("pay electricity bill" , "bills" , LocalDate.now() , 10000 , true , false);
+        ;
 
         Wishlist w1 = new Wishlist("Umiar", 100,100);
-        reminder2.setID(2);
+
+
 
         getUpcomingReminders();
 
@@ -675,7 +675,12 @@ public class HomeController implements Initializable {
                     Reminder reminder1 = new Reminder(reminder_name.getText(), reminder_category.getText(), reminder_date.getValue(), Double.parseDouble(reminder_value.getText()), is_monthly, is_yearly);
                     reminder_label_1.setStyle("-fx-text-fill: green;");
                     reminder_label_1.setText("Reminder added!");
+
+                    getShowingReminders();
+                    System.out.println(showing_reminders.size());
                     setAllReminders_table();
+
+                    reminders();
                     reminder_category.setText("");
                     reminder_date.setValue(null);
                     reminder_value.setText("");
@@ -853,7 +858,8 @@ public class HomeController implements Initializable {
         System.out.println("button clicked");
         int id = currently_showing_reminder.getID();
 
-        deleteReminder(id);
+
+        System.out.println(deleteShowingReminders(id));
 
 
 
@@ -861,16 +867,18 @@ public class HomeController implements Initializable {
     }
 
     public void reminders() {
+        System.out.println("reached the reminders ffunction ");
 
 
-        if(upcomingReminders.isEmpty()) {
+        if(showing_reminders.isEmpty()) {
             reminder_label.setVisible(false);
             complete_reminder_button.setVisible(false);
             reminder_label.setText("");
+            System.out.println("Nothing ");
         }
 
 
-        for(Reminder reminder : upcomingReminders) {
+        for(Reminder reminder : showing_reminders) {
             if(reminder.datePassed()) {
                 reminder_label.setStyle("-fx-text-fill: red;");
                 complete_reminder_button.setVisible(true);
@@ -884,7 +892,7 @@ public class HomeController implements Initializable {
         }
 
 
-        for(Reminder reminder : upcomingReminders){
+        for(Reminder reminder : showing_reminders){
             if (reminder.getDate().isEqual(LocalDate.now())) {
                 reminder_label.setStyle("-fx-text-fill: white;");
                 complete_reminder_button.setVisible(true);
@@ -1090,6 +1098,56 @@ public class HomeController implements Initializable {
         }
 
     }
+
+    public void show_home() {
+        expanded_menu_pane.setVisible(false);
+        income.setVisible(false);
+        expense.setVisible(false);
+        home_pane.setVisible(true);
+        reminder.setVisible(false);
+        wishlist.setVisible(false);
+
+    }
+
+    public void show_income() {
+
+        expanded_menu_pane.setVisible(false);
+        income.setVisible(true);
+        expense.setVisible(false);
+        home_pane.setVisible(false);
+        reminder.setVisible(false);
+        wishlist.setVisible(false);
+    }
+
+    public void show_expense() {
+
+        expanded_menu_pane.setVisible(false);
+        income.setVisible(false);
+        expense.setVisible(true);
+        home_pane.setVisible(false);
+        reminder.setVisible(false);
+        wishlist.setVisible(false);
+    }
+
+    public void show_reminder() {
+
+        expanded_menu_pane.setVisible(false);
+        income.setVisible(false);
+        expense.setVisible(false);
+        home_pane.setVisible(false);
+        reminder.setVisible(true);
+        wishlist.setVisible(false);
+    }
+
+    public void show_wishlist() {
+        expanded_menu_pane.setVisible(false);
+        income.setVisible(false);
+        expense.setVisible(false);
+        home_pane.setVisible(false);
+        reminder.setVisible(false);
+        wishlist.setVisible(true);
+    }
+
 
 
 }
