@@ -459,7 +459,6 @@ public class HomeController implements Initializable {
 
 
 
-    //VALIDATION THAT START DATE IS ALWAYS SMALLER THEN END DATE !!!!
     public void setSearchIncomes_table(){
 
         table_Income.getItems().clear();
@@ -1134,6 +1133,8 @@ public class HomeController implements Initializable {
 
     }
 
+
+
     public void show_home() {
         expanded_menu_pane.setVisible(false);
         income.setVisible(false);
@@ -1141,7 +1142,6 @@ public class HomeController implements Initializable {
         home_pane.setVisible(true);
         reminder.setVisible(false);
         wishlist.setVisible(false);
-
 
         BarGraphs.displayBarChart(HomeBarChart);
 
@@ -1155,6 +1155,16 @@ public class HomeController implements Initializable {
         home_pane.setVisible(false);
         reminder.setVisible(false);
         wishlist.setVisible(false);
+
+        setAllIncomes_table();
+        income_label_1.setText("");
+        income_label_2.setText("");
+        income_label_3.setText("");
+        income_date.setValue(null);
+        income_date_end.setValue(null);
+        income_value.setText("");
+        income_source.setText("");
+        income_ID.setText("");
     }
 
     public void show_expense() {
@@ -1165,16 +1175,36 @@ public class HomeController implements Initializable {
         home_pane.setVisible(false);
         reminder.setVisible(false);
         wishlist.setVisible(false);
+
+        setAllExpenses_table();
+        expense_label_1.setText("");
+        expense_label_2.setText("");
+        expense_label_3.setText("");
+        expense_date.setValue(null);
+        expense_date_end.setValue(null);
+        expense_date_start.setValue(null);
+        expense_value.setText("");
+        expense_category.setText("");
+        expense_ID.setText("");
     }
 
     public void show_reminder() {
-
         expanded_menu_pane.setVisible(false);
         income.setVisible(false);
         expense.setVisible(false);
         home_pane.setVisible(false);
         reminder.setVisible(true);
         wishlist.setVisible(false);
+
+        setAllReminders_table();
+        reminder_label_1.setText("");
+        reminder_label_2.setText("");
+        reminder_date.setValue(null);
+        reminder_value.setText("");
+        reminder_category.setText("");
+        reminder_ID.setText("");
+        reminder_name.setText("");
+
     }
 
     public void show_wishlist() {
@@ -1184,6 +1214,14 @@ public class HomeController implements Initializable {
         home_pane.setVisible(false);
         reminder.setVisible(false);
         wishlist.setVisible(true);
+
+        setAllWishlist_table();
+        wishlist_error_lbl.setText("");
+        wishlist_label_2.setText("");
+        wishlist_price.setText("");
+        wishlist_rate.setText("");
+        redeem_wishlist_id.setText("");
+        wishlist_name.setText("");
     }
 
     @FXML
