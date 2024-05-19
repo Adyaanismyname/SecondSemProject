@@ -12,7 +12,7 @@ public class Wishlist {
     private String item_name;
     private double item_price;
     private double rate;
-    private double amount_saved = 0;
+    private double amount_saved = 100;
     private String Username;
     private LocalDate lastCalculationDate;
 
@@ -22,7 +22,6 @@ public class Wishlist {
 
     // Constructor
     public Wishlist(String item_name, double item_price, double rate) {
-        main.setIdForTable("Wishlist");
         this.ID = W_IDgenerator;
         this.item_name = item_name;
         this.item_price = item_price;
@@ -54,7 +53,7 @@ public class Wishlist {
         return ID;
     }
 
-    public String getItemName() {
+    public String getItem_name() {
         return item_name;
     }
 
@@ -62,7 +61,7 @@ public class Wishlist {
         this.item_name = item_name;
     }
 
-    public double getItemPrice() {
+    public double getItem_price() {
         return item_price;
     }
 
@@ -88,6 +87,10 @@ public class Wishlist {
         }
     }
 
+    public LocalDate getLastCalculationDate() {
+        return lastCalculationDate;
+    }
+
     public double getAmountSaved() {
         return amount_saved;
     }
@@ -104,30 +107,29 @@ public class Wishlist {
     }
 
 
-    public void calculateAmountSaved(){
-
+    public static void calculateAmountSaved() {
         double amount;
         double savings = Income.getTotal() - Expenditure.getTotal();
+        Wishlist.redeemable.clear();
 
-        boolean isNewMonth = lastCalculationDate.getMonthValue() != LocalDate.now().getMonthValue();
+        for (Wishlist wishlist : Wishlist.wishlists) {
+            boolean isNewMonth = wishlist.lastCalculationDate == null || wishlist.lastCalculationDate.getMonthValue() != LocalDate.now().getMonthValue();
 
-        if (isNewMonth){
-
-            if (!isRedeemable()){
-
-                if (savings > 0) {
-                    amount = savings * (this.rate / 100);
-                    this.amount_saved += amount;
+            if (!wishlist.isRedeemable()){
+                if(isNewMonth && savings > 0){
+                    amount = savings * (wishlist.rate / 100);
+                    wishlist.amount_saved += amount;
+                    wishlist.lastCalculationDate = LocalDate.now();
                 }
 
             }
-            else {
-                redeemable.add(this);
+            else{
+                redeemable.add(wishlist);
             }
 
-            this.lastCalculationDate = LocalDate.now();
         }
     }
+
 
     //REMOVE wishlist
     public static boolean deleteWishlist (int ID){
@@ -156,10 +158,11 @@ public class Wishlist {
         return false;
     }
 
-    // convert the wishlist to an expenditure and delEte the wishlist
+
     public boolean isRedeemable (){
         return !(amount_saved < item_price);
     }
+
 
     public static boolean redeem (int ID){
 
@@ -168,7 +171,7 @@ public class Wishlist {
             if (redeemable.get(i).getID() == ID) {
 
                 //add in expenditure
-                Expenditure expenditure = new Expenditure("wishlist", LocalDate.now(), redeemable.get(i).getItemPrice());
+                Expenditure expenditure = new Expenditure("wishlist", LocalDate.now(), redeemable.get(i).getAmountSaved());
 
                 //remove the wishlist
                 deleteWishlist(ID);

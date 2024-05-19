@@ -374,30 +374,40 @@ public class HelloController implements Initializable {
         JDBCConnection.getConnection();
 
         try {
-            ResultSet SV_email_checker = JDBCConnection.ExecuteQuery("Select Answer_to_Security_Question , Username from User where Email = \"" + entered_email + "\";" );
 
-            if(!SV_email_checker.next()) {
-                verification_error_label.setText("This email does not exist");
+            if (SV_email.getText().isEmpty() || sv_answer.getText().isEmpty()){
+
+                verification_error_label.setText("Fields cannot be empty");
             }
-            else if(!SV_email_checker.getString("Answer_to_Security_Question").equals(entered_answer)) {
-                verification_error_label.setText("Wrong answer to question , Try again");
+            else{
 
+                ResultSet SV_email_checker = JDBCConnection.ExecuteQuery("Select Answer_to_Security_Question , Username from User where Email = \"" + entered_email + "\";" );
+
+                if(!SV_email_checker.next()) {
+                    verification_error_label.setText("This email does not exist");
+                }
+                else if(!SV_email_checker.getString("Answer_to_Security_Question").equals(entered_answer)) {
+                    verification_error_label.setText("Wrong answer to question , Try again");
+
+
+                }
+                else {
+                    username_for_password_reset = SV_email_checker.getString("Username");
+                    su_username.setText("");
+                    su_password.setText("");
+                    su_email.setText("");
+                    su_password_confirm.setText("");
+                    su_answer.setText("");
+                    Lbl_error_SU.setText("");
+
+                    Login.setVisible(false);
+                    SignUp.setVisible(false);
+                    SQs.setVisible(false);
+                    ResetPass.setVisible(true);
+                    Verification.setVisible(false);
 
             }
-            else {
-                username_for_password_reset = SV_email_checker.getString("Username");
-                su_username.setText("");
-                su_password.setText("");
-                su_email.setText("");
-                su_password_confirm.setText("");
-                su_answer.setText("");
-                Lbl_error_SU.setText("");
 
-                Login.setVisible(false);
-                SignUp.setVisible(false);
-                SQs.setVisible(false);
-                ResetPass.setVisible(true);
-                Verification.setVisible(false);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

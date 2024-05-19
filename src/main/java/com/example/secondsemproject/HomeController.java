@@ -208,10 +208,11 @@ public class HomeController implements Initializable {
 
     @FXML
     private TableColumn<Wishlist , String> table_wishlistredeemable;
-
-
     @FXML
-    private TextField search_wishlist_name;
+    private TableColumn<Wishlist, Double> table_wishlistAmount;
+
+
+
 
     @FXML
     private TextField redeem_wishlist_id;
@@ -239,6 +240,8 @@ public class HomeController implements Initializable {
     private TextField wishlist_rate;
     @FXML
     private Label wishlist_error_lbl;
+    @FXML
+    private Label wishlist_label_2;
 
 
 
@@ -249,7 +252,9 @@ public class HomeController implements Initializable {
         income.setVisible(false);
         expense.setVisible(false);
         home_pane.setVisible(false);
-        reminder.setVisible(true);
+        reminder.setVisible(false);
+        wishlist.setVisible(true);
+
         reminder_label.setVisible(false);
         reminder_label.setText("");
         complete_reminder_button.setVisible(false);
@@ -260,6 +265,7 @@ public class HomeController implements Initializable {
         Reminder reminder1 = new Reminder("pay gas bill" , "bills" , LocalDate.now() , 1000 , false , true);
         Reminder reminder2 = new Reminder("pay electricity bill" , "bills" , LocalDate.now() , 10000 , true , false);
 
+        Wishlist w1 = new Wishlist("Umiar", 100,100);
         reminder2.setID(2);
 
         getUpcomingReminders();
@@ -267,6 +273,9 @@ public class HomeController implements Initializable {
         reminders();
 
         setAllIncomes_table();
+        setAllReminders_table();
+        setAllExpenses_table();
+        setAllWishlist_table();
 
         BarGraphs.displayBarChart(HomeBarChart);
 
@@ -665,7 +674,7 @@ public class HomeController implements Initializable {
 
                     Reminder reminder1 = new Reminder(reminder_name.getText(), reminder_category.getText(), reminder_date.getValue(), Double.parseDouble(reminder_value.getText()), is_monthly, is_yearly);
                     reminder_label_1.setStyle("-fx-text-fill: green;");
-                    reminder_label_1.setText("Expense added!");
+                    reminder_label_1.setText("Reminder added!");
                     setAllReminders_table();
                     reminder_category.setText("");
                     reminder_date.setValue(null);
@@ -890,27 +899,86 @@ public class HomeController implements Initializable {
 
     }
 
+
+
     public void add_wishlist() {
-        String name = wishlist_name.getText();
-        String price = wishlist_price.getText();
-        String rate = wishlist_rate.getText();
+        try {
+
+            if (wishlist_name.getText().isEmpty() || wishlist_price.getText().isEmpty() || wishlist_rate.getText().isEmpty()) {
+
+                wishlist_error_lbl.setStyle("-fx-text-fill: red;");
+                wishlist_error_lbl.setText("Field cannot be empty");
 
 
-        if(name.isEmpty() || price.isEmpty() || rate.isEmpty()) {
-            wishlist_error_lbl.setStyle("-fx-text-fill: red");
-            wishlist_error_lbl.setText("Field cannot be empty");
+            } else {
+                if (Double.parseDouble(wishlist_price.getText()) <= 0 || Double.parseDouble(wishlist_rate.getText()) <= 0) {
+                    wishlist_error_lbl.setStyle("-fx-text-fill: red;");
+                    wishlist_error_lbl.setText("Price and Rate have to be greater than 0");
+
+
+                } else {
+
+                    if (Double.parseDouble(wishlist_rate.getText()) > 100) {
+                        wishlist_error_lbl.setText("Rate cannot exceed 100.");
+                    } else {
+                        Wishlist w1 = new Wishlist(wishlist_name.getText(), Double.parseDouble(wishlist_price.getText()), Double.parseDouble(wishlist_rate.getText()));
+                        wishlist_error_lbl.setStyle("-fx-text-fill: green;");
+                        wishlist_error_lbl.setText("Wishlist added!");
+                        wishlist_name.setText("");
+                        wishlist_rate.setText("");
+                        wishlist_price.setText("");
+                        setAllWishlist_table();
+                    }
+
+
+                }
+
+            }
         }
-        else if(Double.parseDouble(price) < 0 || Double.parseDouble(rate) < 0) {
-            wishlist_error_lbl.setStyle("-fx-text-fill: red");
-            wishlist_error_lbl.setText("Price or rate cannot be negative");
+            catch(NumberFormatException e) {
+                wishlist_error_lbl.setStyle("-fx-text-fill: red;");
+                wishlist_error_lbl.setText("Need a number in the Numeric fields");
+            }
+    }
+
+    public void removeWishlist(){
+
+        try {
+
+            if (redeem_wishlist_id.getText().isEmpty()){
+                wishlist_label_2.setStyle("-fx-text-fill: red;");
+                wishlist_label_2.setText("Please enter an ID");
+            }
+            else {
+                int ID = Integer.parseInt(redeem_wishlist_id.getText());
+
+                if (ID > 0){
+                    if(Wishlist.deleteWishlist(ID)){
+                        wishlist_label_2.setStyle("-fx-text-fill: green;");
+
+                        wishlist_label_2.setText("Deleted!");
+                        setAllWishlist_table();
+
+                    }
+                    else {
+                        wishlist_label_2.setText("No wishlist recorded with the ID:" + ID);
+                        wishlist_label_2.setTextFill(Color.RED);
+                    }
+                    redeem_wishlist_id.setText("");
+                }
+                else {
+                    wishlist_label_2.setStyle("-fx-text-fill: red;");
+                    wishlist_label_2.setText("Please enter a valid ID");
+
+                }
+
+                setAllWishlist_table();
+
+            }
         }
-        else {
-            Wishlist w1 = new Wishlist(name , Double.parseDouble(price) , Double.parseDouble(rate));
-            wishlist_error_lbl.setStyle("-fx-text-fill: green");
-            wishlist_error_lbl.setText("Item added");
-
-            setAllWishlist_table();
-
+        catch(NumberFormatException e) {
+            wishlist_label_2.setStyle("-fx-text-fill: red;");
+            wishlist_label_2.setText("ID is a positive number");
 
         }
 
@@ -919,15 +987,18 @@ public class HomeController implements Initializable {
 
     public void setAllWishlist_table() {
         table_wishlist.getItems().clear();
+        Wishlist.calculateAmountSaved();
+
 
         ObservableList<Wishlist> wishlistObservableList = FXCollections.observableArrayList(Wishlist.wishlists);
 
 
-        table_wishlistID.setCellValueFactory(new PropertyValueFactory<Wishlist , Integer>("Wishlist ID"));
-        table_wishlistname.setCellValueFactory(new PropertyValueFactory<Wishlist , String>("Name"));
-        table_wishlistprice.setCellValueFactory(new PropertyValueFactory<Wishlist , Double>("Price"));
-        table_wishlistrate.setCellValueFactory(new PropertyValueFactory<Wishlist, Double>("Rate"));
-        table_wishlistdate.setCellValueFactory(new PropertyValueFactory<Wishlist , LocalDate>("Date"));
+        table_wishlistID.setCellValueFactory(new PropertyValueFactory<Wishlist , Integer>("ID"));
+        table_wishlistname.setCellValueFactory(new PropertyValueFactory<Wishlist , String>("item_name"));
+        table_wishlistprice.setCellValueFactory(new PropertyValueFactory<Wishlist , Double>("item_price"));
+        table_wishlistrate.setCellValueFactory(new PropertyValueFactory<Wishlist, Double>("rate"));
+        table_wishlistAmount.setCellValueFactory(new PropertyValueFactory<Wishlist, Double>("AmountSaved"));
+        table_wishlistdate.setCellValueFactory(new PropertyValueFactory<Wishlist , LocalDate>("lastCalculationDate"));
 
         // Custom cell value factory for repeat column
         table_wishlistredeemable.setCellValueFactory(cellData -> {
@@ -946,33 +1017,23 @@ public class HomeController implements Initializable {
 
     }
 
-    public void setsearchwishlist_table(){
+    public void setRedeemableWishlist_table(){
 
         table_wishlist.getItems().clear();
+        Wishlist.calculateAmountSaved();
 
-        ArrayList <Wishlist> searchResult = new ArrayList<>();
-
-
-        for(Wishlist w1 : Wishlist.wishlists) {
-            if(w1.getItemName().equals(search_wishlist_name.getText())) {
-                searchResult.add(w1);
-
-            }
-
-        }
-
-                    // In your initialize method or wherever you set up the TableView
-        ObservableList<Wishlist> wishlistObservableList = FXCollections.observableArrayList(searchResult);
+        ObservableList<Wishlist> wishlistObservableList = FXCollections.observableArrayList(Wishlist.redeemable);
+        System.out.println(Wishlist.redeemable.size());
 
 
-        table_wishlistID.setCellValueFactory(new PropertyValueFactory<Wishlist , Integer>("Wishlist ID"));
-        table_wishlistname.setCellValueFactory(new PropertyValueFactory<Wishlist , String>("Name"));
-        table_wishlistprice.setCellValueFactory(new PropertyValueFactory<Wishlist , Double>("Price"));
-        table_wishlistrate.setCellValueFactory(new PropertyValueFactory<Wishlist, Double>("Rate"));
-        table_wishlistdate.setCellValueFactory(new PropertyValueFactory<Wishlist , LocalDate>("Date"));
+        table_wishlistID.setCellValueFactory(new PropertyValueFactory<Wishlist , Integer>("ID"));
+        table_wishlistname.setCellValueFactory(new PropertyValueFactory<Wishlist , String>("item_name"));
+        table_wishlistprice.setCellValueFactory(new PropertyValueFactory<Wishlist , Double>("item_price"));
+        table_wishlistrate.setCellValueFactory(new PropertyValueFactory<Wishlist, Double>("rate"));
+        table_wishlistAmount.setCellValueFactory(new PropertyValueFactory<Wishlist, Double>("AmountSaved"));
+        table_wishlistdate.setCellValueFactory(new PropertyValueFactory<Wishlist , LocalDate>("lastCalculationDate"));
 
-        table_wishlist.setItems(wishlistObservableList);
-
+        // Custom cell value factory for repeat column
         table_wishlistredeemable.setCellValueFactory(cellData -> {
             Wishlist wishlist = cellData.getValue();
             Boolean is_redeemable = wishlist.isRedeemable();
@@ -984,13 +1045,48 @@ public class HomeController implements Initializable {
                 return new SimpleStringProperty("No");
             }
         });
+
+        table_wishlist.setItems(wishlistObservableList);
     }
 
     public void redeem_wishlist_item() {
-        int id = Integer.parseInt(redeem_wishlist_id.getText());
+        try {
 
-        if(Wishlist.redeem(id)) {
-            setAllWishlist_table();
+            if (redeem_wishlist_id.getText().isEmpty()){
+                wishlist_label_2.setStyle("-fx-text-fill: red;");
+                wishlist_label_2.setText("Please enter an ID");
+            }
+            else {
+                int ID = Integer.parseInt(redeem_wishlist_id.getText());
+
+                if (ID > 0){
+                    if(Wishlist.redeem(ID)){
+                        wishlist_label_2.setStyle("-fx-text-fill: green;");
+
+                        wishlist_label_2.setText("Redeemed!");
+                        setAllWishlist_table();
+
+                    }
+                    else {
+                        wishlist_label_2.setText("Not redeemable or no wishlist recorded with the ID:" + ID);
+                        wishlist_label_2.setTextFill(Color.RED);
+                    }
+                    redeem_wishlist_id.setText("");
+                }
+                else {
+                    wishlist_label_2.setStyle("-fx-text-fill: red;");
+                    wishlist_label_2.setText("Please enter a valid ID");
+
+                }
+
+                setAllWishlist_table();
+
+            }
+        }
+        catch(NumberFormatException e) {
+            wishlist_label_2.setStyle("-fx-text-fill: red;");
+            wishlist_label_2.setText("ID is a positive number");
+
         }
 
     }

@@ -500,29 +500,29 @@
                                           <Font name="System Bold" size="32.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="36.0" layoutY="59.0" prefHeight="56.0" prefWidth="122.0" styleClass="text" text="Item Name: " textFill="#fffb00">
+                                    <Label layoutX="20.0" layoutY="59.0" prefHeight="56.0" prefWidth="141.0" styleClass="text" text="Item Name: " textFill="#fffb00">
                                        <font>
                                           <Font name="System Bold" size="24.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="36.0" layoutY="122.0" prefHeight="56.0" prefWidth="130.0" text="Item Price: " textFill="WHITE">
+                                    <Label layoutX="20.0" layoutY="122.0" prefHeight="56.0" prefWidth="130.0" text="Item Price: " textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="24.0" />
                                        </font>
                                     </Label>
                                     <Label fx:id="reminder_label_11" alignment="CENTER" layoutX="36.0" layoutY="331.0" prefHeight="17.0" prefWidth="310.0" styleClass="history-labels" textFill="WHITE" />
-                                    <Button fx:id="income_search1111" alignment="CENTER" layoutX="26.0" layoutY="294.0" mnemonicParsing="false" onAction="#add_wishlist" prefHeight="35.0" prefWidth="331.0" styleClass="button-search" text="ADD" textAlignment="CENTER">
+                                    <Button alignment="CENTER" layoutX="26.0" layoutY="294.0" mnemonicParsing="false" onAction="#add_wishlist" prefHeight="35.0" prefWidth="331.0" styleClass="button-search" text="ADD" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="16.0" />
                                        </font>
                                     </Button>
-                                    <Label layoutX="37.0" layoutY="187.0" prefHeight="56.0" prefWidth="130.0" text="Rate: " textFill="WHITE">
+                                    <Label layoutX="21.0" layoutY="187.0" prefHeight="56.0" prefWidth="130.0" text="Rate: " textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="24.0" />
                                        </font>
                                     </Label>
                                     <TextField fx:id="wishlist_price" layoutX="186.0" layoutY="131.0" prefHeight="35.0" prefWidth="168.0" style="-fx-border-width: 4;" styleClass="text-field" />
-                                    <Label fx:id="wishlist_error_lbl" layoutX="30.0" layoutY="250.0" prefHeight="32.0" prefWidth="243.0" text="ERROR LABEL" textFill="#f20000" />
+                                    <Label fx:id="wishlist_error_lbl" alignment="CENTER" layoutX="30.0" layoutY="250.0" prefHeight="32.0" prefWidth="310.0" textFill="#f20000" />
                                  </children>
                               </AnchorPane>
                               <TextField fx:id="wishlist_rate" layoutX="195.0" layoutY="215.0" prefHeight="35.0" prefWidth="168.0" style="-fx-border-width: 4;" styleClass="text-field" />
@@ -530,44 +530,43 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="153.0" prefWidth="400.0" styleClass="anchor-transparent">
                            <children>
-                              <AnchorPane layoutX="9.0" layoutY="10.0" prefHeight="143.0" prefWidth="381.0" styleClass="anchor-panes">
+                              <AnchorPane layoutX="7.0" layoutY="-1.0" prefHeight="143.0" prefWidth="381.0" styleClass="anchor-panes">
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="4.0" prefHeight="59.0" prefWidth="321.0" styleClass="history-labels" text="REDEEM" textAlignment="CENTER" textFill="WHITE">
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="9.0" prefHeight="59.0" prefWidth="321.0" styleClass="history-labels" text="REDEEM OR DELETE" textAlignment="CENTER" textFill="WHITE">
                                        <font>
-                                          <Font name="System Bold" size="36.0" />
+                                          <Font name="System Bold" size="29.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="reminder_label_21" alignment="CENTER" layoutX="41.0" layoutY="124.0" prefHeight="17.0" prefWidth="310.0" styleClass="history-labels" textFill="WHITE" />
-                                    <TextField fx:id="redeem_wishlist_id" alignment="CENTER" layoutX="145.0" layoutY="75.0" prefHeight="45.0" prefWidth="85.0" styleClass="text-field" />
-                                    <Button fx:id="income_detete1111" alignment="CENTER" layoutX="246.0" layoutY="75.0" mnemonicParsing="false" onAction="#redeem_wishlist_item" prefHeight="45.0" prefWidth="110.0" styleClass="button-search" text="Redeem" textAlignment="CENTER">
+                                    <Label fx:id="wishlist_label_2" alignment="CENTER" layoutX="41.0" layoutY="124.0" prefHeight="17.0" prefWidth="310.0" styleClass="history-labels" textFill="WHITE" />
+                                    <TextField fx:id="redeem_wishlist_id" alignment="CENTER" layoutX="17.0" layoutY="75.0" prefHeight="45.0" prefWidth="91.0" promptText="Wishlist ID" styleClass="text-field" />
+                                    <Button alignment="CENTER" layoutX="257.0" layoutY="77.0" mnemonicParsing="false" onAction="#removeWishlist" prefHeight="38.0" prefWidth="110.0" styleClass="button-all" text="Delete" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="18.0" />
                                        </font>
                                     </Button>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="67.0" prefHeight="59.0" prefWidth="129.0" styleClass="history-labels" text="Wishlist ID:  " textAlignment="CENTER" textFill="WHITE">
+                                    <Button alignment="CENTER" layoutX="129.0" layoutY="77.0" mnemonicParsing="false" onAction="#redeem_wishlist_item" prefHeight="38.0" prefWidth="110.0" styleClass="button-search" text="Redeem" textAlignment="CENTER">
                                        <font>
-                                          <Font name="System Bold" size="24.0" />
+                                          <Font name="System Bold" size="18.0" />
                                        </font>
-                                    </Label>
+                                    </Button>
                                  </children>
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="70.0" prefWidth="390.0" styleClass="anchor-transparent">
+                        <AnchorPane prefHeight="78.0" prefWidth="390.0" styleClass="anchor-transparent">
                            <children>
-                              <AnchorPane layoutX="5.0" layoutY="14.0" prefHeight="67.0" prefWidth="381.0" styleClass="anchor-panes">
+                              <AnchorPane layoutX="9.0" layoutY="2.0" prefHeight="67.0" prefWidth="381.0" styleClass="anchor-panes" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
                                  <children>
-                                    <TextField fx:id="search_wishlist_name" alignment="CENTER" layoutX="89.0" layoutY="11.0" prefHeight="45.0" prefWidth="157.0" styleClass="text-field" />
-                                    <Button fx:id="income_detete11111" alignment="CENTER" layoutX="256.0" layoutY="11.0" mnemonicParsing="false" onAction="#setsearchwishlist_table" prefHeight="43.0" prefWidth="110.0" styleClass="button-search" text="Search" textAlignment="CENTER">
+                                    <Button alignment="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#setRedeemableWishlist_table" prefHeight="46.0" prefWidth="160.0" styleClass="button-search" text="Redeemable" textAlignment="CENTER">
                                        <font>
-                                          <Font name="System Bold" size="18.0" />
+                                          <Font name="System Bold" size="22.0" />
                                        </font>
                                     </Button>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-18.0" layoutY="3.0" prefHeight="59.0" prefWidth="129.0" styleClass="history-labels" text="Name: " textAlignment="CENTER" textFill="WHITE">
+                                    <Button alignment="CENTER" layoutX="204.0" layoutY="14.0" mnemonicParsing="false" onAction="#setAllWishlist_table" prefHeight="46.0" prefWidth="160.0" styleClass="button-all" text="All" textAlignment="CENTER">
                                        <font>
-                                          <Font name="System Bold" size="24.0" />
+                                          <Font name="System Bold" size="22.0" />
                                        </font>
-                                    </Label>
+                                    </Button>
                                  </children>
                               </AnchorPane>
                            </children>
@@ -576,14 +575,15 @@
                   </VBox>
                   <AnchorPane prefHeight="639.0" prefWidth="847.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="anchor-transparent">
                      <children>
-                        <TableView fx:id="table_wishlist" layoutX="-5.0" layoutY="17.0" prefHeight="625.0" prefWidth="815.0" styleClass="table-background" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="-5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="17.0">
+                        <TableView fx:id="table_wishlist" layoutX="-5.0" layoutY="17.0" prefHeight="598.0" prefWidth="815.0" styleClass="table-background" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="-5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="17.0">
                            <columns>
                               <TableColumn fx:id="table_wishlistID" prefWidth="98.0" text="Wishlist ID" />
                               <TableColumn fx:id="table_wishlistname" prefWidth="159.0" text="Name" />
-                              <TableColumn fx:id="table_wishlistprice" prefWidth="94.0" text="Price" />
-                              <TableColumn fx:id="table_wishlistrate" prefWidth="114.0" text="Rate" />
-                              <TableColumn fx:id="table_wishlistdate" prefWidth="114.0" text="Date" />
-                              <TableColumn fx:id="table_wishlistredeemable" prefWidth="114.0" text="Redeemable?" />
+                              <TableColumn fx:id="table_wishlistprice" prefWidth="101.0" text="Price" />
+                              <TableColumn fx:id="table_wishlistrate" text="Rate" />
+                              <TableColumn fx:id="table_wishlistAmount" prefWidth="129.0" text="Amount Saved" />
+                              <TableColumn fx:id="table_wishlistdate" prefWidth="99.0" text="Date" />
+                              <TableColumn fx:id="table_wishlistredeemable" prefWidth="135.0" text="Redeemable?" />
                            </columns>
                         </TableView>
                      </children>
