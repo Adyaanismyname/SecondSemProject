@@ -117,6 +117,9 @@ public class HelloController implements Initializable {
     @FXML
 
     public void LoginButton() throws SQLException {
+
+        login_error_label.setText("");
+
         String entered_username = Username.getText();
         String entered_password = Password.getText();
 
