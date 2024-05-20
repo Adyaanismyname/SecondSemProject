@@ -1208,6 +1208,7 @@ public class HomeController implements Initializable {
         reminder.setVisible(false);
         wishlist.setVisible(false);
         HomeLabels();
+
         BarGraphs.displayBarChart(HomeBarChart);
 
         clearHome();
