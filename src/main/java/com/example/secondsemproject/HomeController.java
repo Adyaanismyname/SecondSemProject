@@ -390,9 +390,9 @@ public class HomeController implements Initializable {
 
             }
             else{
-                if(Double.parseDouble(income_value.getText()) < 0) {
+                if(Double.parseDouble(income_value.getText()) <= 0) {
                     income_label_1.setStyle("-fx-text-fill: red;");
-                    income_label_1.setText("Value cannot be negative");
+                    income_label_1.setText("Value should be positive");
                 }
 
                 else {
@@ -446,7 +446,7 @@ public class HomeController implements Initializable {
             else {
                 int ID = Integer.parseInt(income_ID.getText());
 
-                if (ID > 0){
+                if (ID >= 0){
                     if(Income.deleteIncome(ID)){
                         income_label_2.setStyle("-fx-text-fill: green;");
 
@@ -585,9 +585,9 @@ public class HomeController implements Initializable {
 
             }
             else{
-                if(Double.parseDouble(expense_value.getText()) < 0) {
+                if(Double.parseDouble(expense_value.getText()) <= 0) {
                     expense_label_1.setStyle("-fx-text-fill: red;");
-                    expense_label_1.setText("Value cannot be negative");
+                    expense_label_1.setText("Value should be positive");
                 }
 
                 else {
@@ -643,7 +643,7 @@ public class HomeController implements Initializable {
             else {
                 int ID = Integer.parseInt(expense_ID.getText());
 
-                if (ID > 0){
+                if (ID >= 0){
                     if(Expenditure.deleteExpense(ID)){
                         expense_label_2.setStyle("-fx-text-fill: green;");
 
@@ -779,9 +779,9 @@ public class HomeController implements Initializable {
 
             }
             else{
-                if(Double.parseDouble(reminder_value.getText()) < 0) {
+                if(Double.parseDouble(reminder_value.getText()) <= 0) {
                     reminder_label_1.setStyle("-fx-text-fill: red;");
-                    reminder_label_1.setText("Value cannot be negative");
+                    reminder_label_1.setText("Value should be positive");
                 }
 
                 else {
@@ -835,7 +835,7 @@ public class HomeController implements Initializable {
             else {
                 int ID = Integer.parseInt(reminder_ID.getText());
 
-                if (ID > 0){
+                if (ID >= 0){
                     if(Reminder.deleteReminder(ID)){
                         reminder_label_2.setStyle("-fx-text-fill: green;");
 
@@ -945,7 +945,7 @@ public class HomeController implements Initializable {
             else {
                 int ID = Integer.parseInt(reminder_ID.getText());
 
-                if (ID > 0){
+                if (ID >= 0){
                     if(Reminder.payReminder(ID)){
                         reminder_label_2.setStyle("-fx-text-fill: green;");
 
@@ -1095,7 +1095,7 @@ public class HomeController implements Initializable {
             else {
                 int ID = Integer.parseInt(redeem_wishlist_id.getText());
 
-                if (ID > 0){
+                if (ID >= 0){
                     if(Wishlist.deleteWishlist(ID)){
                         wishlist_label_2.setStyle("-fx-text-fill: green;");
 
@@ -1202,7 +1202,7 @@ public class HomeController implements Initializable {
             else {
                 int ID = Integer.parseInt(redeem_wishlist_id.getText());
 
-                if (ID > 0){
+                if (ID >= 0){
                     if(Wishlist.redeem(ID)){
                         wishlist_label_2.setStyle("-fx-text-fill: green;");
 
