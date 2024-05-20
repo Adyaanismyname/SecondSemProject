@@ -134,3 +134,7 @@
     -fx-padding: 11px;
     -fx-font-weight : bold;
 }
+
+.avatar-image:hover {
+    -fx-cursor: hand;
+}
