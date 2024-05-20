@@ -52,4 +52,6 @@ public abstract class Transaction {
         return "Transaction ID: " + ID + ", Date: " + date + ", Value: " + value;
     }
 
+
+
 }

@@ -60,6 +60,10 @@
     -fx-background-color : #0e0e94;
 }
 
+.username-fieldNEW {
+    -fx-font-weight: bold;
+}
+
 .text-field{
 
     -fx-border-color: #ffffff;

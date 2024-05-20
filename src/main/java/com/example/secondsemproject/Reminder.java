@@ -227,11 +227,10 @@ public class Reminder extends Transaction {
         //for loop iterates through each reminder
         for (Reminder reminder : reminderList) {
 
-            LocalDate date = reminder.getDate();
+            boolean thisdate = (reminder.getDate().isEqual(LocalDate.now()));
+            boolean passed = (reminder.getDate().isBefore(LocalDate.now()));
 
-            boolean upcoming = (date.isBefore(five_days_later));
-
-            if(upcoming) {
+            if(thisdate || passed) {
                 showing_reminders.add(reminder);
             }
 

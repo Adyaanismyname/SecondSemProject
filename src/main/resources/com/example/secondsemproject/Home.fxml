@@ -260,7 +260,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="zakaat" layoutX="199.0" layoutY="129.0" prefHeight="29.0" prefWidth="92.0" style="-fx-font-weight: bold;" text="1000" textFill="WHITE">
+                  <Label fx:id="zakaat" layoutX="199.0" layoutY="129.0" prefHeight="35.0" prefWidth="219.0" style="-fx-font-weight: bold;" text="1000" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -634,39 +634,34 @@
             </HBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="expanded_menu_pane" prefHeight="777.0" prefWidth="272.0" styleClass="expanded_menu" visible="false">
+      <AnchorPane fx:id="expanded_menu_pane" prefHeight="777.0" prefWidth="272.0" styleClass="expanded_menu">
          <children>
-            <Label layoutX="1.0" layoutY="154.0" onMouseClicked="#show_home" prefHeight="50.0" prefWidth="267.0" styleClass="menu_buttons" text="  Home" textFill="WHITE">
+            <Label layoutX="1.0" layoutY="164.0" onMouseClicked="#show_home" prefHeight="50.0" prefWidth="267.0" styleClass="menu_buttons" text="  Home" textFill="WHITE">
                <font>
                   <Font size="33.0" />
                </font>
             </Label>
-            <Label layoutY="366.0" onMouseClicked="#show_reminder" prefHeight="50.0" prefWidth="268.0" styleClass="menu_buttons" text="  Reminders" textFill="WHITE">
+            <Label layoutY="376.0" onMouseClicked="#show_reminder" prefHeight="50.0" prefWidth="268.0" styleClass="menu_buttons" text="  Reminders" textFill="WHITE">
                <font>
                   <Font size="33.0" />
                </font>
             </Label>
-            <Label layoutX="3.0" layoutY="224.0" onMouseClicked="#show_expense" prefHeight="50.0" prefWidth="266.0" styleClass="menu_buttons" text="  Expenses" textFill="WHITE">
+            <Label layoutX="3.0" layoutY="234.0" onMouseClicked="#show_expense" prefHeight="50.0" prefWidth="266.0" styleClass="menu_buttons" text="  Expenses" textFill="WHITE">
                <font>
                   <Font size="33.0" />
                </font>
             </Label>
-            <Label fx:id="username_field" layoutX="66.0" layoutY="725.0" prefHeight="26.0" prefWidth="194.0" styleClass="username-field" textFill="WHITE">
+            <Label fx:id="username_field" layoutX="66.0" layoutY="725.0" prefHeight="26.0" prefWidth="194.0" styleClass="username-fieldNEW" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="3.0" layoutY="297.0" onMouseClicked="#show_income" prefHeight="50.0" prefWidth="266.0" styleClass="menu_buttons" text="  Income" textFill="WHITE">
+            <Label layoutX="3.0" layoutY="307.0" onMouseClicked="#show_income" prefHeight="50.0" prefWidth="266.0" styleClass="menu_buttons" text="  Income" textFill="WHITE">
                <font>
                   <Font size="33.0" />
                </font>
             </Label>
-            <Label layoutX="1.0" layoutY="438.0" onMouseClicked="#show_wishlist" prefHeight="50.0" prefWidth="268.0" styleClass="menu_buttons" text="  Wishlist" textFill="WHITE">
-               <font>
-                  <Font size="33.0" />
-               </font>
-            </Label>
-            <Label layoutX="3.0" layoutY="508.0" onContextMenuRequested="#show_reminder" prefHeight="50.0" prefWidth="268.0" styleClass="menu_buttons" text="  Utilities" textFill="WHITE">
+            <Label layoutX="1.0" layoutY="448.0" onMouseClicked="#show_wishlist" prefHeight="50.0" prefWidth="268.0" styleClass="menu_buttons" text="  Wishlist" textFill="WHITE">
                <font>
                   <Font size="33.0" />
                </font>
