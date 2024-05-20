@@ -240,6 +240,7 @@ public class HelloController implements Initializable {
         } catch (SQLException e) {
             System.out.println(e);
         }
+        JDBCConnection.close();
     }
 
 
