@@ -21,7 +21,7 @@ public class Expenditure extends  Transaction{
         super(E_IDgenerator, date, value,HelloController.getUsername_to_pass());
         this.category = category;
         ExpenditureList.add(this);
-        main.UpdateLatestIdForClass("L_Expenditure_id",E_IDgenerator+1,E_IDgenerator);
+//        main.UpdateLatestIdForClass("L_Expenditure_id",E_IDgenerator+1,E_IDgenerator);
         E_IDgenerator++;
 
 

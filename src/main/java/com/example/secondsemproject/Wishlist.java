@@ -29,7 +29,7 @@ public class Wishlist {
         this.lastCalculationDate = LocalDate.now();
         this.Username=HelloController.getUsername_to_pass();
         wishlists.add(this);
-        main.UpdateLatestIdForClass("L_Wishlist_id",W_IDgenerator+1,W_IDgenerator);
+//        main.UpdateLatestIdForClass("L_Wishlist_id",W_IDgenerator+1,W_IDgenerator);
         W_IDgenerator++;
     }
 

@@ -17,7 +17,7 @@ public class Reminder extends Transaction {
     public static ArrayList<Reminder> showing_reminders = new ArrayList<>();
 
     public Reminder(int id,String name, String category, LocalDate date, double value, boolean monthly, boolean yearly,String Username) {
-        super(id, date, value,HelloController.getUsername_to_pass());
+        super(id, date, value,Username);
         this.name = name;
         this.category = category;
         this.monthly = monthly;
@@ -45,7 +45,7 @@ public class Reminder extends Transaction {
             showing_reminders.add(this);
         }
 
-        main.UpdateLatestIdForClass("L_Reminder_id",R_IDgenerator+1,R_IDgenerator);
+//        main.UpdateLatestIdForClass("L_Reminder_id",R_IDgenerator+1,R_IDgenerator);
         R_IDgenerator++;
 
         getUpcomingReminders();
@@ -71,7 +71,7 @@ public class Reminder extends Transaction {
     public void setCategory(String category) {
         this.category = category;
     }
-    public static int getID(){
+    public int getID(){
         return R_IDgenerator;
     }
 

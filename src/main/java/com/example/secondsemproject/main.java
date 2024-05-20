@@ -180,38 +180,38 @@ public class main {
     }
 
 
-    public static void UpdateLatestIdForClass(String targetClass, int newLatestId, int oldLatestId) {
-        if (!JDBCConnection.isConnectionValid()) {
-            JDBCConnection.getConnection();
-        }
-        if (targetClass == null || targetClass.isEmpty() || !isValidIdentifier(targetClass)) {
-            System.out.println("Invalid target class");
-            return;
-        }
-
-        try {
-            // Construct the SQL update statement for the specified class in the latest_id table
-            String sql = "UPDATE latest_id SET " + targetClass + " = ? WHERE " + targetClass + " = ?";
-            // Create a PreparedStatement with the SQL statement
-            PreparedStatement preparedStatement = JDBCConnection.connection.prepareStatement(sql);
-            preparedStatement.setInt(1, newLatestId); // Set the new latest ID
-            preparedStatement.setInt(2, oldLatestId); // Set the old latest ID
-
-            // Execute the update query
-            int rowsAffected = preparedStatement.executeUpdate();
-//            JDBCConnection.close();
-
-
-            // Check the number of rows affected
-            if (rowsAffected > 0) {
-                System.out.println("ID updated successfully for " + targetClass);
-            } else {
-                System.out.println("No row found for the given old latest ID or class");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void UpdateLatestIdForClass(String targetClass, int newLatestId, int oldLatestId) {
+//        if (!JDBCConnection.isConnectionValid()) {
+//            JDBCConnection.getConnection();
+//        }
+//        if (targetClass == null || targetClass.isEmpty() || !isValidIdentifier(targetClass)) {
+//            System.out.println("Invalid target class");
+//            return;
+//        }
+//
+//        try {
+//            // Construct the SQL update statement for the specified class in the latest_id table
+//            String sql = "UPDATE latest_id SET " + targetClass + " = ? WHERE " + targetClass + " = ?";
+//            // Create a PreparedStatement with the SQL statement
+//            PreparedStatement preparedStatement = JDBCConnection.connection.prepareStatement(sql);
+//            preparedStatement.setInt(1, newLatestId); // Set the new latest ID
+//            preparedStatement.setInt(2, oldLatestId); // Set the old latest ID
+//
+//            // Execute the update query
+//            int rowsAffected = preparedStatement.executeUpdate();
+////            JDBCConnection.close();
+//
+//
+//            // Check the number of rows affected
+//            if (rowsAffected > 0) {
+//                System.out.println("ID updated successfully for " + targetClass);
+//            } else {
+//                System.out.println("No row found for the given old latest ID or class");
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
 
@@ -431,7 +431,7 @@ public class main {
             System.out.println(x.getCategory()+x.getDate());
         }
         System.out.println("nothing printed");
-        System.out.println(Reminder.getID());
+//        System.out.println(Reminder.getID());
 
     }
 
