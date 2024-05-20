@@ -1,6 +1,5 @@
 package com.example.secondsemproject;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -12,48 +11,49 @@ public class Reminder extends Transaction {
     private boolean yearly = false;
     private boolean monthly = false;
 
-    public static ArrayList<Reminder>  reminderList= new ArrayList<>();
+    // Lists to store reminders
+    public static ArrayList<Reminder> reminderList = new ArrayList<>();
     public static ArrayList<Reminder> upcomingReminders = new ArrayList<>();
     public static ArrayList<Reminder> showing_reminders = new ArrayList<>();
 
-    public Reminder(int id,String name, String category, LocalDate date, double value, boolean monthly, boolean yearly,String Username) {
-        super(id, date, value,Username);
+    // Constructor with all parameters
+    public Reminder(int id, String name, String category, LocalDate date, double value, boolean monthly, boolean yearly, String Username) {
+        super(id, date, value, Username);
         this.name = name;
         this.category = category;
         this.monthly = monthly;
         this.yearly = yearly;
-        main.setIdForTable("Reminder");
-        getUpcomingReminders();
+        main.setIdForTable("Reminder"); // Set ID for the Reminder table
+        getUpcomingReminders(); // Update upcoming reminders list
     }
 
-
-    // Constructor
+    // Constructor with basic parameters
     public Reminder(String name, String category, LocalDate date, double value, boolean monthly, boolean yearly) {
-
-        super(R_IDgenerator, date, value,HelloController.getUsername_to_pass());
+        super(R_IDgenerator, date, value, HelloController.getUsername_to_pass());
         this.name = name;
         this.category = category;
         this.monthly = monthly;
         this.yearly = yearly;
-        reminderList.add(this);
+        reminderList.add(this); // Add reminder to the list
 
+        // Check if reminder date is today or passed
         LocalDate five_days_later = LocalDate.now().plusDays(5);
         boolean thisdate = (date.isEqual(LocalDate.now()));
         boolean passed = (date.isBefore(LocalDate.now()));
 
-        if(thisdate || passed) {
+        // Add reminder to showing_reminders if it's today or passed
+        if (thisdate || passed) {
             showing_reminders.add(this);
         }
 
-//        main.UpdateLatestIdForClass("L_Reminder_id",R_IDgenerator+1,R_IDgenerator);
-        R_IDgenerator++;
-
-        getUpcomingReminders();
-    }
-    public static void setId(int id){
-        R_IDgenerator=id;
+        R_IDgenerator++; // Increment ID generator
+        getUpcomingReminders(); // Update upcoming reminders list
     }
 
+    // Setter for ID generator
+    public static void setId(int id) {
+        R_IDgenerator = id;
+    }
 
     // Getters and setters
     public String getName() {
@@ -72,8 +72,6 @@ public class Reminder extends Transaction {
         this.category = category;
     }
 
-
-
     public boolean isYearly() {
         return yearly;
     }
@@ -90,7 +88,7 @@ public class Reminder extends Transaction {
         this.monthly = monthly;
     }
 
-
+    // Override toString method to provide string representation of Reminder object
     @Override
     public String toString() {
         String repetition = "";
@@ -107,136 +105,101 @@ public class Reminder extends Transaction {
                 "\nRepetition: " + repetition;
     }
 
-
-    //REMOVE REMINDER
-    public static boolean deleteReminder (int ID){
-
-        //for loop iterates through each reminder in the upcoming section
-        for (int i = 0; i < upcomingReminders.size(); i++){
-
-            if (upcomingReminders.get(i).getID() == ID){
-
+    // Method to delete a reminder
+    public static boolean deleteReminder(int ID) {
+        for (int i = 0; i < upcomingReminders.size(); i++) {
+            if (upcomingReminders.get(i).getID() == ID) {
                 upcomingReminders.remove(i);
             }
         }
 
-        //for loop iterates through each reminder
-        for (int i = 0; i < reminderList.size(); i++){
-
-            if (reminderList.get(i).getID() == ID){
-
+        for (int i = 0; i < reminderList.size(); i++) {
+            if (reminderList.get(i).getID() == ID) {
                 reminderList.remove(i);
-
-                getUpcomingReminders();
-
-                //successfully deleted
-                return true;
-
+                getUpcomingReminders(); // Update upcoming reminders list
+                return true; // Successfully deleted
             }
         }
-
-
-        //this means no such reminder with the ID
-        return false;
+        return false; // No such reminder with the ID
     }
 
+    // Method to delete a showing reminder
     public static Boolean deleteShowingReminders(int ID) {
-        for(int i = 0 ; i < showing_reminders.size(); i++) {
+        for (int i = 0; i < showing_reminders.size(); i++) {
             if (showing_reminders.get(i).getID() == ID) {
                 showing_reminders.remove(i);
-
-                return true;
+                return true; // Successfully deleted
             }
         }
-        return false;
-
-
+        return false; // No such showing reminder with the ID
     }
 
-    public static boolean payReminder(int ID){
-
-        //for loop iterates through each reminder
-        for (int i = 0; i < reminderList.size(); i++){
-
+    // Method to pay a reminder
+    public static boolean payReminder(int ID) {
+        for (int i = 0; i < reminderList.size(); i++) {
             Reminder reminder = reminderList.get(i);
-
-            if (reminder.getID() == ID){
-
+            if (reminder.getID() == ID) {
                 Expenditure expense = new Expenditure(reminder.category, LocalDate.now(), reminder.getValue());
-
                 if (!(reminder.yearly || reminder.monthly)) {
                     deleteReminder(ID);
-                    getUpcomingReminders();
-
-                    return true;
-                }
-                else if (reminder.isMonthly()){
+                    getUpcomingReminders(); // Update upcoming reminders list
+                    return true; // Successfully paid
+                } else if (reminder.isMonthly()) {
                     LocalDate current = reminder.getDate();
                     reminder.setDate(current.plusMonths(1));
-                    getUpcomingReminders();
-
-                    return true;
-                }
-                else{
+                    getUpcomingReminders(); // Update upcoming reminders list
+                    return true; // Successfully paid
+                } else {
                     LocalDate current = reminder.getDate();
                     reminder.setDate(current.plusYears(1));
-                    getUpcomingReminders();
-
-                    return true;
-
+                    getUpcomingReminders(); // Update upcoming reminders list
+                    return true; // Successfully paid
                 }
             }
         }
-        return false;
+        return false; // No reminder found with the given ID
     }
 
-
+    // Method to check if reminder date has passed
     public boolean datePassed() {
-
         LocalDate currentDate = LocalDate.now();
-
         return (getDate().isBefore(currentDate) || getDate().isEqual(currentDate));
     }
 
-    public static void getUpcomingReminders(){
-
-        upcomingReminders.clear();
+    // Method to update the list of upcoming reminders
+    public static void getUpcomingReminders() {
+        upcomingReminders.clear(); // Clear the existing list of upcoming reminders
 
         LocalDate five_days_later = LocalDate.now().plusDays(5);
 
-        //for loop iterates through each reminder
+        // Iterate through each reminder in the reminderList
         for (Reminder reminder : reminderList) {
-
             LocalDate date = reminder.getDate();
-
             boolean upcoming = (date.isBefore(five_days_later));
 
             if (upcoming) {
-
-                upcomingReminders.add(reminder);
-
-
+                upcomingReminders.add(reminder); // Add the reminder to the upcoming reminders list
             }
         }
     }
 
+
+    // Method to update the list of reminders that are to be shown
     public static void getShowingReminders() {
-        showing_reminders.clear();
+        showing_reminders.clear(); // Clear the existing list of showing reminders
         LocalDate five_days_later = LocalDate.now().plusDays(5);
 
-        //for loop iterates through each reminder
+        // Iterate through each reminder in the reminderList
         for (Reminder reminder : reminderList) {
-
             boolean thisdate = (reminder.getDate().isEqual(LocalDate.now()));
             boolean passed = (reminder.getDate().isBefore(LocalDate.now()));
 
-            if(thisdate || passed) {
-                showing_reminders.add(reminder);
+            if (thisdate || passed) {
+                showing_reminders.add(reminder); // Add the reminder to the showing reminders list
             }
-
         }
-
     }
+
 
 
 }

@@ -104,20 +104,20 @@ public class BarGraphs {
         // adding all series to the bar chart
         barChart.getData().addAll(incomeSeries, expenseSeries, balanceSeries);
 
-        // changing the color of the balance bar if its a loss
+        // setting the color of the graphs
         for (int i = 0; i < 5; i++){
             incomeSeries.getData().get(i).getNode().setStyle("-fx-bar-fill: blue;");
             expenseSeries.getData().get(i).getNode().setStyle("-fx-bar-fill: purple;");
             balanceSeries.getData().get(i).getNode().setStyle("-fx-bar-fill: green;");
 
-
-
+            //if balance is a loss
             if (monthlyIncome[i] - monthlyExpense[i] < 0){
                 balanceSeries.getData().get(i).getNode().setStyle("-fx-bar-fill: red;");
             }
         }
 
     }
+
 
     // method to get the name of a month
     public static String getMonthName(int num) {
@@ -165,6 +165,8 @@ public class BarGraphs {
         }
         return monthName;
     }
+
+
 
     // method to get the starting month for the chart
     public static int getStartingMonth(){

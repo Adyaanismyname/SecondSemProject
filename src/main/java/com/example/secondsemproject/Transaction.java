@@ -2,12 +2,15 @@ package com.example.secondsemproject;
 
 import java.time.LocalDate;
 
+
+//abstract class for money related transactions
 public abstract class Transaction {
 
     private int ID;
     private String Username;
     private LocalDate date;
     private double value;
+
 
     // Constructor
     public Transaction(int ID, LocalDate date, double value,String Username) {
@@ -51,7 +54,5 @@ public abstract class Transaction {
     public String toString() {
         return "Transaction ID: " + ID + ", Date: " + date + ", Value: " + value;
     }
-
-
 
 }

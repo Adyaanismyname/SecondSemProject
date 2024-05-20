@@ -7,24 +7,13 @@ import static com.example.secondsemproject.Expenditure.ExpenditureList;
 import static com.example.secondsemproject.Income.incomeList;
 import static com.example.secondsemproject.Reminder.reminderList;
 import static com.example.secondsemproject.Wishlist.wishlists;
-import static java.awt.AWTEventMulticaster.add;
 
 public class main {
-    static LocalDate date;
-    static int Id;
-    static double value;
-
-    static String category;
-    static String username;
-    static String name;
-    static String source;
-
-    static Boolean is_monthly;
-    static Boolean is_yearly;
 
     static ResultSet result;
     static PreparedStatement preparedStatement;
 
+    // Method to load expenditure data from the database
     static void load_Expenditure() {
         if (!JDBCConnection.isConnectionValid()) {
             JDBCConnection.getConnection();
@@ -45,10 +34,12 @@ public class main {
                 ExpenditureList.add(new Expenditure(Id, date, value, category, username));
             }
         } catch (SQLException e) {
+            // Error handling for SQL query execution failure
             System.err.println("Error executing SQL query: " + e.getMessage());
         }
     }
 
+    // Method to load reminder data from the database
     static void load_Reminder() {
         if (!JDBCConnection.isConnectionValid()) {
             JDBCConnection.getConnection();
@@ -72,10 +63,12 @@ public class main {
                 reminderList.add(new Reminder(Id, name, category, date, value, is_monthly, is_yearly, username));
             }
         } catch (SQLException e) {
+            // Error handling for SQL query execution failure
             System.err.println("Error executing SQL query: " + e.getMessage());
         }
     }
 
+    // Method to load income data from the database
     static void load_Income() {
         if (!JDBCConnection.isConnectionValid()) {
             JDBCConnection.getConnection();
@@ -96,10 +89,12 @@ public class main {
                 incomeList.add(new Income(Id, source, date, value, username));
             }
         } catch (SQLException e) {
+            // Error handling for SQL query execution failure
             System.err.println("Error executing SQL query: " + e.getMessage());
         }
     }
 
+    // Method to load wishlist data from the database
     static void load_Wishlist() {
         if (!JDBCConnection.isConnectionValid()) {
             JDBCConnection.getConnection();
@@ -119,19 +114,15 @@ public class main {
                 String username = result.getString("Username");
                 String item_name = result.getString("item_name");
 
-                wishlists.add(new Wishlist(Id, item_name, item_price, rate, last_cal_date, username,amount_saved));
+                wishlists.add(new Wishlist(Id, item_name, item_price, rate, last_cal_date, username, amount_saved));
             }
         } catch (SQLException e) {
+            // Error handling for SQL query execution failure
             System.err.println("Error executing SQL query: " + e.getMessage());
         }
     }
 
-
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
+    // Method to set the ID for the table
     public static void setIdForTable(String tableName) {
         if (tableName == null || tableName.isEmpty() || !isValidIdentifier(tableName)) {
             System.out.println("Invalid table name");
@@ -165,63 +156,20 @@ public class main {
                     break;
                 default:
                     System.out.println("Failed to update ID for table: " + tableName);
-                    // Add more cases for additional tables if needed
             }
 
         } catch (SQLException e) {
+            // Error handling for SQL query execution failure
             e.printStackTrace();
-        } finally {
-//            JDBCConnection.close();
         }
     }
 
+    // Method to check if a string is a valid identifier
     private static boolean isValidIdentifier(String identifier) {
         return identifier.matches("[A-Za-z_][A-Za-z0-9_]*");
     }
 
-
-//    public static void UpdateLatestIdForClass(String targetClass, int newLatestId, int oldLatestId) {
-//        if (!JDBCConnection.isConnectionValid()) {
-//            JDBCConnection.getConnection();
-//        }
-//        if (targetClass == null || targetClass.isEmpty() || !isValidIdentifier(targetClass)) {
-//            System.out.println("Invalid target class");
-//            return;
-//        }
-//
-//        try {
-//            // Construct the SQL update statement for the specified class in the latest_id table
-//            String sql = "UPDATE latest_id SET " + targetClass + " = ? WHERE " + targetClass + " = ?";
-//            // Create a PreparedStatement with the SQL statement
-//            PreparedStatement preparedStatement = JDBCConnection.connection.prepareStatement(sql);
-//            preparedStatement.setInt(1, newLatestId); // Set the new latest ID
-//            preparedStatement.setInt(2, oldLatestId); // Set the old latest ID
-//
-//            // Execute the update query
-//            int rowsAffected = preparedStatement.executeUpdate();
-////            JDBCConnection.close();
-//
-//
-//            // Check the number of rows affected
-//            if (rowsAffected > 0) {
-//                System.out.println("ID updated successfully for " + targetClass);
-//            } else {
-//                System.out.println("No row found for the given old latest ID or class");
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-
-
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
+    // Method to insert expenditure data into the database
     static void insert_Expenditure(int Id, LocalDate date, double value, String Category) {
         if (!JDBCConnection.isConnectionValid()) {
             JDBCConnection.getConnection();
@@ -238,40 +186,51 @@ public class main {
 
             int rowsInserted = preparedStatement.executeUpdate();
             System.out.println("Rows inserted: " + rowsInserted);
+
         } catch (SQLException e) {
+            // Error handling for SQL query execution failure
             System.err.println("Error executing SQL query: " + e.getMessage());
         }
     }
 
+
+    // Method to insert income data into the database
     static void insert_Income(int Id, LocalDate date, double value, String source) {
         if (!JDBCConnection.isConnectionValid()) {
             JDBCConnection.getConnection();
         }
 
+        // SQL query to insert income data
         String insertSql = "INSERT INTO Income(Id, Date, value, source, Username) VALUES (?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = JDBCConnection.connection.prepareStatement(insertSql)) {
+            // Setting parameters for the prepared statement
             preparedStatement.setInt(1, Id);
             preparedStatement.setDate(2, Date.valueOf(date));
             preparedStatement.setDouble(3, value);
             preparedStatement.setString(4, source);
             preparedStatement.setString(5, HelloController.getUsername_to_pass());
 
+            // Executing the SQL query
             int rowsInserted = preparedStatement.executeUpdate();
             System.out.println("Rows inserted: " + rowsInserted);
         } catch (SQLException e) {
+            // Error handling for SQL query execution failure
             System.err.println("Error executing SQL query: " + e.getMessage());
         }
     }
 
+    // Method to insert reminder data into the database
     static void insert_Reminder(int Id, LocalDate date, double value, String name, String Category, Boolean is_yearly, Boolean is_monthly) {
         if (!JDBCConnection.isConnectionValid()) {
             JDBCConnection.getConnection();
         }
 
+        // SQL query to insert reminder data
         String insertSql = "INSERT INTO Reminder(Id, Date, value, name, Category, is_yearly, is_monthly, Username) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = JDBCConnection.connection.prepareStatement(insertSql)) {
+            // Setting parameters for the prepared statement
             preparedStatement.setInt(1, Id);
             preparedStatement.setDate(2, Date.valueOf(date));
             preparedStatement.setDouble(3, value);
@@ -281,23 +240,28 @@ public class main {
             preparedStatement.setBoolean(7, is_monthly);
             preparedStatement.setString(8, HelloController.getUsername_to_pass());
 
+            // Executing the SQL query
             int rowsInserted = preparedStatement.executeUpdate();
             System.out.println("Rows inserted: " + rowsInserted);
+
         } catch (SQLException e) {
+            // Error handling for SQL query execution failure
             System.err.println("Error while inserting reminder into the database: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-
+    // Method to insert wishlist data into the database
     static void insert_Wishlist(int Id, String item_name, double item_price, double rate, double amount_saved, LocalDate last_calculated_date) {
         if (!JDBCConnection.isConnectionValid()) {
             JDBCConnection.getConnection();
         }
 
+        // SQL query to insert wishlist data
         String insertSql = "INSERT INTO Wishlist(Id, item_name, item_price, rate, amount_saved, last_calculated_date, Username) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = JDBCConnection.connection.prepareStatement(insertSql)) {
+            // Setting parameters for the prepared statement
             preparedStatement.setInt(1, Id);
             preparedStatement.setString(2, item_name);
             preparedStatement.setDouble(3, item_price);
@@ -306,180 +270,179 @@ public class main {
             preparedStatement.setDate(6, Date.valueOf(last_calculated_date));
             preparedStatement.setString(7, HelloController.getUsername_to_pass());
 
+            // Executing the SQL query
             int rowsInserted = preparedStatement.executeUpdate();
             System.out.println("Rows inserted: " + rowsInserted);
+
         } catch (SQLException e) {
+            // Error handling for SQL query execution failure
             System.err.println("Error executing SQL query: " + e.getMessage());
         }
     }
 
-
-
+    // Method to delete wishlist data from the database
     static void deleteWishlistfromdb() {
         if (!JDBCConnection.isConnectionValid()) {
             JDBCConnection.getConnection();
         }
 
+        // SQL query to delete wishlist data
         String deleteSql = "DELETE FROM Wishlist WHERE Username = ?";
         try (PreparedStatement preparedStatement = JDBCConnection.connection.prepareStatement(deleteSql)) {
+            // Setting parameter for the prepared statement
             preparedStatement.setString(1, HelloController.getUsername_to_pass());
 
+            // Executing the SQL query
             int rowsDeleted = preparedStatement.executeUpdate();
             System.out.println("Rows deleted: " + rowsDeleted);
         } catch (SQLException e) {
+            // Error handling for SQL query execution failure
             System.err.println("Error executing SQL query: " + e.getMessage());
         }
     }
 
-
+    // Method to delete income data from the database
     static void deleteIncomefromdb() {
         if (!JDBCConnection.isConnectionValid()) {
             JDBCConnection.getConnection();
         }
 
+        // SQL query to delete income data
         String deleteSql = "DELETE FROM Income WHERE Username = ?";
         try (PreparedStatement preparedStatement = JDBCConnection.connection.prepareStatement(deleteSql)) {
+            // Setting parameter for the prepared statement
             preparedStatement.setString(1, HelloController.getUsername_to_pass());
 
+            // Executing the SQL query
             int rowsDeleted = preparedStatement.executeUpdate();
             System.out.println("Rows deleted: " + rowsDeleted);
         } catch (SQLException e) {
+            // Error handling for SQL query execution failure
             System.err.println("Error executing SQL query: " + e.getMessage());
         }
     }
 
-
+    // Method to delete expenditure data from the database
     static void deleteExpenditurefromdb() {
         if (!JDBCConnection.isConnectionValid()) {
             JDBCConnection.getConnection();
         }
 
+        // SQL query to delete expenditure data
         String deleteSql = "DELETE FROM Expenditure WHERE Username = ?";
         try (PreparedStatement preparedStatement = JDBCConnection.connection.prepareStatement(deleteSql)) {
+            // Setting parameter for the prepared statement
             preparedStatement.setString(1, HelloController.getUsername_to_pass());
 
+            // Executing the SQL query
             int rowsDeleted = preparedStatement.executeUpdate();
             System.out.println("Rows deleted: " + rowsDeleted);
         } catch (SQLException e) {
+            // Error handling for SQL query execution failure
             System.err.println("Error executing SQL query: " + e.getMessage());
         }
     }
 
-
-
+    // Method to delete reminder data from the database
     static void deleteReminderfromdb() {
         if (!JDBCConnection.isConnectionValid()) {
             JDBCConnection.getConnection();
         }
 
+        // SQL query to delete reminder data
         String deleteSql = "DELETE FROM Reminder WHERE Username = ?";
         try (PreparedStatement preparedStatement = JDBCConnection.connection.prepareStatement(deleteSql)) {
+            // Setting parameter for the prepared statement
             preparedStatement.setString(1, HelloController.getUsername_to_pass());
 
+            // Executing the SQL query
             int rowsDeleted = preparedStatement.executeUpdate();
             System.out.println("Rows deleted: " + rowsDeleted);
         } catch (SQLException e) {
+            // Error handling for SQL query execution failure
             System.err.println("Error executing SQL query: " + e.getMessage());
         }
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    // Method to load data into the database
     static void Load_into_databsae (){
         try {
-
+            // Attempting to insert wishlist, income, expenditure, and reminder data into the database
             Insert_Wishlist_db();
             Insert_Income_db();
             Insert_Expenditure_db();
             Insert_Reminder_db();
         }
         catch (RuntimeException e){
-            System.out.println(e+"There is an error in loading");
+            // Handling runtime exceptions during loading
+            System.out.println(e + " There is an error in loading");
         }
-        for(Reminder x :reminderList){
-            System.out.println(x.getCategory()+x.getDate()+x.getID());
+        // Printing reminder data after loading
+        for(Reminder x : reminderList){
+            System.out.println(x.getCategory() + x.getDate() + x.getID());
         }
-        for(Income i :incomeList){
-            System.out.println(i.getSource()+"  "+i.getDate());
+        // Printing income data after loading
+        for(Income i : incomeList){
+            System.out.println(i.getSource() + "  " + i.getDate());
         }
         System.out.println("the data has been inserted into database");
+        // Closing JDBC connection after loading
         JDBCConnection.close();
-
-
     }
 
-    static void  delete_Previous_Data(){
-
+    // Method to delete previous data from the database
+    static void delete_Previous_Data(){
+        // Deleting expenditure, income, reminder, and wishlist data from the database
         deleteExpenditurefromdb();
         deleteIncomefromdb();
         deleteReminderfromdb();
         deleteWishlistfromdb();
         System.out.println("the data has been deleted from database");
+        // Printing reminder data after deletion
         for(Reminder x:reminderList){
-            System.out.println(x.getCategory()+x.getDate());
+            System.out.println(x.getCategory() + x.getDate());
         }
-
     }
 
+    // Method to load data from the database
     static void load_Data_AL(){
+        // Loading wishlist, reminder, income, and expenditure data
         load_Wishlist();
         load_Reminder();
         load_Income();
         load_Expenditure();
         System.out.println("the data has been loaded");
+        // Printing reminder data after loading
         for(Reminder x : reminderList){
-            System.out.println(x.getCategory()+x.getDate());
+            System.out.println(x.getCategory() + x.getDate());
         }
-        System.out.println("nothing printed");
-//        System.out.println(Reminder.getID());
-
     }
 
-
-
-
-
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    // Method to insert wishlist data into the database
     static void Insert_Wishlist_db() {
         for (Wishlist wishlist : wishlists) {
             insert_Wishlist(wishlist.getID(), wishlist.getItem_name(), wishlist.getItem_price(), wishlist.getRate(), wishlist.getAmountSaved(), wishlist.getLastCalculationDate());
         }
-
     }
 
+    // Method to insert expenditure data into the database
     static void Insert_Expenditure_db() {
         for (Expenditure E : ExpenditureList) {
             insert_Expenditure(E.getID(), E.getDate(), E.getValue(), E.getCategory());
         }
     }
 
+    // Method to insert income data into the database
     static void Insert_Income_db() {
         for (Income I : incomeList) {
             insert_Income(I.getID(), I.getDate(), I.getValue(), I.getSource());
         }
     }
+
+    // Method to insert reminder data into the database
     static void Insert_Reminder_db() {
         for (Reminder R : reminderList) {
             insert_Reminder(R.getID(),R.getDate(),R.getValue(),R.getName(),R.getCategory(),R.isYearly(),R.isMonthly());
         }
     }
-
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 }
