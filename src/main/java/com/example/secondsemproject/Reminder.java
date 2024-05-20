@@ -71,9 +71,7 @@ public class Reminder extends Transaction {
     public void setCategory(String category) {
         this.category = category;
     }
-    public int getID(){
-        return R_IDgenerator;
-    }
+
 
 
     public boolean isYearly() {

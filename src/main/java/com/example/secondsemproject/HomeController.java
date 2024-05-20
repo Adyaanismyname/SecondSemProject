@@ -358,6 +358,7 @@ public class HomeController implements Initializable {
 
     @FXML
     public void exit(Event event){
+     Wishlist.calculateAmountSaved();
      main.delete_Previous_Data();
      main.Load_into_databsae();
         System.exit(0);
@@ -1278,6 +1279,7 @@ public class HomeController implements Initializable {
 
 
     public void logout() {
+        Wishlist.calculateAmountSaved();
         main.delete_Previous_Data();
         main.Load_into_databsae();
         helloController.helloApplication.showLoginPage();
