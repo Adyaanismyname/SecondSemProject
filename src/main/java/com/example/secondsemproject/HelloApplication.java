@@ -75,9 +75,6 @@ public class HelloApplication extends Application {
     public void showHomePage() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
-
-
-
             Parent root = loader.load();
 
             HomeController homeController = loader.getController();

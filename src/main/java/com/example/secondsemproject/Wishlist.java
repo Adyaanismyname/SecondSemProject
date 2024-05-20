@@ -28,11 +28,8 @@ public class Wishlist {
         this.rate = rate;
         this.lastCalculationDate = LocalDate.now();
         this.Username=HelloController.getUsername_to_pass();
-
         wishlists.add(this);
         main.UpdateLatestIdForClass("L_Wishlist_id",W_IDgenerator+1,W_IDgenerator);
-
-
         W_IDgenerator++;
     }
 
@@ -43,6 +40,8 @@ public class Wishlist {
         this.item_price = item_price;
         this.rate = rate;
         this.lastCalculationDate =date;
+        main.setIdForTable("Wishlist");
+
     }
     public static void setId(int id){
         W_IDgenerator=id;

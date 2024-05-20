@@ -26,95 +26,109 @@ public class main {
     static PreparedStatement preparedStatement;
 
     static void load_Expenditure() {
+        if (!JDBCConnection.isConnectionValid()) {
+            JDBCConnection.getConnection();
+        }
         ExpenditureList.clear();
         try {
-            String query = "SELECT * FROM Expenditure WHERE Username = "+HelloController.getUsername_to_pass();
+            String query = "SELECT * FROM Expenditure WHERE Username = ?";
             preparedStatement = JDBCConnection.connection.prepareStatement(query);
+            preparedStatement.setString(1, HelloController.getUsername_to_pass());
             result = preparedStatement.executeQuery();
             while (result.next()) {
-                Id = result.getInt("Id");
-                date = result.getDate("Date").toLocalDate();
-                value = result.getDouble("value");
-                category = result.getString("Category");
-                username = result.getString("Username");
+                int Id = result.getInt("Id");
+                LocalDate date = result.getDate("Date").toLocalDate();
+                double value = result.getDouble("value");
+                String category = result.getString("Category");
+                String username = result.getString("Username");
+
                 ExpenditureList.add(new Expenditure(Id, date, value, category, username));
             }
-
         } catch (SQLException e) {
             System.err.println("Error executing SQL query: " + e.getMessage());
         }
-
     }
+
 
     static void load_Reminder() {
+        if (!JDBCConnection.isConnectionValid()) {
+            JDBCConnection.getConnection();
+        }
         reminderList.clear();
         try {
-            String query = "SELECT * FROM Reminder where Username =" + HelloController.getUsername_to_pass();
+            String query = "SELECT * FROM Reminder WHERE Username = ?";
             preparedStatement = JDBCConnection.connection.prepareStatement(query);
+            preparedStatement.setString(1, HelloController.getUsername_to_pass());
             result = preparedStatement.executeQuery();
             while (result.next()) {
-                Id = result.getInt("Id");
-                date = result.getDate("Date").toLocalDate();
-                value = result.getDouble("value");
-                category = result.getString("Category");
-                is_yearly = result.getBoolean("is_yearly");
-                is_monthly = result.getBoolean("is_monthly");
-                username = result.getString("Username");
-                name = result.getString("name");
+                int Id = result.getInt("Id");
+                LocalDate date = result.getDate("Date").toLocalDate();
+                double value = result.getDouble("value");
+                String category = result.getString("Category");
+                boolean is_yearly = result.getBoolean("is_yearly");
+                boolean is_monthly = result.getBoolean("is_monthly");
+                String username = result.getString("Username");
+                String name = result.getString("name");
+
                 reminderList.add(new Reminder(Id, name, category, date, value, is_monthly, is_yearly, username));
             }
-
         } catch (SQLException e) {
             System.err.println("Error executing SQL query: " + e.getMessage());
         }
-
     }
+
 
     static void load_Income() {
+        if (!JDBCConnection.isConnectionValid()) {
+            JDBCConnection.getConnection();
+        }
         incomeList.clear();
-
         try {
-            String query = "SELECT * FROM Income WHERE Username = "+HelloController.getUsername_to_pass();
+            String query = "SELECT * FROM Income WHERE Username = ?";
             preparedStatement = JDBCConnection.connection.prepareStatement(query);
+            preparedStatement.setString(1, HelloController.getUsername_to_pass());
             result = preparedStatement.executeQuery();
-
             while (result.next()) {
-                Id = result.getInt("Id");
-                date = result.getDate("Date").toLocalDate();
-                value = result.getDouble("value");
-                source = result.getString("source");
-                username = result.getString("Username");
+                int Id = result.getInt("Id");
+                LocalDate date = result.getDate("Date").toLocalDate();
+                double value = result.getDouble("value");
+                String source = result.getString("source");
+                String username = result.getString("Username");
+
                 incomeList.add(new Income(Id, source, date, value, username));
             }
-
         } catch (SQLException e) {
             System.err.println("Error executing SQL query: " + e.getMessage());
         }
-
     }
 
+
     static void load_Wishlist() {
+        if (!JDBCConnection.isConnectionValid()) {
+            JDBCConnection.getConnection();
+        }
         wishlists.clear();
         try {
-            String query = "SELECT * FROM Wishlist WHERE Username = "+HelloController.getUsername_to_pass();
+            String query = "SELECT * FROM Wishlist WHERE Username = ?";
             preparedStatement = JDBCConnection.connection.prepareStatement(query);
+            preparedStatement.setString(1, HelloController.getUsername_to_pass());
             result = preparedStatement.executeQuery();
             while (result.next()) {
-                Id = result.getInt("Id");
+                int Id = result.getInt("Id");
                 LocalDate last_cal_date = result.getDate("last_calculated_date").toLocalDate();
                 double amount_saved = result.getDouble("amount_saved");
                 double item_price = result.getDouble("item_price");
                 double rate = result.getDouble("rate");
-                username = result.getString("Username");
+                String username = result.getString("Username");
                 String item_name = result.getString("item_name");
-                wishlists.add(new Wishlist(Id, item_name, item_price, rate, date, username));
-            }
 
+                wishlists.add(new Wishlist(Id, item_name, item_price, rate, last_cal_date, username));
+            }
         } catch (SQLException e) {
             System.err.println("Error executing SQL query: " + e.getMessage());
         }
-
     }
+
 
 
 
@@ -123,13 +137,18 @@ public class main {
 
 
     public static void setIdForTable(String tableName) {
+        if (tableName == null || tableName.isEmpty() || !isValidIdentifier(tableName)) {
+            System.out.println("Invalid table name");
+            return;
+        }
+
         try {
-            Statement statement = JDBCConnection.connection.createStatement();
-
             String query = "SELECT Id FROM " + tableName + " ORDER BY Id DESC LIMIT 1";
-            ResultSet resultSet = statement.executeQuery(query);
+            PreparedStatement preparedStatement = JDBCConnection.connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            int latestId = 0;
+            int latestId = -1;  // Initialize latestId to -1
+
             if (resultSet.next()) {
                 latestId = resultSet.getInt("Id");
             }
@@ -149,17 +168,30 @@ public class main {
                     Wishlist.setId(latestId + 1);
                     break;
                 default:
-                    System.out.println("FAILED TO UPDATE");
-                    // Add more cases for additional tables
+                    System.out.println("Failed to update ID for table: " + tableName);
+                    // Add more cases for additional tables if needed
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+//            JDBCConnection.close();
         }
-
-
     }
+
+    private static boolean isValidIdentifier(String identifier) {
+        return identifier.matches("[A-Za-z_][A-Za-z0-9_]*");
+    }
+
+
     public static void UpdateLatestIdForClass(String targetClass, int newLatestId, int oldLatestId) {
+        if (!JDBCConnection.isConnectionValid()) {
+            JDBCConnection.getConnection();
+        }
+        if (targetClass == null || targetClass.isEmpty() || !isValidIdentifier(targetClass)) {
+            System.out.println("Invalid target class");
+            return;
+        }
 
         try {
             // Construct the SQL update statement for the specified class in the latest_id table
@@ -171,6 +203,8 @@ public class main {
 
             // Execute the update query
             int rowsAffected = preparedStatement.executeUpdate();
+//            JDBCConnection.close();
+
 
             // Check the number of rows affected
             if (rowsAffected > 0) {
@@ -185,12 +219,17 @@ public class main {
 
 
 
+
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
 
     static void insert_Expenditure(int Id, LocalDate date, double value, String Category) {
+        if (!JDBCConnection.isConnectionValid()) {
+            JDBCConnection.getConnection();
+        }
         PreparedStatement preparedStatement = null;
         while (true) {
             try {
@@ -205,6 +244,7 @@ public class main {
 
                     // Executing the insert query
                     int rowsInserted = preparedStatement.executeUpdate();
+                    JDBCConnection.close();
                     System.out.println("Rows inserted: " + rowsInserted);
                 } catch (SQLException f) {
                     System.err.println("Error executing SQL query: " + f.getMessage());
@@ -221,6 +261,9 @@ public class main {
     }
 
     static void insert_Income(int Id, LocalDate date, double value, String source) {
+        if (!JDBCConnection.isConnectionValid()) {
+            JDBCConnection.getConnection();
+        }
         PreparedStatement preparedStatement = null;
         while (true) {
             try {
@@ -250,6 +293,9 @@ public class main {
     }
 
     static void insert_Reminder(int Id, LocalDate date, double value, String name, String Category, Boolean is_yearly, Boolean is_monthly) {
+        if (!JDBCConnection.isConnectionValid()) {
+            JDBCConnection.getConnection();
+        }
         PreparedStatement preparedStatement = null;
         while (true) {
             try {
@@ -281,7 +327,9 @@ public class main {
     }
 
     static void insert_Wishlist(int Id, String item_name, double item_price, double rate, double amount_saved, LocalDate last_calculated_date) {
-
+        if (!JDBCConnection.isConnectionValid()) {
+            JDBCConnection.getConnection();
+        }
         PreparedStatement preparedStatement = null;
         while (true) {
             try {
@@ -409,12 +457,23 @@ public class main {
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    static void Load_into_databsae(){
+    static void Load_into_databsae (){
+        try {
 
-        Insert_Wishlist_db();
-        Insert_Income_db();
-        Insert_Expenditure_db();
-        Insert_Reminder_db();
+            Insert_Wishlist_db();
+            Insert_Income_db();
+            Insert_Expenditure_db();
+            Insert_Reminder_db();
+        }
+        catch (RuntimeException e){
+            System.out.println(e+"There is an error in loading");
+        }
+//        for(Reminder x :reminderList){
+//            System.out.println(x.getCategory()+x.getDate()+x.getID());
+//        }
+//        System.out.println("the data has been inserted into database");
+        JDBCConnection.close();
+
 
     }
 
@@ -424,6 +483,10 @@ public class main {
         deleteIncomefromdb();
         deleteReminderfromdb();
         deleteWishlistfromdb();
+        System.out.println("the data has been deleted from database");
+         for(Reminder x:reminderList){
+             System.out.println(x.getCategory()+x.getDate());
+         }
 
     }
 
@@ -432,6 +495,11 @@ public class main {
         load_Reminder();
         load_Income();
         load_Expenditure();
+        System.out.println("the data has been loaded");
+      for(Reminder x : reminderList){
+          System.out.println(x.getCategory()+x.getDate());
+      }
+      System.out.println("nothing printed");
 
     }
 
