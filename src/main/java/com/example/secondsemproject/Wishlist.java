@@ -12,7 +12,7 @@ public class Wishlist {
     private String item_name;
     private double item_price;
     private double rate;
-    private double amount_saved = 0;
+    private double amount_saved = 234;
     private String Username;
     private LocalDate lastCalculationDate;
 

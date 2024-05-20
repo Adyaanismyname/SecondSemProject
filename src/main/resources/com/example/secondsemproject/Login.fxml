@@ -120,7 +120,7 @@
                         </Text>
                     </children>
                 </AnchorPane>
-                <AnchorPane fx:id="Verification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="552.0" style="-fx-background-color: rgba(255, 255, 255, 0.05); -fx-background-radius: 27; -fx-border-width: 0.5; -fx-border-color: #0a0625; -fx-border-radius: 27;" visible="false">
+                <AnchorPane fx:id="Verification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="552.0" style="-fx-background-color: rgba(255, 255, 255, 0.05); -fx-background-radius: 27; -fx-border-width: 0.5; -fx-border-color: #0a0625; -fx-border-radius: 27;">
                     <children>
                         <VBox layoutX="74.0" layoutY="103.0" prefHeight="343.0" prefWidth="414.0" spacing="10.0">
                             <children>
@@ -165,7 +165,7 @@
                         </Text>
                     </children>
                 </AnchorPane>
-                <AnchorPane fx:id="SQs" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="552.0" style="-fx-background-color: rgba(255, 255, 255, 0.05); -fx-background-radius: 27; -fx-border-width: 0.5; -fx-border-color: #0a0625; -fx-border-radius: 27;">
+                <AnchorPane fx:id="SQs" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="552.0" style="-fx-background-color: rgba(255, 255, 255, 0.05); -fx-background-radius: 27; -fx-border-width: 0.5; -fx-border-color: #0a0625; -fx-border-radius: 27;" visible="false">
                     <children>
                         <VBox layoutX="74.0" layoutY="108.0" prefHeight="343.0" prefWidth="414.0" spacing="10.0">
                             <children>
@@ -196,10 +196,10 @@
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
                         <Label fx:id="secQS_lbl" alignment="CENTER" prefHeight="17.0" prefWidth="413.0" textAlignment="CENTER" textFill="RED">
                            <font>
-                              <Font size="19.0" />
+                              <Font size="14.0" />
                            </font>
                         </Label>
-                                <Button fx:id="finish" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#SQFinish" onMouseClicked="#SQFinish" prefHeight="58.0" prefWidth="413.0" style="-fx-background-radius: 20;" styleClass="btn-startPage" text="Finish" textAlignment="CENTER" textFill="WHITE">
+                                <Button fx:id="finish" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#SQFinish" prefHeight="58.0" prefWidth="413.0" style="-fx-background-radius: 20;" styleClass="btn-startPage" text="Finish" textAlignment="CENTER" textFill="WHITE">
                                     <font>
                                         <Font size="27.0" />
                                     </font>

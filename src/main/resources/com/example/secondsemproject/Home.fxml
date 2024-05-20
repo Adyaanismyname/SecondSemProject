@@ -142,7 +142,7 @@
             <FontAwesomeIconView fill="WHITE" glyphName="WINDOW_MINIMIZE" onMouseClicked="#minimize" size="15" styleClass="btn-minimize" text="" />
          </graphic>
       </Button>
-      <AnchorPane fx:id="home_pane" layoutX="83.0" layoutY="101.0" prefHeight="631.0" prefWidth="1243.0" visible="false">
+      <AnchorPane fx:id="home_pane" layoutX="83.0" layoutY="101.0" prefHeight="631.0" prefWidth="1243.0">
          <children>
             <AnchorPane layoutX="27.0" layoutY="96.0" prefHeight="522.0" prefWidth="578.0" styleClass="anchor-panes">
                <children>
@@ -289,7 +289,7 @@
          </font>
       </Button>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-      <AnchorPane fx:id="expense" layoutX="101.0" layoutY="109.0" prefHeight="633.0" prefWidth="1225.0">
+      <AnchorPane fx:id="expense" layoutX="101.0" layoutY="109.0" prefHeight="633.0" prefWidth="1225.0" visible="false">
          <children>
             <HBox layoutY="7.0" prefHeight="605.0" prefWidth="1228.0" style="-fx-spacing: 20;" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0">
                <children>

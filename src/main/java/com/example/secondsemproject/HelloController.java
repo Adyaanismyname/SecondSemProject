@@ -91,6 +91,9 @@ public class HelloController implements Initializable {
 
     private PasswordField Password;
 
+    @FXML
+    private  Label secQS_lbl;
+
 
     private static String username_to_pass;
 
@@ -118,7 +121,7 @@ public class HelloController implements Initializable {
 
     public void LoginButton() throws SQLException {
 
-        login_error_label.setText("");
+
 
         String entered_username = Username.getText();
         String entered_password = Password.getText();
@@ -143,6 +146,7 @@ public class HelloController implements Initializable {
                         Username.setText("");
                         Password.setText("");
                         username_to_pass = entered_username;
+                        clearAll();
                         helloApplication.showHomePage();
                     } else {
                         login_error_label.setText("Incorrect Password,Try again");
@@ -183,14 +187,8 @@ public class HelloController implements Initializable {
         ResetPass.setVisible(false);
         Verification.setVisible(false);
 
-        su_username.setText("");
-        su_password.setText("");
-        su_email.setText("");
-        su_password_confirm.setText("");
-        su_answer.setText("");
-        Lbl_error_SU.setText("");
-        reset_pass_errorlbl.setText("");
-        verification_error_label.setText("");
+        clearAll();
+
 
 
 
@@ -206,23 +204,11 @@ public class HelloController implements Initializable {
         ResetPass.setVisible(false);
         Verification.setVisible(false);
 
-        su_username.setText("");
-        su_password.setText("");
-        su_email.setText("");
-        su_password_confirm.setText("");
-        su_answer.setText("");
-        Lbl_error_SU.setText("");
+        clearAll();
+
 
     }
 
-    //@FXML
-    //public void getSecQs(Event event){
-        //Login.setVisible(false);
-       // SignUp.setVisible(false);
-       // SQs.setVisible(true);
-       // ResetPass.setVisible(false);
-            //Verification.setVisible(false);
-    //}
 
     @FXML
     public void getLogIn(Event event){
@@ -232,36 +218,11 @@ public class HelloController implements Initializable {
         ResetPass.setVisible(false);
         Verification.setVisible(false);
 
-        su_username.setText("");
-        su_password.setText("");
-        su_email.setText("");
-        su_password_confirm.setText("");
-        su_answer.setText("");
-        Lbl_error_SU.setText("");
-        Username.setText("");
-        Password.setText("");
+        clearAll();
+
 
     }
 
-    @FXML
-    public void getResetPassword(Event event){
-
-        Login.setVisible(false);
-        SignUp.setVisible(false);
-        SQs.setVisible(false);
-        ResetPass.setVisible(true);
-        Verification.setVisible(false);
-
-        su_username.setText("");
-        su_password.setText("");
-        su_email.setText("");
-        su_password_confirm.setText("");
-        su_answer.setText("");
-        Lbl_error_SU.setText("");
-        Username.setText("");
-        Password.setText("");
-
-    }
 
     @FXML
     public void getVerification(Event event){
@@ -272,14 +233,8 @@ public class HelloController implements Initializable {
         ResetPass.setVisible(false);
         Verification.setVisible(true);
 
-        su_username.setText("");
-        su_password.setText("");
-        su_email.setText("");
-        su_password_confirm.setText("");
-        su_answer.setText("");
-        Lbl_error_SU.setText("");
-        Username.setText("");
-        Password.setText("");
+        clearAll();
+
 
     }
 
@@ -288,33 +243,43 @@ public class HelloController implements Initializable {
     @FXML
     public void SQFinish() throws InterruptedException {
 
+
         String sue_answer = su_answer.getText();
 
-        JDBCConnection.getConnection();
-        try {
-        JDBCConnection.ExecuteQueryWithNoResult("insert into User values(\"" + signup_array[0] + "\" , \"" + signup_array[1] + "\", \"" + signup_array[2] + "\", \""+ sue_answer + "\");");
+        if (su_answer.getText().isEmpty()){
+            secQS_lbl.setText("Field cannot be empty");
+        }
+        else{
+            JDBCConnection.getConnection();
+            try {
+                JDBCConnection.ExecuteQueryWithNoResult("insert into User values(\"" + signup_array[0] + "\" , \"" + signup_array[1] + "\", \"" + signup_array[2] + "\", \""+ sue_answer + "\");");
+
+            }
+            catch (SQLException e) {
+                System.out.println(e);
+            }
+
+            JDBCConnection.close();
+
+
+
+
+            Login.setVisible(true);
+            SignUp.setVisible(false);
+            SQs.setVisible(false);
+            ResetPass.setVisible(false);
+            Verification.setVisible(false);
+            clearAll();
+
 
         }
-        catch (SQLException e) {
-            System.out.println(e);
-        }
 
-        JDBCConnection.close();
 
-        su_username.setText("");
-        su_password.setText("");
-        su_email.setText("");
-        su_password_confirm.setText("");
-        su_answer.setText("");
-        Lbl_error_SU.setText("");
-
-        Login.setVisible(true);
-        SignUp.setVisible(false);
-        SQs.setVisible(false);
-        ResetPass.setVisible(false);
-        Verification.setVisible(false);
     }
     public void signup() {
+
+
+
         String sue_username = su_username.getText();
         String entered_password = su_password.getText();
         String entered_email = su_email.getText();
@@ -353,6 +318,8 @@ public class HelloController implements Initializable {
                     SQs.setVisible(true);
                     ResetPass.setVisible(false);
                     Verification.setVisible(false);
+
+                    clearAll();
                 }
 
             }
@@ -396,18 +363,13 @@ public class HelloController implements Initializable {
                 }
                 else {
                     username_for_password_reset = SV_email_checker.getString("Username");
-                    su_username.setText("");
-                    su_password.setText("");
-                    su_email.setText("");
-                    su_password_confirm.setText("");
-                    su_answer.setText("");
-                    Lbl_error_SU.setText("");
 
                     Login.setVisible(false);
                     SignUp.setVisible(false);
                     SQs.setVisible(false);
                     ResetPass.setVisible(true);
                     Verification.setVisible(false);
+                    clearAll();
 
             }
 
@@ -435,7 +397,7 @@ public class HelloController implements Initializable {
 
         }
         else {
-            JDBCConnection.ExecuteQueryWithNoResult("Update User set password = \"" +password + "\" where Username = \"" + username_for_password_reset + "\";");
+            JDBCConnection.ExecuteQueryWithNoResult("Update User set password = \"" + password + "\" where Username = \"" + username_for_password_reset + "\";");
 
             Login.setVisible(true);
             SignUp.setVisible(false);
@@ -443,24 +405,38 @@ public class HelloController implements Initializable {
             ResetPass.setVisible(false);
             Verification.setVisible(false);
 
-            su_username.setText("");
-            su_password.setText("");
-            su_email.setText("");
-            su_password_confirm.setText("");
-            su_answer.setText("");
-            Lbl_error_SU.setText("");
+            clearAll();
 
 
             JDBCConnection.close();
 
         }
 
-
-
-
-
     }
 
+    public void  clearAll(){
+        // Clear PasswordFields
+        su_password.clear();
+        su_password_confirm.clear();
+        reset_password.clear();
+        reset_password_confirm.clear();
+        Password.clear();
+
+        // Clear TextFields
+        su_username.clear();
+        su_email.clear();
+        su_answer.clear();
+        SV_email.clear();
+        sv_answer.clear();
+        Username.clear();
+
+        // Clear Labels
+        Lbl_error_SU.setText("");
+        reset_pass_errorlbl.setText("");
+        verification_error_label.setText("");
+        login_error_label.setText("");
+        secQS_lbl.setText("");
+    }
 
 
 }

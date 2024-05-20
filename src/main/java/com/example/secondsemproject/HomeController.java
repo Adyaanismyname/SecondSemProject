@@ -338,7 +338,18 @@ public class HomeController implements Initializable {
 
         BarGraphs.displayBarChart(HomeBarChart);
 
+        mon_income = Income.getMonthIncome(LocalDate.now().getMonthValue() , LocalDate.now().getYear());
+        mon_savings = mon_income - mon_expense;
+        monthly_expenses.setText(String.valueOf(mon_expense));
+        monthly_income.setText(String.valueOf(mon_income));
+        if(mon_savings > 0) {
+            monthly_savings.setText(String.valueOf(mon_savings));
 
+        }
+        else {
+            monthly_savings.setText("0");
+        }
+        zakaat.setText(String.valueOf(Double.max(.025 * (Income.getTotal() - Expenditure.getTotal()),0)));
 
     }
 
@@ -393,25 +404,13 @@ public class HomeController implements Initializable {
             else{
                 if(Double.parseDouble(income_value.getText()) <= 0) {
                     income_label_1.setStyle("-fx-text-fill: red;");
-                    income_label_1.setText("Value should be negative");
+                    income_label_1.setText("Value should be positive");
                 }
 
                 else {
                     Income income = new Income(income_source.getText(), income_date.getValue(), Double.parseDouble(income_value.getText()));
                     income_label_1.setStyle("-fx-text-fill: green;");
                     income_label_1.setText("Income added!");
-                    mon_income = Income.getMonthIncome(LocalDate.now().getMonthValue() , LocalDate.now().getYear());
-                    mon_savings = mon_income - mon_expense;
-                    monthly_expenses.setText(String.valueOf(mon_expense));
-                    monthly_income.setText(String.valueOf(mon_income));
-                    if(mon_savings > 0) {
-                        monthly_savings.setText(String.valueOf(mon_savings));
-
-                    }
-                    else {
-                        monthly_savings.setText("0");
-                    }
-                    zakaat.setText(String.valueOf(Double.max(.025 * (Income.getTotal() - Expenditure.getTotal()),0)));
 
                     setAllIncomes_table();
                     income_source.setText("");
@@ -453,18 +452,7 @@ public class HomeController implements Initializable {
                         income_label_2.setStyle("-fx-text-fill: green;");
 
                         income_label_2.setText("Deleted!");
-                        mon_income = Income.getMonthIncome(LocalDate.now().getMonthValue() , LocalDate.now().getYear());
-                        mon_savings = mon_income - mon_expense;
-                        monthly_expenses.setText(String.valueOf(mon_expense));
-                        monthly_income.setText(String.valueOf(mon_income));
-                        if(mon_savings > 0) {
-                            monthly_savings.setText(String.valueOf(mon_savings));
 
-                        }
-                        else {
-                            monthly_savings.setText("0");
-                        }
-                        zakaat.setText(String.valueOf(Double.max(.025 * (Income.getTotal() - Expenditure.getTotal()),0)));
 
 
                         setAllIncomes_table();
@@ -559,6 +547,7 @@ public class HomeController implements Initializable {
                     income_label_3.setText("");
 
 
+
                 }
             }
         }catch (DateTimeParseException e){
@@ -586,7 +575,7 @@ public class HomeController implements Initializable {
 
             }
             else{
-                if(Double.parseDouble(expense_value.getText()) < 0) {
+                if(Double.parseDouble(expense_value.getText()) <= 0) {
                     expense_label_1.setStyle("-fx-text-fill: red;");
                     expense_label_1.setText("Value should be positive");
                 }
@@ -595,18 +584,7 @@ public class HomeController implements Initializable {
                     Expenditure expense1 = new Expenditure(expense_category.getText(), expense_date.getValue(),Double.parseDouble(expense_value.getText()));
                     expense_label_1.setStyle("-fx-text-fill: green;");
                     expense_label_1.setText("Expense added!");
-                    mon_expense = Expenditure.getMonthExpense(LocalDate.now().getMonthValue() , LocalDate.now().getYear());
-                    mon_savings = mon_income - mon_expense;
-                    monthly_expenses.setText(String.valueOf(mon_expense));
-                    monthly_income.setText(String.valueOf(mon_income));
-                    if(mon_savings > 0) {
-                        monthly_savings.setText(String.valueOf(mon_savings));
 
-                    }
-                    else {
-                        monthly_savings.setText("0");
-                    }
-                    zakaat.setText(String.valueOf(Double.max(.025 * (Income.getTotal() - Expenditure.getTotal()),0)));
 
 
                     setAllExpenses_table();
@@ -649,20 +627,7 @@ public class HomeController implements Initializable {
                         expense_label_2.setStyle("-fx-text-fill: green;");
 
                         expense_label_2.setText("Deleted!");
-                        mon_expense = Expenditure.getMonthExpense(LocalDate.now().getMonthValue() , LocalDate.now().getYear()) ;
-                        mon_savings = mon_income - mon_expense;
 
-
-                        monthly_expenses.setText(String.valueOf(mon_expense));
-                        monthly_income.setText(String.valueOf(mon_income));
-                        if(mon_savings > 0) {
-                            monthly_savings.setText(String.valueOf(mon_savings));
-
-                        }
-                        else {
-                            monthly_savings.setText("0");
-                        }
-                        zakaat.setText(String.valueOf(Double.max(.025 * (Income.getTotal() - Expenditure.getTotal()),0)));
                         setAllExpenses_table();
                         HomeLabels();
 
@@ -1195,7 +1160,7 @@ public class HomeController implements Initializable {
             else {
                 int ID = Integer.parseInt(redeem_wishlist_id.getText());
 
-                if (ID > 0){
+                if (ID >= 0){
                     if(Wishlist.redeem(ID)){
                         wishlist_label_2.setStyle("-fx-text-fill: green;");
 
@@ -1216,6 +1181,7 @@ public class HomeController implements Initializable {
                 }
 
                 setAllWishlist_table();
+                HomeLabels();
 
             }
         }
@@ -1239,6 +1205,8 @@ public class HomeController implements Initializable {
         HomeLabels();
         BarGraphs.displayBarChart(HomeBarChart);
 
+        clearHome();
+
     }
 
     public void show_income() {
@@ -1251,14 +1219,8 @@ public class HomeController implements Initializable {
         wishlist.setVisible(false);
 
         setAllIncomes_table();
-        income_label_1.setText("");
-        income_label_2.setText("");
-        income_label_3.setText("");
-        income_date.setValue(null);
-        income_date_end.setValue(null);
-        income_value.setText("");
-        income_source.setText("");
-        income_ID.setText("");
+        clearHome();
+
     }
 
     public void show_expense() {
@@ -1271,15 +1233,8 @@ public class HomeController implements Initializable {
         wishlist.setVisible(false);
 
         setAllExpenses_table();
-        expense_label_1.setText("");
-        expense_label_2.setText("");
-        expense_label_3.setText("");
-        expense_date.setValue(null);
-        expense_date_end.setValue(null);
-        expense_date_start.setValue(null);
-        expense_value.setText("");
-        expense_category.setText("");
-        expense_ID.setText("");
+        clearHome();
+
     }
 
     public void show_reminder() {
@@ -1291,13 +1246,7 @@ public class HomeController implements Initializable {
         wishlist.setVisible(false);
 
         setAllReminders_table();
-        reminder_label_1.setText("");
-        reminder_label_2.setText("");
-        reminder_date.setValue(null);
-        reminder_value.setText("");
-        reminder_category.setText("");
-        reminder_ID.setText("");
-        reminder_name.setText("");
+        clearHome();
 
     }
 
@@ -1310,12 +1259,8 @@ public class HomeController implements Initializable {
         wishlist.setVisible(true);
 
         setAllWishlist_table();
-        wishlist_error_lbl.setText("");
-        wishlist_label_2.setText("");
-        wishlist_price.setText("");
-        wishlist_rate.setText("");
-        redeem_wishlist_id.setText("");
-        wishlist_name.setText("");
+        clearHome();
+
     }
 
     @FXML
@@ -1348,6 +1293,44 @@ public class HomeController implements Initializable {
         zakaat.setText(String.valueOf(Double.max(.025 * (Income.getTotal() - Expenditure.getTotal()),0)));
     }
 
+    public void clearHome(){
+        // Reset TextFields
+        wishlist_name.setText("");
+        wishlist_price.setText("");
+        wishlist_rate.setText("");
+        redeem_wishlist_id.setText("");
+        income_ID.setText("");
+        income_source.setText("");
+        income_value.setText("");
+        expense_ID.setText("");
+        expense_category.setText("");
+        expense_value.setText("");
+        reminder_ID.setText("");
+        reminder_category.setText("");
+        reminder_name.setText("");
+        reminder_value.setText("");
+
+        // Reset DatePickers
+        income_date.setValue(null);
+        income_date_end.setValue(null);
+        income_date_start.setValue(null);
+        expense_date.setValue(null);
+        expense_date_end.setValue(null);
+        expense_date_start.setValue(null);
+        reminder_date.setValue(null);
+
+        // Reset Labels
+        wishlist_error_lbl.setText("");
+        wishlist_label_2.setText("");
+        income_label_1.setText("");
+        income_label_2.setText("");
+        income_label_3.setText("");
+        expense_label_1.setText("");
+        expense_label_2.setText("");
+        expense_label_3.setText("");
+        reminder_label_1.setText("");
+        reminder_label_2.setText("");
+    }
 
 
 
