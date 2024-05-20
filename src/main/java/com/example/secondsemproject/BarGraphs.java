@@ -69,7 +69,10 @@ public class BarGraphs {
             monthIndex = (monthIndex == 0) ? 12 : monthIndex;
 
             incomeSeries.getData().add(new XYChart.Data<>(getMonthName(monthIndex), monthlyIncome[i]));
+
         }
+
+
 
         // creating series for expenses
         XYChart.Series<String, Number> expenseSeries = new XYChart.Series<>();
@@ -80,6 +83,7 @@ public class BarGraphs {
             int monthIndex = (startingMonth + i) % 12;
             monthIndex = (monthIndex == 0) ? 12 : monthIndex;
             expenseSeries.getData().add(new XYChart.Data<>(getMonthName(monthIndex), monthlyExpense[i]));
+
         }
 
         // defining series for balance
@@ -94,6 +98,7 @@ public class BarGraphs {
             double balance = Math.abs(monthlyIncome[i] - monthlyExpense[i]);
 
             balanceSeries.getData().add(new XYChart.Data<>(getMonthName(monthIndex), balance));
+
         }
 
         // adding all series to the bar chart
@@ -101,6 +106,12 @@ public class BarGraphs {
 
         // changing the color of the balance bar if its a loss
         for (int i = 0; i < 5; i++){
+            incomeSeries.getData().get(i).getNode().setStyle("-fx-bar-fill: blue;");
+            expenseSeries.getData().get(i).getNode().setStyle("-fx-bar-fill: purple;");
+            balanceSeries.getData().get(i).getNode().setStyle("-fx-bar-fill: green;");
+
+
+
             if (monthlyIncome[i] - monthlyExpense[i] < 0){
                 balanceSeries.getData().get(i).getNode().setStyle("-fx-bar-fill: red;");
             }
