@@ -49,7 +49,6 @@ public class main {
         }
     }
 
-
     static void load_Reminder() {
         if (!JDBCConnection.isConnectionValid()) {
             JDBCConnection.getConnection();
@@ -77,7 +76,6 @@ public class main {
         }
     }
 
-
     static void load_Income() {
         if (!JDBCConnection.isConnectionValid()) {
             JDBCConnection.getConnection();
@@ -101,7 +99,6 @@ public class main {
             System.err.println("Error executing SQL query: " + e.getMessage());
         }
     }
-
 
     static void load_Wishlist() {
         if (!JDBCConnection.isConnectionValid()) {
@@ -128,7 +125,6 @@ public class main {
             System.err.println("Error executing SQL query: " + e.getMessage());
         }
     }
-
 
 
 
@@ -230,33 +226,20 @@ public class main {
         if (!JDBCConnection.isConnectionValid()) {
             JDBCConnection.getConnection();
         }
-        PreparedStatement preparedStatement = null;
-        while (true) {
-            try {
-                try {
-                    String insertSql = "INSERT INTO Expenditure(Id, Date, value, Category, Username) VALUES (?, ?, ?, ?, ?)";
-                    preparedStatement = JDBCConnection.connection.prepareStatement(insertSql);
-                    preparedStatement.setInt(1, Id); // book_id
-                    preparedStatement.setDate(2, Date.valueOf(date));
-                    preparedStatement.setDouble(3, value);
-                    preparedStatement.setString(4, Category);
-                    preparedStatement.setString(5, HelloController.getUsername_to_pass());
 
-                    // Executing the insert query
-                    int rowsInserted = preparedStatement.executeUpdate();
-                    JDBCConnection.close();
-                    System.out.println("Rows inserted: " + rowsInserted);
-                } catch (SQLException f) {
-                    System.err.println("Error executing SQL query: " + f.getMessage());
-                }
-            } catch (Exception e) {
-                System.out.println("re enter the value ");
-            }
-            try {
-                break;
-            } catch (Exception h) {
-                System.out.println("Exiting on wrong Input");
-            }
+        String insertSql = "INSERT INTO Expenditure(Id, Date, value, Category, Username) VALUES (?, ?, ?, ?, ?)";
+
+        try (PreparedStatement preparedStatement = JDBCConnection.connection.prepareStatement(insertSql)) {
+            preparedStatement.setInt(1, Id);
+            preparedStatement.setDate(2, Date.valueOf(date));
+            preparedStatement.setDouble(3, value);
+            preparedStatement.setString(4, Category);
+            preparedStatement.setString(5, HelloController.getUsername_to_pass());
+
+            int rowsInserted = preparedStatement.executeUpdate();
+            System.out.println("Rows inserted: " + rowsInserted);
+        } catch (SQLException e) {
+            System.err.println("Error executing SQL query: " + e.getMessage());
         }
     }
 
@@ -264,31 +247,20 @@ public class main {
         if (!JDBCConnection.isConnectionValid()) {
             JDBCConnection.getConnection();
         }
-        PreparedStatement preparedStatement = null;
-        while (true) {
-            try {
-                try {
-                    String insertSql = "INSERT INTO Income(Id, Date, value, source, Username) VALUES (?, ?, ?, ?, ?)";
-                    preparedStatement = JDBCConnection.connection.prepareStatement(insertSql);
-                    preparedStatement.setInt(1,Id);
-                    preparedStatement.setDate(2, Date.valueOf(date));
-                    preparedStatement.setDouble(3, value);
-                    preparedStatement.setString(4, source);
-                    preparedStatement.setString(5, HelloController.getUsername_to_pass());
-                    // Executing the insert query
-                    int rowsInserted = preparedStatement.executeUpdate();
-                    System.out.println("Rows inserted: " + rowsInserted);
-                } catch (SQLException f) {
-                    System.err.println("Error executing SQL query: " + f.getMessage());
-                }
-            } catch (Exception e) {
-                System.out.println("re enter the value ");
-            }
-            try {
-                break;
-            } catch (Exception h) {
-                System.out.println("Exiting on wrong Input");
-            }
+
+        String insertSql = "INSERT INTO Income(Id, Date, value, source, Username) VALUES (?, ?, ?, ?, ?)";
+
+        try (PreparedStatement preparedStatement = JDBCConnection.connection.prepareStatement(insertSql)) {
+            preparedStatement.setInt(1, Id);
+            preparedStatement.setDate(2, Date.valueOf(date));
+            preparedStatement.setDouble(3, value);
+            preparedStatement.setString(4, source);
+            preparedStatement.setString(5, HelloController.getUsername_to_pass());
+
+            int rowsInserted = preparedStatement.executeUpdate();
+            System.out.println("Rows inserted: " + rowsInserted);
+        } catch (SQLException e) {
+            System.err.println("Error executing SQL query: " + e.getMessage());
         }
     }
 
@@ -296,165 +268,121 @@ public class main {
         if (!JDBCConnection.isConnectionValid()) {
             JDBCConnection.getConnection();
         }
-        PreparedStatement preparedStatement = null;
-        while (true) {
-            try {
-                try {
-                    String insertSql = "INSERT INTO Reminder(Id,Date,value,name,Category,is_yearly,is_monthly) VALUES (?, ?, ?, ?, ? ,? ,?)";
-                    preparedStatement = JDBCConnection.connection.prepareStatement(insertSql);
-                    preparedStatement.setInt(1,Id); // book_id
-                    preparedStatement.setDate(2, Date.valueOf(date)); // title
-                    preparedStatement.setDouble(3, value); // author
-                    preparedStatement.setString(4, name);
-                    preparedStatement.setString(5, Category);
-                    preparedStatement.setBoolean(6, is_yearly);
-                    preparedStatement.setBoolean(7, is_monthly);
-                    // Executing the insert query
-                    int rowsInserted = preparedStatement.executeUpdate();
-                    System.out.println("Rows inserted: " + rowsInserted);
-                } catch (SQLException f) {
-                    System.err.println("Error executing SQL query: " + f.getMessage());
-                }
-            } catch (Exception e) {
-                System.out.println("re enter the value ");
-            }
-            try {
-                break;
-            } catch (Exception h) {
-                System.out.println("Exiting on wrong Input");
-            }
+
+        String insertSql = "INSERT INTO Reminder(Id, Date, value, name, Category, is_yearly, is_monthly, Username) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement preparedStatement = JDBCConnection.connection.prepareStatement(insertSql)) {
+            preparedStatement.setInt(1, Id);
+            preparedStatement.setDate(2, Date.valueOf(date));
+            preparedStatement.setDouble(3, value);
+            preparedStatement.setString(4, name);
+            preparedStatement.setString(5, Category);
+            preparedStatement.setBoolean(6, is_yearly);
+            preparedStatement.setBoolean(7, is_monthly);
+            preparedStatement.setString(8, HelloController.getUsername_to_pass());
+
+            int rowsInserted = preparedStatement.executeUpdate();
+            System.out.println("Rows inserted: " + rowsInserted);
+        } catch (SQLException e) {
+            System.err.println("Error while inserting reminder into the database: " + e.getMessage());
+            e.printStackTrace();
         }
     }
+
 
     static void insert_Wishlist(int Id, String item_name, double item_price, double rate, double amount_saved, LocalDate last_calculated_date) {
         if (!JDBCConnection.isConnectionValid()) {
             JDBCConnection.getConnection();
         }
-        PreparedStatement preparedStatement = null;
-        while (true) {
-            try {
-                try {
-                    String insertSql = "INSERT INTO Wishlist(Id,item_name,item_price,rate,amount_saved,last_calculated_date,Username) VALUES (?, ?, ?, ?, ? ,? ,?)";
-                    preparedStatement = JDBCConnection.connection.prepareStatement(insertSql);
-                    preparedStatement.setInt(1, Id);
-                    preparedStatement.setString(2, item_name); // title
-                    preparedStatement.setDouble(3, item_price); // author
-                    preparedStatement.setDouble(4, rate);
-                    preparedStatement.setDouble(5, amount_saved);
-                    preparedStatement.setDate(6, Date.valueOf(last_calculated_date));
-                    preparedStatement.setString(7, HelloController.getUsername_to_pass());
-                    int rowsInserted = preparedStatement.executeUpdate();
-                    System.out.println("Rows inserted: " + rowsInserted);
 
-                } catch (SQLException f) {
-                    System.err.println("Error executing SQL query: " + f.getMessage());
-                }
-            } catch (Exception e) {
-                System.out.println("re enter the value ");
-            }
-            try {
-                break;
-            } catch (Exception h) {
-                System.out.println("Exiting on wrong Input");
-            }
+        String insertSql = "INSERT INTO Wishlist(Id, item_name, item_price, rate, amount_saved, last_calculated_date, Username) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement preparedStatement = JDBCConnection.connection.prepareStatement(insertSql)) {
+            preparedStatement.setInt(1, Id);
+            preparedStatement.setString(2, item_name);
+            preparedStatement.setDouble(3, item_price);
+            preparedStatement.setDouble(4, rate);
+            preparedStatement.setDouble(5, amount_saved);
+            preparedStatement.setDate(6, Date.valueOf(last_calculated_date));
+            preparedStatement.setString(7, HelloController.getUsername_to_pass());
+
+            int rowsInserted = preparedStatement.executeUpdate();
+            System.out.println("Rows inserted: " + rowsInserted);
+        } catch (SQLException e) {
+            System.err.println("Error executing SQL query: " + e.getMessage());
         }
     }
+
 
 
     static void deleteWishlistfromdb() {
-        PreparedStatement preparedStatement = null;
-        while (true) {
-            try {
-                try {
-                    String insertSql = "DELETE FROM Wishlist WHERE Username =" + HelloController.getUsername_to_pass();
-                    preparedStatement = JDBCConnection.connection.prepareStatement(insertSql);
-                    int rowsInserted = preparedStatement.executeUpdate();
-                    System.out.println("Rows inserted: " + rowsInserted);
-                } catch (SQLException f) {
-                    System.err.println("Error executing SQL query: " + f.getMessage());
-                }
-            } catch (Exception e) {
-                System.out.println("re enter the value ");
-            }
-            try {
-                break;
-            } catch (Exception h) {
-                System.out.println("Exiting on wrong Input");
-            }
+        if (!JDBCConnection.isConnectionValid()) {
+            JDBCConnection.getConnection();
+        }
+
+        String deleteSql = "DELETE FROM Wishlist WHERE Username = ?";
+        try (PreparedStatement preparedStatement = JDBCConnection.connection.prepareStatement(deleteSql)) {
+            preparedStatement.setString(1, HelloController.getUsername_to_pass());
+
+            int rowsDeleted = preparedStatement.executeUpdate();
+            System.out.println("Rows deleted: " + rowsDeleted);
+        } catch (SQLException e) {
+            System.err.println("Error executing SQL query: " + e.getMessage());
         }
     }
+
 
     static void deleteIncomefromdb() {
-        PreparedStatement preparedStatement = null;
-        while (true) {
-            try {
-                try {
-                    String insertSql = "DELETE FROM Income WHERE Username =" + HelloController.getUsername_to_pass();
-                    preparedStatement = JDBCConnection.connection.prepareStatement(insertSql);
-                    int rowsInserted = preparedStatement.executeUpdate();
-                    System.out.println("Rows inserted: " + rowsInserted);
+        if (!JDBCConnection.isConnectionValid()) {
+            JDBCConnection.getConnection();
+        }
 
-                } catch (SQLException f) {
-                    System.err.println("Error executing SQL query: " + f.getMessage());
-                }
-            } catch (Exception e) {
-                System.out.println("re enter the value ");
-            }
-            try {
-                break;
-            } catch (Exception h) {
-                System.out.println("Exiting on wrong Input");
-            }
+        String deleteSql = "DELETE FROM Income WHERE Username = ?";
+        try (PreparedStatement preparedStatement = JDBCConnection.connection.prepareStatement(deleteSql)) {
+            preparedStatement.setString(1, HelloController.getUsername_to_pass());
+
+            int rowsDeleted = preparedStatement.executeUpdate();
+            System.out.println("Rows deleted: " + rowsDeleted);
+        } catch (SQLException e) {
+            System.err.println("Error executing SQL query: " + e.getMessage());
         }
     }
+
 
     static void deleteExpenditurefromdb() {
-        PreparedStatement preparedStatement = null;
-        while (true) {
-            try {
+        if (!JDBCConnection.isConnectionValid()) {
+            JDBCConnection.getConnection();
+        }
 
-                try {
-                    String insertSql = "DELETE FROM Expenditure WHERE Username =" + HelloController.getUsername_to_pass();
-                    preparedStatement = JDBCConnection.connection.prepareStatement(insertSql);
-                    int rowsInserted = preparedStatement.executeUpdate();
-                    System.out.println("Rows inserted: " + rowsInserted);
-                } catch (SQLException f) {
-                    System.err.println("Error executing SQL query: " + f.getMessage());
-                }
-            } catch (Exception e) {
-                System.out.println("re enter the value ");
-            }
-            try {
-                break;
-            } catch (Exception h) {
-                System.out.println("Exiting on wrong Input");
-            }
+        String deleteSql = "DELETE FROM Expenditure WHERE Username = ?";
+        try (PreparedStatement preparedStatement = JDBCConnection.connection.prepareStatement(deleteSql)) {
+            preparedStatement.setString(1, HelloController.getUsername_to_pass());
+
+            int rowsDeleted = preparedStatement.executeUpdate();
+            System.out.println("Rows deleted: " + rowsDeleted);
+        } catch (SQLException e) {
+            System.err.println("Error executing SQL query: " + e.getMessage());
         }
     }
+
 
 
     static void deleteReminderfromdb() {
-        PreparedStatement preparedStatement = null;
-        while (true) {
-            try {
-                try {
-                    String insertSql = "DELETE FROM Reminder WHERE Username =" + HelloController.getUsername_to_pass();
-                    preparedStatement = JDBCConnection.connection.prepareStatement(insertSql);
-                    int rowsInserted = preparedStatement.executeUpdate();
-                    System.out.println("Rows inserted: " + rowsInserted);
-                } catch (SQLException f) {
-                    System.err.println("Error executing SQL query: " + f.getMessage());
-                }
-            } catch (Exception e) {
-                System.out.println("re enter the value ");
-            }
-            try {
-                break;
-            } catch (Exception h) {
-                System.out.println("Exiting on wrong Input");
-            }
+        if (!JDBCConnection.isConnectionValid()) {
+            JDBCConnection.getConnection();
+        }
+
+        String deleteSql = "DELETE FROM Reminder WHERE Username = ?";
+        try (PreparedStatement preparedStatement = JDBCConnection.connection.prepareStatement(deleteSql)) {
+            preparedStatement.setString(1, HelloController.getUsername_to_pass());
+
+            int rowsDeleted = preparedStatement.executeUpdate();
+            System.out.println("Rows deleted: " + rowsDeleted);
+        } catch (SQLException e) {
+            System.err.println("Error executing SQL query: " + e.getMessage());
         }
     }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     static void Load_into_databsae (){
@@ -468,25 +396,28 @@ public class main {
         catch (RuntimeException e){
             System.out.println(e+"There is an error in loading");
         }
-//        for(Reminder x :reminderList){
-//            System.out.println(x.getCategory()+x.getDate()+x.getID());
-//        }
-//        System.out.println("the data has been inserted into database");
+        for(Reminder x :reminderList){
+            System.out.println(x.getCategory()+x.getDate()+x.getID());
+        }
+        for(Income i :incomeList){
+            System.out.println(i.getSource()+"  "+i.getDate());
+        }
+        System.out.println("the data has been inserted into database");
         JDBCConnection.close();
 
 
     }
 
-     static void  delete_Previous_Data(){
+    static void  delete_Previous_Data(){
 
         deleteExpenditurefromdb();
         deleteIncomefromdb();
         deleteReminderfromdb();
         deleteWishlistfromdb();
         System.out.println("the data has been deleted from database");
-         for(Reminder x:reminderList){
-             System.out.println(x.getCategory()+x.getDate());
-         }
+        for(Reminder x:reminderList){
+            System.out.println(x.getCategory()+x.getDate());
+        }
 
     }
 
@@ -496,10 +427,11 @@ public class main {
         load_Income();
         load_Expenditure();
         System.out.println("the data has been loaded");
-      for(Reminder x : reminderList){
-          System.out.println(x.getCategory()+x.getDate());
-      }
-      System.out.println("nothing printed");
+        for(Reminder x : reminderList){
+            System.out.println(x.getCategory()+x.getDate());
+        }
+        System.out.println("nothing printed");
+        System.out.println(Reminder.getID());
 
     }
 

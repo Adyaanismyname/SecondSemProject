@@ -104,6 +104,7 @@ public class HelloController implements Initializable {
 
     @FXML
     public void exit(Event event){
+
         System.exit(0);
     }
 

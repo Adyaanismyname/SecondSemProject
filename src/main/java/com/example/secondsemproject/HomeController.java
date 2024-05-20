@@ -271,6 +271,9 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        main.load_Data_AL();
+
         expanded_menu_pane.setVisible(false);
         income.setVisible(false);
         expense.setVisible(false);
@@ -323,7 +326,7 @@ public class HomeController implements Initializable {
         // for testing purposes
         ;
 
-        Wishlist w1 = new Wishlist("Umiar", 100,100);
+//        Wishlist w1 = new Wishlist("Umiar", 100,100);
 
 
 
@@ -355,6 +358,8 @@ public class HomeController implements Initializable {
 
     @FXML
     public void exit(Event event){
+     main.delete_Previous_Data();
+     main.Load_into_databsae();
         System.exit(0);
     }
 
@@ -1273,6 +1278,8 @@ public class HomeController implements Initializable {
 
 
     public void logout() {
+        main.delete_Previous_Data();
+        main.Load_into_databsae();
         helloController.helloApplication.showLoginPage();
     }
     public void HomeLabels(){

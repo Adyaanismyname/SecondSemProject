@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public abstract class Transaction {
 
-    private int ID;
+    private static int ID;
     private String Username;
     private LocalDate date;
     private double value;
@@ -22,7 +22,7 @@ public abstract class Transaction {
     public void setID(int ID) {
         this.ID = ID;
     }
-    public int getID() {
+    public static int getID() {
         return ID;
     }
 
