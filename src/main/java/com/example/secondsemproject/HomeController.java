@@ -411,8 +411,7 @@ public class HomeController implements Initializable {
                     else {
                         monthly_savings.setText("0");
                     }
-                    zakaat.setText(String.valueOf(0.025 * (Income.getTotal() - Expenditure.getTotal())));
-
+                    zakaat.setText(String.valueOf(Double.max(.025 * (Income.getTotal() - Expenditure.getTotal()),0)));
 
                     setAllIncomes_table();
                     income_source.setText("");
@@ -463,8 +462,7 @@ public class HomeController implements Initializable {
                         else {
                             monthly_savings.setText("0");
                         }
-                        zakaat.setText(String.valueOf(0.025 * (Income.getTotal() - Expenditure.getTotal())));
-
+                        zakaat.setText(String.valueOf(Double.max(.025 * (Income.getTotal() - Expenditure.getTotal()),0)));
 
 
                         setAllIncomes_table();
@@ -604,8 +602,7 @@ public class HomeController implements Initializable {
                     else {
                         monthly_savings.setText("0");
                     }
-                    zakaat.setText(String.valueOf(0.025 * (Income.getTotal() - Expenditure.getTotal())));
-
+                    zakaat.setText(String.valueOf(Double.max(.025 * (Income.getTotal() - Expenditure.getTotal()),0)));
 
 
                     setAllExpenses_table();
@@ -659,7 +656,7 @@ public class HomeController implements Initializable {
                         else {
                             monthly_savings.setText("0");
                         }
-                        zakaat.setText(String.valueOf(0.025 * (Income.getTotal() - Expenditure.getTotal())));
+                        zakaat.setText(String.valueOf(Double.max(.025 * (Income.getTotal() - Expenditure.getTotal()),0)));
                         setAllExpenses_table();
 
                     }
