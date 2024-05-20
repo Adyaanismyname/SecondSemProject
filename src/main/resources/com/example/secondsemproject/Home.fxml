@@ -107,7 +107,7 @@
                                           <Font name="System Bold" size="22.0" />
                                        </font>
                                     </Button>
-                                    <Label fx:id="income_label_3" alignment="CENTER" layoutX="151.0" layoutY="80.0" prefHeight="17.0" prefWidth="194.0" styleClass="history-labels" textFill="WHITE" />
+                                    <Label fx:id="income_label_3" alignment="CENTER" layoutX="151.0" layoutY="80.0" prefHeight="17.0" prefWidth="219.0" styleClass="history-labels" textFill="WHITE" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -142,7 +142,7 @@
             <FontAwesomeIconView fill="WHITE" glyphName="WINDOW_MINIMIZE" onMouseClicked="#minimize" size="15" styleClass="btn-minimize" text="" />
          </graphic>
       </Button>
-      <AnchorPane fx:id="home_pane" layoutX="83.0" layoutY="101.0" prefHeight="631.0" prefWidth="1243.0">
+      <AnchorPane fx:id="home_pane" layoutX="83.0" layoutY="101.0" prefHeight="631.0" prefWidth="1243.0" visible="false">
          <children>
             <AnchorPane layoutX="27.0" layoutY="96.0" prefHeight="522.0" prefWidth="578.0" styleClass="anchor-panes">
                <children>
@@ -234,7 +234,7 @@
                         <Font size="31.0" />
                      </font>
                   </Label>
-                  <Label layoutX="124.0" layoutY="66.0" prefHeight="47.0" prefWidth="349.0" style="-fx-font-weight: bold;" text="A penny saved is a penny earned." textFill="#d0cfcf" wrapText="true">
+                  <Label layoutX="124.0" layoutY="66.0" prefHeight="47.0" prefWidth="411.0" style="-fx-font-weight: bold;" text="A penny saved is a penny earned." textFill="#d0cfcf" wrapText="true">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -270,6 +270,11 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
+                  <Label alignment="CENTER" layoutX="2.0" layoutY="163.0" prefHeight="29.0" prefWidth="578.0" style="-fx-font-weight: bold;" text="NOTE: THIS IS CALCULATED BASED ON THE INFORMATION GIVEN AND SHOULD BE PAID YEARLY" textAlignment="CENTER" textFill="#bf0000" textOverrun="CLIP" wrapText="true">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </children></AnchorPane>
@@ -278,13 +283,13 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <Button fx:id="complete_reminder_button" alignment="CENTER" layoutX="1110.0" layoutY="80.0" mnemonicParsing="false" onAction="#complete_reminder" prefHeight="23.0" prefWidth="114.0" styleClass="button-search" text="Complete" textAlignment="CENTER">
+      <Button fx:id="complete_reminder_button" alignment="CENTER" layoutX="1110.0" layoutY="80.0" mnemonicParsing="false" onAction="#complete_reminder" prefHeight="23.0" prefWidth="114.0" styleClass="button-search" text="Next" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-      <AnchorPane fx:id="expense" layoutX="101.0" layoutY="109.0" prefHeight="633.0" prefWidth="1225.0" visible="false">
+      <AnchorPane fx:id="expense" layoutX="101.0" layoutY="109.0" prefHeight="633.0" prefWidth="1225.0">
          <children>
             <HBox layoutY="7.0" prefHeight="605.0" prefWidth="1228.0" style="-fx-spacing: 20;" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0">
                <children>
@@ -358,17 +363,17 @@
                                  <children>
                                     <DatePicker fx:id="expense_date_start" layoutX="10.0" layoutY="10.0" prefHeight="37.0" prefWidth="122.0" promptText="Start Date" styleClass="text-field" />
                                     <DatePicker fx:id="expense_date_end" layoutX="10.0" layoutY="60.0" prefHeight="37.0" prefWidth="122.0" promptText="End Date" styleClass="text-field" />
-                                    <Button alignment="CENTER" layoutX="147.0" layoutY="20.0" mnemonicParsing="false" onAction="#setSearchExpense_table" prefHeight="67.0" prefWidth="101.0" styleClass="button-search" text="Search" textAlignment="CENTER">
+                                    <Button alignment="CENTER" layoutX="147.0" layoutY="8.0" mnemonicParsing="false" onAction="#setSearchExpense_table" prefHeight="67.0" prefWidth="101.0" styleClass="button-search" text="Search" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="22.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" layoutX="257.0" layoutY="20.0" mnemonicParsing="false" onAction="#setAllExpenses_table" prefHeight="67.0" prefWidth="110.0" styleClass="button-all" text="All" textAlignment="CENTER">
+                                    <Button alignment="CENTER" layoutX="257.0" layoutY="8.0" mnemonicParsing="false" onAction="#setAllExpenses_table" prefHeight="67.0" prefWidth="110.0" styleClass="button-all" text="All" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="22.0" />
                                        </font>
                                     </Button>
-                                    <Label fx:id="expense_label_3" alignment="CENTER" layoutX="151.0" layoutY="80.0" prefHeight="17.0" prefWidth="194.0" styleClass="history-labels" textFill="WHITE" />
+                                    <Label fx:id="expense_label_3" alignment="CENTER" layoutX="151.0" layoutY="80.0" prefHeight="17.0" prefWidth="219.0" styleClass="history-labels" textFill="WHITE" />
                                  </children>
                               </AnchorPane>
                            </children>

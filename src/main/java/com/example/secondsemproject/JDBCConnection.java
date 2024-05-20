@@ -55,6 +55,14 @@ public class JDBCConnection {
         }
 
     }
+    public static boolean isConnectionValid() {
+        try {
+            return connection != null && !connection.isClosed();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 
 }

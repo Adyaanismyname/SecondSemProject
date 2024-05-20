@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Reminder extends Transaction {
-    private static int R_IDgenerator = 1;
+    private static int R_IDgenerator = 0;
 
     private String name;
     private String category;
@@ -23,11 +23,7 @@ public class Reminder extends Transaction {
         this.monthly = monthly;
         this.yearly = yearly;
         main.setIdForTable("Reminder");
-
         getUpcomingReminders();
-
-
-
     }
 
 

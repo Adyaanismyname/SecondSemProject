@@ -8,11 +8,11 @@ import java.util.ArrayList;
 public class Wishlist {
 
     private int ID;
-    private static int W_IDgenerator = 1;
+    private static int W_IDgenerator = 0;
     private String item_name;
     private double item_price;
     private double rate;
-    private double amount_saved = 100;
+    private double amount_saved = 0;
     private String Username;
     private LocalDate lastCalculationDate;
 
@@ -28,11 +28,8 @@ public class Wishlist {
         this.rate = rate;
         this.lastCalculationDate = LocalDate.now();
         this.Username=HelloController.getUsername_to_pass();
-
         wishlists.add(this);
         main.UpdateLatestIdForClass("L_Wishlist_id",W_IDgenerator+1,W_IDgenerator);
-
-
         W_IDgenerator++;
     }
 
@@ -43,6 +40,8 @@ public class Wishlist {
         this.item_price = item_price;
         this.rate = rate;
         this.lastCalculationDate =date;
+        main.setIdForTable("Wishlist");
+
     }
     public static void setId(int id){
         W_IDgenerator=id;
@@ -167,11 +166,13 @@ public class Wishlist {
     public static boolean redeem (int ID){
 
         //for loop iterates through each wishlist
-        for (int i = 0; i < redeemable.size(); i++) {
-            if (redeemable.get(i).getID() == ID) {
+        for (Wishlist wishlist : redeemable) {
+            if (wishlist.getID() == ID) {
 
+                String categ = "wishlist: " + wishlist.item_name;
                 //add in expenditure
-                Expenditure expenditure = new Expenditure("wishlist", LocalDate.now(), redeemable.get(i).getAmountSaved());
+
+                Expenditure expenditure = new Expenditure(categ, LocalDate.now(), wishlist.getAmountSaved());
 
                 //remove the wishlist
                 deleteWishlist(ID);

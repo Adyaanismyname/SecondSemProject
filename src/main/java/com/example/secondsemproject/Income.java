@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Income extends Transaction {
-    private static int I_IDgenerator;
+    private static int I_IDgenerator=0;
     private String source;
     private String Username;
     public static ArrayList<Income> incomeList = new ArrayList<>();
@@ -16,7 +16,6 @@ public class Income extends Transaction {
         super(I_IDgenerator, date, value, HelloController.getUsername_to_pass());
         this.source = source;
         main.UpdateLatestIdForClass("L_Income_id",I_IDgenerator+1,I_IDgenerator);
-
         I_IDgenerator++;
         incomeList.add(this);
 
