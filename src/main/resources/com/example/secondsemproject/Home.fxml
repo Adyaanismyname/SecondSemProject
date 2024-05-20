@@ -147,20 +147,20 @@
             <AnchorPane layoutX="27.0" layoutY="96.0" prefHeight="522.0" prefWidth="578.0" styleClass="anchor-panes">
                <children>
                   <BarChart fx:id="HomeBarChart" categoryGap="20.0" layoutX="1.0" layoutY="54.0" legendVisible="false" prefHeight="400.0" prefWidth="588.0" stylesheets="@Home.css">
-                    <xAxis>
-                      <CategoryAxis side="BOTTOM" tickLabelFill="WHITE">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" tickLabelFill="WHITE">
                            <tickLabelFont>
                               <Font size="12.0" />
                            </tickLabelFont>
                         </CategoryAxis>
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis side="LEFT" tickLabelFill="WHITE">
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" tickLabelFill="WHITE">
                            <tickLabelFont>
                               <Font name="System Bold" size="12.0" />
                            </tickLabelFont>
                         </NumberAxis>
-                    </yAxis>
+                     </yAxis>
                   </BarChart>
                   <AnchorPane layoutX="38.0" layoutY="469.0" prefHeight="37.0" prefWidth="536.0" style="-fx-border-color: #ffffff; -fx-border-width: 2;" styleClass="anchor-panes">
                      <children>

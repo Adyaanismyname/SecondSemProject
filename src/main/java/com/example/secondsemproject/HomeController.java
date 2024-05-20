@@ -391,13 +391,13 @@ public class HomeController implements Initializable {
 
             }
             else{
-                if(Double.parseDouble(income_value.getText()) < 0) {
+                if(Double.parseDouble(income_value.getText()) <= 0) {
                     income_label_1.setStyle("-fx-text-fill: red;");
-                    income_label_1.setText("Value cannot be negative");
+                    income_label_1.setText("Value should be negative");
                 }
 
                 else {
-                    Income income = new Income(income_source.getText(), income_date.getValue(),Double.parseDouble(income_value.getText()));
+                    Income income = new Income(income_source.getText(), income_date.getValue(), Double.parseDouble(income_value.getText()));
                     income_label_1.setStyle("-fx-text-fill: green;");
                     income_label_1.setText("Income added!");
                     mon_income = Income.getMonthIncome(LocalDate.now().getMonthValue() , LocalDate.now().getYear());
@@ -417,6 +417,8 @@ public class HomeController implements Initializable {
                     income_source.setText("");
                     income_date.setValue(null);
                     income_value.setText("");
+
+                    HomeLabels();
                 }
 
             }
@@ -446,7 +448,7 @@ public class HomeController implements Initializable {
             else {
                 int ID = Integer.parseInt(income_ID.getText());
 
-                if (ID > 0){
+                if (ID >= 0){
                     if(Income.deleteIncome(ID)){
                         income_label_2.setStyle("-fx-text-fill: green;");
 
@@ -466,6 +468,7 @@ public class HomeController implements Initializable {
 
 
                         setAllIncomes_table();
+                        HomeLabels();
 
                     }
                     else {
@@ -528,7 +531,7 @@ public class HomeController implements Initializable {
 
                 if(start.isAfter(end)){
                     income_label_3.setText("Start date should be smaller than the End date");
-                    income_label_3.setStyle("-fx-text-fill: red;");
+                    income_label_3.setStyle("-fx-text-fill: red; -fx-font-size: 9;");
                 }
                 else {
 
@@ -553,6 +556,7 @@ public class HomeController implements Initializable {
                     table_IncomeSource.setCellValueFactory(new PropertyValueFactory<Income , String>("Source"));
 
                     table_Income.setItems(incomeObservableList);
+                    income_label_3.setText("");
 
 
                 }
@@ -584,7 +588,7 @@ public class HomeController implements Initializable {
             else{
                 if(Double.parseDouble(expense_value.getText()) < 0) {
                     expense_label_1.setStyle("-fx-text-fill: red;");
-                    expense_label_1.setText("Value cannot be negative");
+                    expense_label_1.setText("Value should be positive");
                 }
 
                 else {
@@ -606,9 +610,11 @@ public class HomeController implements Initializable {
 
 
                     setAllExpenses_table();
+
                     expense_category.setText("");
                     expense_date.setValue(null);
                     expense_value.setText("");
+                    HomeLabels();
                 }
 
             }
@@ -638,7 +644,7 @@ public class HomeController implements Initializable {
             else {
                 int ID = Integer.parseInt(expense_ID.getText());
 
-                if (ID > 0){
+                if (ID >= 0){
                     if(Expenditure.deleteExpense(ID)){
                         expense_label_2.setStyle("-fx-text-fill: green;");
 
@@ -658,6 +664,8 @@ public class HomeController implements Initializable {
                         }
                         zakaat.setText(String.valueOf(Double.max(.025 * (Income.getTotal() - Expenditure.getTotal()),0)));
                         setAllExpenses_table();
+                        HomeLabels();
+
 
                     }
                     else {
@@ -716,7 +724,7 @@ public class HomeController implements Initializable {
 
                 if(start.isAfter(end)){
                     expense_label_3.setText("Start date should be smaller than the End date");
-                    expense_label_3.setStyle("-fx-text-fill: red;");
+                    expense_label_3.setStyle("-fx-text-fill: red;-fx-font-size: 9");
                 }
                 else {
 
@@ -740,12 +748,14 @@ public class HomeController implements Initializable {
                     table_expenseCategory.setCellValueFactory(new PropertyValueFactory<Expenditure , String>("Category"));
 
                     table_expense.setItems(expenseObservableList);
+                    expense_label_3.setText("");
+
 
 
                 }
             }
         }catch (DateTimeParseException e){
-            expense_label_3.setText("Enter valid dates");
+            expense_label_3.setText("");
             expense_label_3.setStyle("-fx-text-fill: red;");
 
         }
@@ -770,9 +780,9 @@ public class HomeController implements Initializable {
 
             }
             else{
-                if(Double.parseDouble(reminder_value.getText()) < 0) {
+                if(Double.parseDouble(reminder_value.getText()) <= 0) {
                     reminder_label_1.setStyle("-fx-text-fill: red;");
-                    reminder_label_1.setText("Value cannot be negative");
+                    reminder_label_1.setText("Value should be positive");
                 }
 
                 else {
@@ -792,6 +802,7 @@ public class HomeController implements Initializable {
 
                     System.out.println(showing_reminders.size());
                     setAllReminders_table();
+                    HomeLabels();
 
                     reminders();
                     reminder_category.setText("");
@@ -826,12 +837,13 @@ public class HomeController implements Initializable {
             else {
                 int ID = Integer.parseInt(reminder_ID.getText());
 
-                if (ID > 0){
+                if (ID >= 0){
                     if(Reminder.deleteReminder(ID)){
                         reminder_label_2.setStyle("-fx-text-fill: green;");
 
                         reminder_label_2.setText("Deleted!");
                         setAllReminders_table();
+                        HomeLabels();
 
                     }
                     else {
@@ -936,12 +948,13 @@ public class HomeController implements Initializable {
             else {
                 int ID = Integer.parseInt(reminder_ID.getText());
 
-                if (ID > 0){
+                if (ID >= 0){
                     if(Reminder.payReminder(ID)){
                         reminder_label_2.setStyle("-fx-text-fill: green;");
 
                         reminder_label_2.setText("Completed!");
                         setAllReminders_table();
+                        HomeLabels();
 
                     }
                     else {
@@ -1049,6 +1062,7 @@ public class HomeController implements Initializable {
                         wishlist_rate.setText("");
                         wishlist_price.setText("");
                         setAllWishlist_table();
+                        HomeLabels();
                     }
 
 
@@ -1073,12 +1087,13 @@ public class HomeController implements Initializable {
             else {
                 int ID = Integer.parseInt(redeem_wishlist_id.getText());
 
-                if (ID > 0){
+                if (ID >= 0){
                     if(Wishlist.deleteWishlist(ID)){
                         wishlist_label_2.setStyle("-fx-text-fill: green;");
 
                         wishlist_label_2.setText("Deleted!");
                         setAllWishlist_table();
+                        HomeLabels();
 
                     }
                     else {
@@ -1221,7 +1236,7 @@ public class HomeController implements Initializable {
         home_pane.setVisible(true);
         reminder.setVisible(false);
         wishlist.setVisible(false);
-
+        HomeLabels();
         BarGraphs.displayBarChart(HomeBarChart);
 
     }
@@ -1315,6 +1330,26 @@ public class HomeController implements Initializable {
     public void logout() {
         helloController.helloApplication.showLoginPage();
     }
+    public void HomeLabels(){
+        double mon_income, mon_expense, mon_savings;
+        mon_expense = Expenditure.getMonthExpense(LocalDate.now().getMonthValue(), LocalDate.now().getYear());
+
+        mon_income = Income.getMonthIncome(LocalDate.now().getMonthValue() , LocalDate.now().getYear());
+        mon_savings = mon_income - mon_expense;
+        monthly_expenses.setText(String.valueOf(mon_expense));
+        monthly_income.setText(String.valueOf(mon_income));
+        if(mon_savings > 0) {
+            monthly_savings.setText(String.valueOf(mon_savings));
+
+        }
+        else {
+            monthly_savings.setText("0");
+        }
+        zakaat.setText(String.valueOf(Double.max(.025 * (Income.getTotal() - Expenditure.getTotal()),0)));
+    }
+
+
+
 
 
 }
