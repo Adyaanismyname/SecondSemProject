@@ -33,11 +33,12 @@ public class Wishlist {
         W_IDgenerator++;
     }
 
-    public Wishlist(int Id,String item_name, double item_price, double rate,LocalDate date,String Username) {
+    public Wishlist(int Id,String item_name, double item_price, double rate,LocalDate date,String Username,double amount_saved) {
         this.ID = Id;
         this.Username=Username;
         this.item_name = item_name;
         this.item_price = item_price;
+        this.amount_saved=amount_saved;
         this.rate = rate;
         this.lastCalculationDate =date;
         main.setIdForTable("Wishlist");
@@ -111,7 +112,9 @@ public class Wishlist {
         double savings = Income.getTotal() - Expenditure.getTotal();
         Wishlist.redeemable.clear();
 
-        for (Wishlist wishlist : Wishlist.wishlists) {
+        for (int i = 0; i < Wishlist.wishlists.size(); i ++) {
+
+            Wishlist wishlist = Wishlist.wishlists.get(i);
             boolean isNewMonth = wishlist.lastCalculationDate == null || wishlist.lastCalculationDate.getMonthValue() != LocalDate.now().getMonthValue();
 
             if (!wishlist.isRedeemable()){
@@ -128,7 +131,6 @@ public class Wishlist {
 
         }
     }
-
 
     //REMOVE wishlist
     public static boolean deleteWishlist (int ID){

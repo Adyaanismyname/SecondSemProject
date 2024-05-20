@@ -119,7 +119,7 @@ public class main {
                 String username = result.getString("Username");
                 String item_name = result.getString("item_name");
 
-                wishlists.add(new Wishlist(Id, item_name, item_price, rate, last_cal_date, username));
+                wishlists.add(new Wishlist(Id, item_name, item_price, rate, last_cal_date, username,amount_saved));
             }
         } catch (SQLException e) {
             System.err.println("Error executing SQL query: " + e.getMessage());
