@@ -38,9 +38,10 @@ public class Reminder extends Transaction {
         reminderList.add(this);
 
         LocalDate five_days_later = LocalDate.now().plusDays(5);
-        boolean upcoming = (date.isBefore(five_days_later));
+        boolean thisdate = (date.isEqual(LocalDate.now()));
+        boolean passed = (date.isBefore(LocalDate.now()));
 
-        if(upcoming) {
+        if(thisdate || passed) {
             showing_reminders.add(this);
         }
 
