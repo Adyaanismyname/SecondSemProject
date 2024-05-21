@@ -122,6 +122,7 @@ public class Wishlist {
             if (!wishlist.isRedeemable()) {
                 if (isNewMonth && savings > 0) {
                     amount = savings * (wishlist.rate / 100);
+                    savings -= amount;
                     wishlist.amount_saved += amount;
                     wishlist.lastCalculationDate = LocalDate.now();
                 }
