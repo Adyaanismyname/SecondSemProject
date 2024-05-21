@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 // Income class extends Transaction class
 public class Income extends Transaction {
-    private static int I_IDgenerator=0;
+    private static int I_IDgenerator;
     private String source;
     public static ArrayList<Income> incomeList = new ArrayList<>();
 
@@ -92,7 +92,7 @@ public class Income extends Transaction {
                 monthlyIncome += income.getValue();
             }
         }
-        
+
         return monthlyIncome;
     }
 }

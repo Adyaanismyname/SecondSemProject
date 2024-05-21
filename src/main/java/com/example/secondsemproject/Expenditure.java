@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 // Expenditure class extending the Transaction class
 public class Expenditure extends Transaction {
-    private static int E_IDgenerator = 0; // Static variable to generate unique ID for each expenditure
+    private static int E_IDgenerator ; // Static variable to generate unique ID for each expenditure
     private String category; // Category of the expenditure
     public static ArrayList<Expenditure> ExpenditureList = new ArrayList<>(); // List to store all expenditures
 
