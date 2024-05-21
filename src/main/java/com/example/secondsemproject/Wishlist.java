@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Wishlist {
 
     private int ID;
-    private static int W_IDgenerator ;
+    private static int W_IDgenerator;
     private String item_name;
     private double item_price;
     private double rate;
@@ -26,7 +26,7 @@ public class Wishlist {
         this.item_name = item_name;
         this.item_price = item_price;
         this.rate = rate;
-        this.lastCalculationDate = LocalDate.now().minusMonths(1);
+        this.lastCalculationDate = LocalDate.now();
         this.Username = HelloController.getUsername_to_pass();
         wishlists.add(this);
         W_IDgenerator++;

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Reminder extends Transaction {
-    private static int R_IDgenerator = 0;
+    private static int R_IDgenerator ;
 
     private String name;
     private String category;

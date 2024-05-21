@@ -259,6 +259,13 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
+
+        main.setIdForTable("Wishlist");
+        main.setIdForTable("Expenditure");
+        main.setIdForTable("Income");
+        main.setIdForTable("Reminder");
+
         //SETTING HOME PAGE
         main.load_Data_AL();
 
