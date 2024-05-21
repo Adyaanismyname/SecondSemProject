@@ -122,9 +122,24 @@ public class Wishlist {
             if (!wishlist.isRedeemable()) {
                 if (isNewMonth && savings > 0) {
                     amount = savings * (wishlist.rate / 100);
-                    savings -= amount;
-                    wishlist.amount_saved += amount;
-                    wishlist.lastCalculationDate = LocalDate.now();
+
+                    //so that the amount saved doesnt exceed the price
+                    if (wishlist.amount_saved + amount > wishlist.item_price) {
+
+                        double final_amount = wishlist.getItem_price() - wishlist.amount_saved;
+                        savings -= final_amount;
+                        wishlist.amount_saved += final_amount;
+
+                        wishlist.lastCalculationDate = LocalDate.now();
+
+                    }
+
+                    else {
+                        savings -= amount;
+                        wishlist.amount_saved += amount;
+                        wishlist.lastCalculationDate = LocalDate.now();
+                    }
+
                 }
 
             } else {
