@@ -211,6 +211,8 @@ public class HomeController implements Initializable {
 
     @FXML
     private Label monthly_savings;
+    @FXML
+    private Label total_savings;
 
     @FXML
     private Label zakaat;
@@ -1128,12 +1130,24 @@ public class HomeController implements Initializable {
         mon_savings = mon_income - mon_expense;
         monthly_expenses.setText(String.valueOf(mon_expense));
         monthly_income.setText(String.valueOf(mon_income));
+
+
         if (mon_savings > 0) {
             monthly_savings.setText(String.valueOf(mon_savings));
         } else {
             monthly_savings.setText("0");
         }
+
+        double total = Income.getTotal() - Expenditure.getTotal();
+
+        if (total > 0) {
+            total_savings.setText(String.valueOf(total));
+        } else {
+            total_savings.setText("0");
+        }
+
         zakaat.setText(String.valueOf(Double.max(.025 * (Income.getTotal() - Expenditure.getTotal()), 0)));
+
     }
 
     public void clearHome() {

@@ -199,12 +199,12 @@
             </AnchorPane>
             <AnchorPane layoutX="637.0" layoutY="95.0" prefHeight="319.0" prefWidth="594.0" styleClass="anchor-panes">
                <children>
-                  <Label layoutX="26.0" layoutY="141.0" prefHeight="35.0" prefWidth="283.0" style="-fx-font-weight: bold;" text="INCOME THIS MONTH : " textFill="WHITE">
+                  <Label layoutX="26.0" layoutY="125.0" prefHeight="35.0" prefWidth="283.0" style="-fx-font-weight: bold;" text="INCOME THIS MONTH : " textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="monthly_income" layoutX="339.0" layoutY="134.0" prefHeight="42.0" prefWidth="174.0" style="-fx-font-weight: bold;" text="10000" textFill="#fffefe">
+                  <Label fx:id="monthly_income" layoutX="339.0" layoutY="118.0" prefHeight="42.0" prefWidth="174.0" style="-fx-font-weight: bold;" textFill="#fffefe">
                      <font>
                         <Font size="31.0" />
                      </font>
@@ -214,22 +214,22 @@
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <Label layoutX="25.0" layoutY="201.0" prefHeight="35.0" prefWidth="299.0" style="-fx-font-weight: bold;" text="EXPENSES THIS MONTH : " textFill="WHITE">
+                  <Label layoutX="25.0" layoutY="169.0" prefHeight="35.0" prefWidth="299.0" style="-fx-font-weight: bold;" text="EXPENSES THIS MONTH : " textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="monthly_expenses" layoutX="341.0" layoutY="194.0" prefHeight="42.0" prefWidth="180.0" style="-fx-font-weight: bold;" text="100" textFill="#fffefe">
+                  <Label fx:id="monthly_expenses" layoutX="341.0" layoutY="162.0" prefHeight="42.0" prefWidth="180.0" style="-fx-font-weight: bold;" textFill="#fffefe">
                      <font>
                         <Font size="31.0" />
                      </font>
                   </Label>
-                  <Label layoutX="27.0" layoutY="264.0" prefHeight="29.0" prefWidth="201.0" style="-fx-font-weight: bold;" text="TOTAL SAVINGS: " textFill="WHITE">
+                  <Label layoutX="27.0" layoutY="227.0" prefHeight="35.0" prefWidth="266.0" style="-fx-font-weight: bold;" text="MONTHLY SAVINGS: " textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="monthly_savings" layoutX="261.0" layoutY="257.0" prefHeight="42.0" prefWidth="299.0" style="-fx-font-weight: bold;" text="NOT ENOUGH MF" textFill="#fffefe">
+                  <Label fx:id="monthly_savings" layoutX="339.0" layoutY="220.0" prefHeight="46.0" prefWidth="237.0" style="-fx-font-weight: bold;" textFill="#fffefe">
                      <font>
                         <Font size="31.0" />
                      </font>
@@ -240,6 +240,16 @@
                      </font>
                   </Label>
                   <Line endX="380.0" layoutX="206.0" layoutY="64.0" startX="-197.34552001953125" stroke="#a1a0a0" strokeWidth="2.5" />
+                  <Label layoutX="27.0" layoutY="274.0" prefHeight="35.0" prefWidth="266.0" style="-fx-font-weight: bold;" text="TOATAL SAVINGS: " textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="total_savings" layoutX="341.0" layoutY="267.0" prefHeight="46.0" prefWidth="219.0" style="-fx-font-weight: bold;" textFill="#fffefe">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <Label layoutX="36.0" layoutY="22.0" style="-fx-font-weight: bold;" text="WELCOME!">
@@ -278,7 +288,7 @@
                </children>
             </AnchorPane>
          </children></AnchorPane>
-      <Label fx:id="reminder_label" layoutX="185.0" layoutY="73.0" prefHeight="39.0" prefWidth="1045.0" styleClass="reminder-label" text="MF THIS IS A REMINDER TO STUDY OR SUICIDE CUZ YOU MIGHT AS WELL" textFill="WHITE">
+      <Label fx:id="reminder_label" layoutX="185.0" layoutY="73.0" prefHeight="39.0" prefWidth="1045.0" styleClass="reminder-label" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -634,7 +644,7 @@
             </HBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="expanded_menu_pane" prefHeight="777.0" prefWidth="272.0" styleClass="expanded_menu">
+      <AnchorPane fx:id="expanded_menu_pane" prefHeight="777.0" prefWidth="272.0" styleClass="expanded_menu" visible="false">
          <children>
             <Label layoutX="1.0" layoutY="164.0" onMouseClicked="#show_home" prefHeight="50.0" prefWidth="267.0" styleClass="menu_buttons" text="  Home" textFill="WHITE">
                <font>

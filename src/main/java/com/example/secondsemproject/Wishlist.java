@@ -26,14 +26,14 @@ public class Wishlist {
         this.item_name = item_name;
         this.item_price = item_price;
         this.rate = rate;
-        this.lastCalculationDate = LocalDate.now();
+        this.lastCalculationDate = LocalDate.now().minusMonths(1);
         this.Username = HelloController.getUsername_to_pass();
         wishlists.add(this);
         W_IDgenerator++;
     }
 
 
-    // Constructor with parameters
+    // Constructor wih different parameters
     public Wishlist(int Id, String item_name, double item_price, double rate, LocalDate date, String Username, double amount_saved) {
         this.ID = Id;
         this.Username = Username;
@@ -118,6 +118,7 @@ public class Wishlist {
 
             Wishlist wishlist = Wishlist.wishlists.get(i);
             boolean isNewMonth = wishlist.lastCalculationDate == null || wishlist.lastCalculationDate.getMonthValue() != LocalDate.now().getMonthValue();
+            savings -= wishlist.getAmountSaved();
 
             if (!wishlist.isRedeemable()) {
                 if (isNewMonth && savings > 0) {
@@ -125,6 +126,7 @@ public class Wishlist {
 
                     //so that the amount saved doesnt exceed the price
                     if (wishlist.amount_saved + amount > wishlist.item_price) {
+
 
                         double final_amount = wishlist.getItem_price() - wishlist.amount_saved;
                         savings -= final_amount;
